@@ -1,4 +1,4 @@
-package embinmc.mod.poosmp.item;
+package embinmc.mod.poosmp.item.component;
 
 import embinmc.mod.poosmp.PooSMPMod;
 import net.minecraft.core.Registry;

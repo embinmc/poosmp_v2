@@ -65,4 +65,7 @@ public interface PooComponents {
     DataComponentType<Unit> FUN_STICK = registerUnit("fun_stick");
     DataComponentType<Unit> FORCE_ALLOW_IN_BACKPACK = registerUnit("force_allow_in_backpack");
     DataComponentType<RequestedDiscComponent> REQUESTED_DISC = registerBasic("requested_disc", RequestedDiscComponent.CODEC);
+    DataComponentType<Unit> SERVER_SAYS_WHAT = registerUnit("server_says_what");
+    DataComponentType<Unit> WIND_SHOOTER = registerUnit("wind_shooter");
+    DataComponentType<Unit> LIGHTNING_SUMMONER = registerUnit("lightning_summoner");
 }

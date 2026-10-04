@@ -3,9 +3,11 @@ package embinmc.mod.poosmp.item;
 import embinmc.mod.poosmp.PooSMPMod;
 import embinmc.mod.poosmp.item.component.PooComponents;
 import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.Unit;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -42,6 +44,13 @@ public interface PooItems {
         return registerBlock(key, block, new Item.Properties());
     }
 
+    Item POOP_STICK = stick(PooItemKeys.POOP_STICK,
+            quickComponent(PooComponents.POOP_STICK).rarity(Rarity.UNCOMMON).fireResistant().stacksTo(1)
+    );
+    Item SERVER_SAYS_WHAT_STICK = stick(PooItemKeys.SERVER_SAYS_WHAT_STICK,
+            quickComponent(PooComponents.SERVER_SAYS_WHAT).rarity(Rarity.UNCOMMON).fireResistant().stacksTo(1)
+    );
+
     private static Item warpStick(ResourceKey<Item> key, ResourceKey<Level> dimension) {
         return register(
                 key, Item::new,
@@ -50,5 +59,13 @@ public interface PooItems {
                         .component(PooComponents.WARP_DIMENSION, new EitherHolder<>(dimension)),
                 BuiltInRegistries.ITEM.getKey(Items.STICK)
         );
+    }
+
+    private static Item stick(ResourceKey<Item> key, Item.Properties properties) {
+        return register(key, Item::new, properties, Items.STICK.builtInRegistryHolder().key().identifier());
+    }
+
+    private static Item.Properties quickComponent(DataComponentType<Unit> component) {
+        return new Item.Properties().component(component, Unit.INSTANCE);
     }
 }

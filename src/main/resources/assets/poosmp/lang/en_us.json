@@ -1,4 +1,6 @@
 {
   "poosmp.creative_snitch": "%s took a %s from Creative Mode or /give",
-  "poosmp.requested_disc": "Requested by %s"
+  "poosmp.requested_disc": "Requested by %s",
+  "poosmp.biome_stick.radius": "Radius: %s",
+  "poosmp.biome_stick.current_biome": "Selected biome: %s"
 }

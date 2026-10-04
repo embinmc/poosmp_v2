@@ -44,10 +44,11 @@ public interface PooComponents {
         return register(id, builder -> builder.persistent(codec).networkSynchronized(streamCodec));
     }
 
-    DataComponentType<EitherHolder<Biome>> SELECTED_BIOME = register("selected_biome", builder -> {
-        builder.persistent(EitherHolder.codec(Registries.BIOME, RegistryFixedCodec.create(Registries.BIOME)));
-        builder.networkSynchronized(EitherHolder.streamCodec(Registries.BIOME, ByteBufCodecs.holderRegistry(Registries.BIOME)));
-    });
+    //DataComponentType<EitherHolder<Biome>> SELECTED_BIOME = register("selected_biome", builder -> {
+    //    builder.persistent(EitherHolder.codec(Registries.BIOME, RegistryFixedCodec.create(Registries.BIOME)));
+    //    builder.networkSynchronized(EitherHolder.streamCodec(Registries.BIOME, ByteBufCodecs.holderRegistry(Registries.BIOME)));
+    //});
+    DataComponentType<String> SELECTED_BIOME = registerBasic("selected_biome", Codec.STRING);
     DataComponentType<Boolean> MARRIED = register("married", builder -> {
         builder.persistent(Codec.BOOL);
         builder.networkSynchronized(ByteBufCodecs.BOOL);
@@ -68,4 +69,5 @@ public interface PooComponents {
     DataComponentType<Unit> SERVER_SAYS_WHAT = registerUnit("server_says_what");
     DataComponentType<Unit> WIND_SHOOTER = registerUnit("wind_shooter");
     DataComponentType<Unit> LIGHTNING_SUMMONER = registerUnit("lightning_summoner");
+    DataComponentType<Unit> POOP_STICK = registerUnit("poop_stick");
 }

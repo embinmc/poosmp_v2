@@ -1,6 +1,8 @@
 package embinmc.mod.poosmp.item.component;
 
 import embinmc.mod.poosmp.PooSMPMod;
+import embinmc.mod.poosmp.misc.PooSMPGameRules;
+import embinmc.mod.poosmp.misc.PooUtil;
 import net.fabricmc.fabric.api.event.player.ItemEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
@@ -15,6 +17,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -28,7 +32,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.levelgen.Heightmap;
-import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 import java.util.Optional;
@@ -49,14 +52,15 @@ public class ItemUseComponents {
     }
 
     public static void register() {
-        ItemEvents.USE.register(WARP_STICK, require(PooComponents.WARP_DIMENSION, ItemUseComponents::warpStick));
-        ItemEvents.USE.register(WIND_STICK, require(PooComponents.WIND_SHOOTER, ItemUseComponents::windStick));
         ItemEvents.USE.register(SERVER_SAYS_WHAT_STICK, require(PooComponents.SERVER_SAYS_WHAT, ItemUseComponents::serverSaysWhatStick));
+        ItemEvents.USE.register(WARP_STICK, require(PooComponents.WARP_DIMENSION, ItemUseComponents::warpStick));
+        ItemEvents.USE.register(WIND_STICK, require(PooComponents.WIND_SHOOTER,   ItemUseComponents::windStick));
+        ItemEvents.USE.register(POOP_STICK, require(PooComponents.POOP_STICK,     ItemUseComponents::poopStick));
     }
 
     private record ConditionalCallback(DataComponentType<?> component, ItemEvents.UseCallback callback) implements ItemEvents.UseCallback {
         @Override
-        public @Nullable InteractionResult use(@NonNull Level level, Player player, @NonNull InteractionHand interactionHand) {
+        public @Nullable InteractionResult use(Level level, Player player, InteractionHand interactionHand) {
             ItemStack itemStack = player.getItemInHand(interactionHand);
             if (itemStack.has(component))
                 return callback.use(level, player, interactionHand);
@@ -126,6 +130,26 @@ public class ItemUseComponents {
             }, serverLevel, serverPlayer.getItemInHand(hand), serverPlayer, 0f, 2f, 0f);
             serverPlayer.awardStat(Stats.ITEM_USED.get(heldItem.getItem()));
         }
+        return InteractionResult.SUCCESS;
+    }
+
+    private static InteractionResult poopStick(Level world, Player user, InteractionHand hand) {
+        double player_x = user.getX();
+        double player_y = user.getY();
+        double player_z = user.getZ();
+        if (Math.random() > 0.5) {
+            world.playSound(null, player_x, player_y + 5, player_z, SoundEvents.HORSE_DEATH, SoundSource.PLAYERS);
+            if (world instanceof ServerLevel serverLevel) {
+                if (serverLevel.getGameRules().get(PooSMPGameRules.OUTLAW_EXPLOSIVE_GADGETS)) {
+                    user.displayClientMessage(PooUtil.OUTLAWED_EXPLOSIVE_TEXT, true);
+                } else {
+                    serverLevel.explode(null, player_x, player_y, player_z, 5.0F, Level.ExplosionInteraction.NONE);
+                }
+            }
+        } else {
+            world.playSound(null, player_x, player_y, player_z, SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(3).value(), SoundSource.PLAYERS);
+        }
+        user.awardStat(Stats.ITEM_USED.get(user.getItemInHand(hand).getItem()));
         return InteractionResult.SUCCESS;
     }
 }

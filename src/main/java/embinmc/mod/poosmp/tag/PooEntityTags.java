@@ -1,5 +1,6 @@
-package embinmc.mod.poosmp;
+package embinmc.mod.poosmp.tag;
 
+import embinmc.mod.poosmp.PooSMPMod;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;

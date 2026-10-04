@@ -2,7 +2,7 @@ package embinmc.mod.poosmp.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
-import embinmc.mod.poosmp.PooEntityTags;
+import embinmc.mod.poosmp.tag.PooEntityTags;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;

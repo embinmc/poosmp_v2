@@ -12,9 +12,7 @@ import java.util.Map;
 
 @Mixin(CachedUserNameToIdResolver.class)
 public class CachedUserNameResolverMixin implements PooNameCache {
-    @Shadow
-    @Final
-    private Map<String, CachedUserNameToIdResolver.GameProfileInfo> profilesByName;
+    @Shadow private @Final Map<String, CachedUserNameToIdResolver.GameProfileInfo> profilesByName;
 
     @Override
     public Collection<NameAndId> poosmp$getCachedNames() {

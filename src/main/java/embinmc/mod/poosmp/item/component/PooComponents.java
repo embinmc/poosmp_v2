@@ -54,4 +54,5 @@ public interface PooComponents {
     DataComponentType<Unit> JUMPSCARE_STICK = registerUnit("jumpscare_stick");
     DataComponentType<Unit> FUN_STICK = registerUnit("fun_stick");
     DataComponentType<Unit> FORCE_ALLOW_IN_BACKPACK = registerUnit("force_allow_in_backpack");
+    DataComponentType<RequestedDiscComponent> REQUESTED_DISC = register("requested_dis", builder -> builder.persistent(RequestedDiscComponent.CODEC));
 }

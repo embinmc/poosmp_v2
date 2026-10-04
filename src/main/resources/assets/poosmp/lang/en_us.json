@@ -1,3 +1,4 @@
 {
-  "poosmp.creative_snitch": "%s took a %s from Creative Mode or /give"
+  "poosmp.creative_snitch": "%s took a %s from Creative Mode or /give",
+  "poosmp.requested_disc": "Requested by %s"
 }

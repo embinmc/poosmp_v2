@@ -5,7 +5,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 
-public interface ItemKeys {
+public interface PooItemKeys {
     ResourceKey<Item> POOP_STICK = create("poop_stick");
     ResourceKey<Item> SERVER_SAYS_WHAT_STICK = create("server_says_what_stick");
 

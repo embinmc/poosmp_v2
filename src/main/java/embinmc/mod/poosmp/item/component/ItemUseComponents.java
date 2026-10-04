@@ -53,7 +53,7 @@ public class ItemUseComponents {
 
     public static void register() {
         ItemEvents.USE.register(SERVER_SAYS_WHAT_STICK, require(PooComponents.SERVER_SAYS_WHAT, ItemUseComponents::serverSaysWhatStick));
-        ItemEvents.USE.register(WARP_STICK, require(PooComponents.WARP_DIMENSION, ItemUseComponents::warpStick));
+        ItemEvents.USE.register(WARP_STICK, require(PooComponents.DIMENSION_WARPER, ItemUseComponents::warpStick));
         ItemEvents.USE.register(WIND_STICK, require(PooComponents.WIND_SHOOTER,   ItemUseComponents::windStick));
         ItemEvents.USE.register(POOP_STICK, require(PooComponents.POOP_STICK,     ItemUseComponents::poopStick));
     }
@@ -80,7 +80,7 @@ public class ItemUseComponents {
         double posX = player.getX();
         double posZ = player.getZ();
         EitherHolder<Level> fallback = new EitherHolder<>(PooSMPMod.HYRULE);
-        Optional<Holder<Level>> optionalDim = itemStack.getOrDefault(PooComponents.WARP_DIMENSION, fallback).unwrap(level.registryAccess());
+        Optional<Holder<Level>> optionalDim = itemStack.getOrDefault(PooComponents.DIMENSION_WARPER, fallback).unwrap(level.registryAccess());
         if (optionalDim.isEmpty()) {
             serverPlayer.sendSystemMessage(Component.literal("Dimension not found").withStyle(ChatFormatting.RED));
             return InteractionResult.FAIL;

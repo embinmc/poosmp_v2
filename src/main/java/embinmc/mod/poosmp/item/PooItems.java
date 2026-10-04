@@ -56,7 +56,7 @@ public interface PooItems {
                 key, Item::new,
                 new Item.Properties()
                         .rarity(Rarity.EPIC)
-                        .component(PooComponents.WARP_DIMENSION, new EitherHolder<>(dimension)),
+                        .component(PooComponents.DIMENSION_WARPER, new EitherHolder<>(dimension)),
                 BuiltInRegistries.ITEM.getKey(Items.STICK)
         );
     }

@@ -48,7 +48,6 @@ public interface PooComponents {
     //    builder.persistent(EitherHolder.codec(Registries.BIOME, RegistryFixedCodec.create(Registries.BIOME)));
     //    builder.networkSynchronized(EitherHolder.streamCodec(Registries.BIOME, ByteBufCodecs.holderRegistry(Registries.BIOME)));
     //});
-    DataComponentType<String> SELECTED_BIOME = registerBasic("selected_biome", Codec.STRING);
     DataComponentType<Boolean> MARRIED = register("married", builder -> {
         builder.persistent(Codec.BOOL);
         builder.networkSynchronized(ByteBufCodecs.BOOL);
@@ -58,7 +57,7 @@ public interface PooComponents {
         builder.networkSynchronized(ByteBufCodecs.BOOL);
     });
 
-    DataComponentType<EitherHolder<Level>> WARP_DIMENSION = register("warp_dimension", builder -> {
+    DataComponentType<EitherHolder<Level>> DIMENSION_WARPER = register("warp_dimension", builder -> {
         builder.persistent(EitherHolder.codec(Registries.DIMENSION, RegistryFixedCodec.create(Registries.DIMENSION)));
         builder.networkSynchronized(EitherHolder.streamCodec(Registries.DIMENSION, ByteBufCodecs.holderRegistry(Registries.DIMENSION)));
     });

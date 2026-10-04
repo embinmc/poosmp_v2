@@ -1,4 +1,4 @@
-package embinmc.mod.poosmp;
+package embinmc.mod.poosmp.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;

@@ -9,6 +9,6 @@ import java.util.function.Function;
 public class PooBlocks {
 
     private static Block register(ResourceKey<Block> id, Function<BlockBehaviour.Properties, Block> block) {
-
+        return null;
     }
 }

@@ -1,0 +1,42 @@
+package embinmc.mod.poosmp.item;
+
+import embinmc.mod.poosmp.PooSMPMod;
+import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.resources.RegistryFixedCodec;
+import net.minecraft.util.Unit;
+import net.minecraft.world.item.EitherHolder;
+import net.minecraft.world.level.biome.Biome;
+
+import java.util.function.Consumer;
+
+public interface PooComponents {
+    static void init() {
+        PooSMPMod.LOGGER.info("Creating PooSMP Item Components");
+    }
+
+    private static <T> DataComponentType<T> register(String id, Consumer<DataComponentType.Builder<T>> builder) {
+        DataComponentType.Builder<T> component = DataComponentType.builder();
+        builder.accept(component);
+        return Registry.register(
+                BuiltInRegistries.DATA_COMPONENT_TYPE,
+                PooSMPMod.id(id),
+                component.build()
+        );
+    }
+
+    private static DataComponentType<Unit> registerUnit(String id) {
+        return register(id, builder -> builder.persistent(Unit.CODEC).networkSynchronized(Unit.STREAM_CODEC));
+    }
+
+    DataComponentType<EitherHolder<Biome>> SELECTED_BIOME = register("selected_biome", builder -> {
+        builder.persistent(EitherHolder.codec(Registries.BIOME, RegistryFixedCodec.create(Registries.BIOME)));
+        builder.networkSynchronized(EitherHolder.streamCodec(Registries.BIOME, ByteBufCodecs.holderRegistry(Registries.BIOME)));
+    });
+    DataComponentType<Unit> JUMPSCARE_STICK = registerUnit("jumpscare_stick");
+    DataComponentType<Unit> FUN_STICK = registerUnit("fun_stick");
+    DataComponentType<Unit> FORCE_ALLOW_IN_BACKPACK = registerUnit("force_allow_in_backpack");
+}

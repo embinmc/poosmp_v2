@@ -1,14 +1,16 @@
 {
-	"required": true,
-	"package": "embinmc.mod.poosmp.mixin",
-	"compatibilityLevel": "JAVA_21",
-	"mixins": [
-		"ExampleMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
-	},
-	"overwrites": {
-		"requireAnnotations": true
+  "required": true,
+  "package": "embinmc.mod.poosmp.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "CachedUserNameResolverMixin",
+    "ExampleMixin",
+    "ItemStackMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
 	}
 }

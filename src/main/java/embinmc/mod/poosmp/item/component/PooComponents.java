@@ -1,5 +1,6 @@
 package embinmc.mod.poosmp.item.component;
 
+import com.mojang.serialization.Codec;
 import embinmc.mod.poosmp.PooSMPMod;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
@@ -9,6 +10,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.RegistryFixedCodec;
 import net.minecraft.util.Unit;
 import net.minecraft.world.item.EitherHolder;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 
 import java.util.function.Consumer;
@@ -35,6 +37,19 @@ public interface PooComponents {
     DataComponentType<EitherHolder<Biome>> SELECTED_BIOME = register("selected_biome", builder -> {
         builder.persistent(EitherHolder.codec(Registries.BIOME, RegistryFixedCodec.create(Registries.BIOME)));
         builder.networkSynchronized(EitherHolder.streamCodec(Registries.BIOME, ByteBufCodecs.holderRegistry(Registries.BIOME)));
+    });
+    DataComponentType<Boolean> MARRIED = register("married", builder -> {
+        builder.persistent(Codec.BOOL);
+        builder.networkSynchronized(ByteBufCodecs.BOOL);
+    });
+    DataComponentType<Boolean> FROM_CREATIVE = register("from_creative", builder -> {
+        builder.persistent(Codec.BOOL);
+        builder.networkSynchronized(ByteBufCodecs.BOOL);
+    });
+
+    DataComponentType<EitherHolder<Level>> WARP_DIMENSION = register("warp_dimension", builder -> {
+        builder.persistent(EitherHolder.codec(Registries.DIMENSION, RegistryFixedCodec.create(Registries.DIMENSION)));
+        builder.networkSynchronized(EitherHolder.streamCodec(Registries.DIMENSION, ByteBufCodecs.holderRegistry(Registries.DIMENSION)));
     });
     DataComponentType<Unit> JUMPSCARE_STICK = registerUnit("jumpscare_stick");
     DataComponentType<Unit> FUN_STICK = registerUnit("fun_stick");

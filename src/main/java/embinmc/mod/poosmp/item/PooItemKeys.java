@@ -9,6 +9,15 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
 public interface PooItemKeys {
+    private static ResourceKey<Item> create(String id) {
+        return ResourceKey.create(Registries.ITEM, PooSMPMod.id(id));
+    }
+
+    private static ResourceKey<Item> create(ResourceKey<Block> block) {
+        return ResourceKey.create(Registries.ITEM, block.identifier());
+    }
+
+    // items
     ResourceKey<Item> POOP_STICK =                    create("poop_stick");
     ResourceKey<Item> SERVER_SAYS_WHAT_STICK =        create("server_says_what_stick");
     ResourceKey<Item> BIOME_STICK =                   create("biome_stick");
@@ -75,7 +84,7 @@ public interface PooItemKeys {
     ResourceKey<Item> WIND_STICK =                    create("wind_stick");
     ResourceKey<Item> ITEM_FORCING_BACKPACK_UPGRADE = create("item_forcing_upgrade");
 
-    // block items
+    // blocks
     ResourceKey<Item> POOP_BLOCK =             create(PooBlockKeys.POOP_BLOCK);
     ResourceKey<Item> MISSINGNO_BLOCK =        create(PooBlockKeys.MISSINGNO_BLOCK);
     ResourceKey<Item> POOP_BRICKS =            create(PooBlockKeys.POOP_BRICKS);
@@ -96,12 +105,4 @@ public interface PooItemKeys {
     ResourceKey<Item> DIM_MOSS_BLOCK =         create(PooBlockKeys.DIM_MOSS_BLOCK);
     ResourceKey<Item> DIM_MOSS_CARPET =        create(PooBlockKeys.DIM_MOSS_CARPET);
     ResourceKey<Item> ANNOYANCE_DEHEED =       create(PooBlockKeys.ANNOYANCE_DEHEED);
-
-    private static ResourceKey<Item> create(String id) {
-        return ResourceKey.create(Registries.ITEM, PooSMPMod.id(id));
-    }
-
-    private static ResourceKey<Item> create(ResourceKey<Block> block) {
-        return ResourceKey.create(Registries.ITEM, block.identifier());
-    }
 }

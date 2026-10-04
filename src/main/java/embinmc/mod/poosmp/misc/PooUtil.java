@@ -1,17 +1,23 @@
 package embinmc.mod.poosmp.misc;
 
+import com.mojang.serialization.Codec;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.RegistryFixedCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Util;
 import net.minecraft.world.entity.decoration.painting.PaintingVariant;
+import net.minecraft.world.item.EitherHolder;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -69,6 +75,14 @@ public class PooUtil {
 
     public static Component formattedIntText(int integer, ChatFormatting... formatting) {
         return Component.literal("%,d".formatted(integer)).withStyle(formatting);
+    }
+
+    public static <T> Codec<EitherHolder<T>> quickEitherHolderCodec(ResourceKey<Registry<T>> registry) {
+        return EitherHolder.codec(registry, RegistryFixedCodec.create(registry));
+    }
+
+    public static <T> StreamCodec<? super RegistryFriendlyByteBuf, EitherHolder<T>> quickEitherHolderStreamCodec(ResourceKey<Registry<T>> registry) {
+        return EitherHolder.streamCodec(registry, ByteBufCodecs.holderRegistry(registry));
     }
 
     public static <T> List<T> listFromEnumeration(final Iterator<T> enumeration) {

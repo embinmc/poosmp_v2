@@ -1,6 +1,7 @@
 package embinmc.mod.poosmp.item;
 
 import embinmc.mod.poosmp.PooSMPMod;
+import embinmc.mod.poosmp.item.component.BiomeStickComponent;
 import embinmc.mod.poosmp.item.component.PooComponents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
@@ -10,6 +11,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Unit;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 
 import java.util.function.Function;
@@ -49,6 +51,9 @@ public interface PooItems {
     );
     Item SERVER_SAYS_WHAT_STICK = stick(PooItemKeys.SERVER_SAYS_WHAT_STICK,
             quickComponent(PooComponents.SERVER_SAYS_WHAT).rarity(Rarity.UNCOMMON).fireResistant().stacksTo(1)
+    );
+    Item BIOME_STICK = stick(PooItemKeys.BIOME_STICK, new Item.Properties().rarity(Rarity.UNCOMMON).fireResistant()
+            .component(PooComponents.BIOME_TRANSFORMER, new BiomeStickComponent(8, new EitherHolder<>(Biomes.PLAINS)))
     );
 
     private static Item warpStick(ResourceKey<Item> key, ResourceKey<Level> dimension) {

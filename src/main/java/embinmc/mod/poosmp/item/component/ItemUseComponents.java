@@ -53,9 +53,10 @@ public class ItemUseComponents {
 
     public static void register() {
         ItemEvents.USE.register(SERVER_SAYS_WHAT_STICK, require(PooComponents.SERVER_SAYS_WHAT, ItemUseComponents::serverSaysWhatStick));
-        ItemEvents.USE.register(WARP_STICK, require(PooComponents.DIMENSION_WARPER, ItemUseComponents::warpStick));
-        ItemEvents.USE.register(WIND_STICK, require(PooComponents.WIND_SHOOTER,   ItemUseComponents::windStick));
-        ItemEvents.USE.register(POOP_STICK, require(PooComponents.POOP_STICK,     ItemUseComponents::poopStick));
+        ItemEvents.USE.register(WARP_STICK,  require(PooComponents.DIMENSION_WARPER,  ItemUseComponents::warpStick));
+        ItemEvents.USE.register(WIND_STICK,  require(PooComponents.WIND_SHOOTER,      ItemUseComponents::windStick));
+        ItemEvents.USE.register(POOP_STICK,  require(PooComponents.POOP_STICK,        ItemUseComponents::poopStick));
+        ItemEvents.USE.register(BIOME_STICK, require(PooComponents.BIOME_TRANSFORMER, BiomeStickComponent::onUse));
     }
 
     private record ConditionalCallback(DataComponentType<?> component, ItemEvents.UseCallback callback) implements ItemEvents.UseCallback {

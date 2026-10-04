@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "CachedUserNameResolverMixin",
+    "EntityMixin",
     "ExampleMixin",
     "ItemStackMixin"
   ],

@@ -24,10 +24,13 @@ public class PooSMPEntityTypeTagProvider extends FabricTagProvider.EntityTypeTag
         this.valueLookupBuilder(PooEntityTags.IMMUNE_TO_EXPLOSIONS)
                 .add(EntityType.HAPPY_GHAST)
                 .add(EntityType.ITEM_FRAME)
-                .add(EntityType.PAINTING);
+                .add(EntityType.PAINTING)
+                .add(EntityType.ITEM)
+        ;
         this.valueLookupBuilder(PooEntityTags.IMMUNE_TO_EXPLOSIONS_WHEN_NAMED)
                 .add(EntityType.PIG)
                 .add(EntityType.WOLF)
-                .add(EntityType.CAT);
+                .add(EntityType.CAT)
+        ;
     }
 }

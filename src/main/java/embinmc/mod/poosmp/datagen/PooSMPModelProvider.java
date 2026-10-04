@@ -16,6 +16,11 @@ public class PooSMPModelProvider extends FabricModelProvider {
     }
 
     @Override
+    public String getName() {
+        return "PooSMP: " + super.getName();
+    }
+
+    @Override
     public void generateBlockStateModels(@NonNull BlockModelGenerators gen) {
     }
 

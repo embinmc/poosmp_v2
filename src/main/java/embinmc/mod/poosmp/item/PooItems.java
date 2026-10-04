@@ -1,5 +1,6 @@
 package embinmc.mod.poosmp.item;
 
+import embinmc.mod.poosmp.PooSMPMod;
 import embinmc.mod.poosmp.item.component.PooComponents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -12,6 +13,10 @@ import net.minecraft.world.level.block.Block;
 import java.util.function.Function;
 
 public interface PooItems {
+    static void init() {
+        PooSMPMod.LOGGER.info("Making PooSMP items!!!");
+    }
+
     private static Item register(ResourceKey<Item> key, Function<Item.Properties, Item> item, Item.Properties properties, Identifier modelId) {
         return Registry.register(BuiltInRegistries.ITEM, key, item.apply(properties.setId(key).modelId(modelId)));
     }

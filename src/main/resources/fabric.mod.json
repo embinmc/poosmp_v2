@@ -13,7 +13,6 @@
 	"contact": {
 		"sources": "https://github.com/embinmc/poosmp_v2"
 	},
-	"license": "CC0-1.0",
 	"icon": "assets/poosmp/icon.png",
 	"environment": "*",
 	"entrypoints": {

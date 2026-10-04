@@ -70,4 +70,6 @@ public interface PooComponents {
     DataComponentType<Unit> LIGHTNING_SUMMONER = registerUnit("lightning_summoner");
     DataComponentType<Unit> POOP_STICK = registerUnit("poop_stick");
     DataComponentType<BiomeStickComponent> BIOME_TRANSFORMER = registerBasic("biome_transformer", BiomeStickComponent.CODEC);
+    DataComponentType<Unit> BOOM_STICK = registerUnit("boom_stick");
+    DataComponentType<Unit> EXPLOSION_SPAWNER = registerUnit("explosion_spawner");
 }

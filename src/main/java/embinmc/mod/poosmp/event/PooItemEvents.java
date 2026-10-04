@@ -2,9 +2,14 @@ package embinmc.mod.poosmp.event;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
+import net.fabricmc.fabric.api.event.player.ItemEvents;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Item;
 import org.jspecify.annotations.Nullable;
@@ -37,11 +42,29 @@ public final class PooItemEvents {
             }
     );
 
+    public static final Event<LivingEntityInteraction> INTERACT_LIVING_ENTITY = EventFactory.createArrayBacked(LivingEntityInteraction.class,
+            (listeners) -> (level, player, entity, interactionHand) -> {
+                for (LivingEntityInteraction event : listeners) {
+                    InteractionResult result = event.interact(level, player, entity, interactionHand);
+
+                    if (result != null) {
+                        return result;
+                    }
+                }
+
+                return null;
+            }
+    );
+
     public interface PreInvItemTick {
         boolean onTick(ItemStack itemStack, ServerLevel serverLevel, Entity entity, @Nullable EquipmentSlot slot);
     }
 
     public interface PostInvItemTick {
         boolean onTick(ItemStack itemStack, ServerLevel serverLevel, Entity entity, @Nullable EquipmentSlot slot);
+    }
+
+    public interface LivingEntityInteraction {
+        @Nullable InteractionResult interact(ItemStack stack, Player player, LivingEntity entity, InteractionHand hand);
     }
 }

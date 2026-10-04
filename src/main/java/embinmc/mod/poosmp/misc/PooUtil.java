@@ -14,21 +14,21 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.RegistryFixedCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Util;
 import net.minecraft.world.entity.decoration.painting.PaintingVariant;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.EitherHolder;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gamerules.GameRule;
+import org.jetbrains.annotations.Nullable;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.function.Consumer;
 
 @SuppressWarnings("NullableProblems")
@@ -92,5 +92,14 @@ public class PooUtil {
                 list.add(element);
             }
         });
+    }
+
+    public static @Nullable ServerPlayer getPlayerByName(String name, ServerLevel world) {
+        for (ServerPlayer player : world.players()) {
+            if (Objects.equals(name, player.getScoreboardName())) {
+                return player;
+            }
+        }
+        return null;
     }
 }

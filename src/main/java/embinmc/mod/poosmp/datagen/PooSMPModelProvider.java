@@ -5,8 +5,6 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.model.ModelTemplates;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import org.jspecify.annotations.NonNull;
 
@@ -16,7 +14,7 @@ public class PooSMPModelProvider extends FabricModelProvider {
     }
 
     @Override
-    public String getName() {
+    public @NonNull String getName() {
         return "PooSMP: " + super.getName();
     }
 

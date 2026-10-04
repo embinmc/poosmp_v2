@@ -3,9 +3,9 @@
 	"id": "poosmp",
 	"version": "${version}",
 	"name": "PooSMP Mod",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "The best Minecraft mod ever created",
 	"authors": [
-		"Me!"
+		"Embin"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
@@ -27,7 +27,7 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.19.3",
-		"minecraft": "~1.21.11",
+		"minecraft": ">=1.21.11-rc.1",
 		"java": ">=21",
 		"fabric-api": "*"
 	}

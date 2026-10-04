@@ -3,6 +3,8 @@ package embinmc.mod.poosmp;
 import embinmc.mod.poosmp.block.PooBlocks;
 import embinmc.mod.poosmp.item.PooItems;
 import embinmc.mod.poosmp.item.component.PooComponents;
+import embinmc.mod.poosmp.misc.PooRegistries;
+import embinmc.mod.poosmp.misc.PooSoundEvents;
 import net.fabricmc.api.ModInitializer;
 
 import net.minecraft.core.registries.Registries;
@@ -27,6 +29,8 @@ public class PooSMPMod implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		LOGGER.info("Welcome to PooSMP!");
+		PooRegistries.acknowledge();
+		PooSoundEvents.init();
 		PooComponents.init();
 		PooBlocks.init();
 		PooItems.init();

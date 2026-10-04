@@ -1,6 +1,6 @@
 package embinmc.mod.poosmp.mixin;
 
-import embinmc.mod.poosmp.util.PooNameCache;
+import embinmc.mod.poosmp.misc.PooNameCache;
 import net.minecraft.server.players.CachedUserNameToIdResolver;
 import net.minecraft.server.players.NameAndId;
 import org.spongepowered.asm.mixin.Final;

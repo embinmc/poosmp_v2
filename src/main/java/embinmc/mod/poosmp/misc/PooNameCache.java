@@ -1,4 +1,4 @@
-package embinmc.mod.poosmp.util;
+package embinmc.mod.poosmp.misc;
 
 import net.minecraft.server.players.NameAndId;
 

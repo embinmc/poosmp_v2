@@ -1,4 +1,4 @@
-package embinmc.mod.poosmp.datagen;
+package embinmc.mod.poosmp.datagen.tag;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
@@ -7,8 +7,8 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.concurrent.CompletableFuture;
 
-public class PooSMPBlockTagProvider extends FabricTagProvider.BlockTagProvider {
-    public PooSMPBlockTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+public class PooSMPItemTagProvider extends FabricTagProvider.ItemTagProvider {
+    public PooSMPItemTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 

@@ -1,4 +1,4 @@
-package embinmc.mod.poosmp.datagen;
+package embinmc.mod.poosmp.datagen.tag;
 
 import embinmc.mod.poosmp.PooEntityTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;

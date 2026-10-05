@@ -52,7 +52,7 @@ public class PooSMPRecipeProvider extends FabricRecipeProvider {
             @Override
             public void buildRecipes() {
                 this.smithingComponentApplication();
-                this.shapedSpecial(RecipeCategory.MISC, this.notFromCreative(PooItems.SERVER_SAYS_WHAT_STICK, 1))
+                this.shapedSpecial(RecipeCategory.MISC, PooItems.SERVER_SAYS_WHAT_STICK)
                         .pattern("4#4")
                         .pattern("#3#")
                         .pattern("4#4")
@@ -61,7 +61,7 @@ public class PooSMPRecipeProvider extends FabricRecipeProvider {
                         .define('4', Items.DIAMOND)
                         .unlockedBy(getHasName(Items.DIAMOND), this.has(Items.DIAMOND))
                         .save(this.output);
-                this.shapedSpecial(RecipeCategory.MISC, this.notFromCreative(PooItems.POOP_STICK, 1))
+                this.shapedSpecial(RecipeCategory.MISC, PooItems.POOP_STICK)
                         .pattern("4#4")
                         .pattern("#3#")
                         .pattern("4#4")
@@ -95,14 +95,16 @@ public class PooSMPRecipeProvider extends FabricRecipeProvider {
                 this.output.accept(key, recipe, null);
             }
 
-            public ItemStack notFromCreative(Item item, int count) {
-                ItemStack itemStack = new ItemStack(item, count);
-                itemStack.set(PooComponents.FROM_CREATIVE, false);
-                return itemStack;
-            }
-
             public SpecialShapedBuilder shapedSpecial(RecipeCategory category, ItemStack result) {
                 return new SpecialShapedBuilder(this.items, category, result);
+            }
+
+            public SpecialShapedBuilder shapedSpecial(RecipeCategory category, ItemLike result, int count) {
+                return new SpecialShapedBuilder(this.items, category, new ItemStack(result, count));
+            }
+
+            public SpecialShapedBuilder shapedSpecial(RecipeCategory category, ItemLike result) {
+                return this.shapedSpecial(category, result, 1);
             }
         };
     }

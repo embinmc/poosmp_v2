@@ -2,6 +2,7 @@ package embinmc.mod.poosmp.datagen;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import embinmc.mod.poosmp.item.component.PooComponents;
 import net.minecraft.advancements.*;
 import net.minecraft.advancements.criterion.RecipeUnlockedTrigger;
 import net.minecraft.core.HolderGetter;
@@ -38,6 +39,8 @@ public class SpecialShapedBuilder implements RecipeBuilder {
     protected SpecialShapedBuilder(HolderGetter<Item> items, RecipeCategory category, ItemStack result) {
         this.items = items;
         this.category = category;
+        if (result.has(PooComponents.FROM_CREATIVE))
+            result.set(PooComponents.FROM_CREATIVE, false);
         this.result = result;
     }
 

@@ -1,5 +1,6 @@
 package embinmc.mod.poosmp.datagen;
 
+import embinmc.mod.poosmp.item.PooItems;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.client.data.models.BlockModelGenerators;
@@ -24,7 +25,7 @@ public class PooSMPModelProvider extends FabricModelProvider {
 
     @Override
     public void generateItemModels(@NonNull ItemModelGenerators gen) {
-        gen.createFlatItemModel(null, Items.STICK, ModelTemplates.FLAT_HANDHELD_ITEM);
-        gen.createFlatItemModel(null, Items.STICK, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.createFlatItemModel(PooItems.POOP_STICK, Items.STICK, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.createFlatItemModel(PooItems.SERVER_SAYS_WHAT_STICK, Items.STICK, ModelTemplates.FLAT_HANDHELD_ITEM);
     }
 }

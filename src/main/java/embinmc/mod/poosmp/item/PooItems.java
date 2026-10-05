@@ -4,6 +4,7 @@ import embinmc.mod.poosmp.PooSMPMod;
 import embinmc.mod.poosmp.item.component.BiomeStickComponent;
 import embinmc.mod.poosmp.item.component.MobSummonerComponent;
 import embinmc.mod.poosmp.item.component.PooComponents;
+import embinmc.mod.poosmp.item.component.WeddingRing;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -14,6 +15,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.Consumable;
+import net.minecraft.world.item.component.Consumables;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
@@ -36,11 +38,15 @@ public interface PooItems {
 
     private static Item registerBlock(ResourceKey<Item> key, Block block, Item.Properties properties, Identifier modelId) {
         Function<Item.Properties, Item> item = properties1 -> new BlockItem(block, properties1);
-        return Registry.register(BuiltInRegistries.ITEM, key, item.apply(properties.setId(key).modelId(modelId)));
+        return Registry.register(BuiltInRegistries.ITEM, key, item.apply(properties.setId(key).modelId(modelId).useBlockDescriptionPrefix()));
     }
 
     private static Item registerBlock(ResourceKey<Item> key, Block block, Item.Properties properties) {
         return registerBlock(key, block, properties, key.identifier());
+    }
+
+    private static Item register(ResourceKey<Item> key, Item.Properties properties) {
+        return register(key, Item::new, properties, key.identifier());
     }
 
     private static Item register(ResourceKey<Item> key) {
@@ -65,6 +71,16 @@ public interface PooItems {
     );
     Item ZOMBIE_STICK = mobStick(PooItemKeys.ZOMBIE_STICK, EntityType.ZOMBIE, Rarity.RARE, MobSummonerComponent.NAMES_DEFAULT);
     Item DIAMOND_SHARD = register(PooItemKeys.DIAMOND_SHARD);
+    Item WEDDING_RING = register(PooItemKeys.WEDDING_RING, new Item.Properties()
+            .component(PooComponents.WEDDING_RING, new WeddingRing(
+                    WeddingRing.defaultNotMarriedAttributes(),
+                    WeddingRing.defaultMarriedAttributes()
+            )).rarity(Rarity.RARE).stacksTo(1).fireResistant()
+    );
+    Item RED_NETHER_BRICK = register(PooItemKeys.RED_NETHER_BRICK);
+    Item POOP_BRICK = register(PooItemKeys.POOP_BRICK);
+    Item POOPLET = food(PooItemKeys.POOPLET, PooFoods.POOPLET, Consumables.DRIED_KELP);
+    Item RING = register(PooItemKeys.RING);
 
     private static Item warpStick(ResourceKey<Item> key, ResourceKey<Level> dimension) {
         return register(

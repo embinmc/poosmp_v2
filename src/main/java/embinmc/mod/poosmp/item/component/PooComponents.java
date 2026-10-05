@@ -73,4 +73,6 @@ public interface PooComponents {
     DataComponentType<Unit> BOOM_STICK = registerUnit("boom_stick");
     DataComponentType<Unit> EXPLOSION_SPAWNER = registerUnit("explosion_spawner");
     DataComponentType<MobSummonerComponent> MOB_SUMMONER = registerBasic("mob_summoner", MobSummonerComponent.CODEC, MobSummonerComponent.STREAM_CODEC);
+    DataComponentType<WeddingRing> WEDDING_RING = registerBasic("wedding_ring", WeddingRing.CODEC, WeddingRing.STREAM_CODEC);
+    DataComponentType<Unit> FORCE_MARRIED = registerUnit("force_married");
 }

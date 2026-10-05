@@ -56,6 +56,8 @@ public class PooSMPEvents {
         });
 
         ComponentTooltipAppenderRegistry.addAfter(DataComponents.JUKEBOX_PLAYABLE, PooComponents.REQUESTED_DISC);
+        ComponentTooltipAppenderRegistry.addAfter(DataComponents.JUKEBOX_PLAYABLE, PooComponents.BIOME_TRANSFORMER);
+        ComponentTooltipAppenderRegistry.addAfter(DataComponents.JUKEBOX_PLAYABLE, PooComponents.MOB_SUMMONER);
         ItemUseComponents.register();
     }
 }

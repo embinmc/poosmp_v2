@@ -2,9 +2,11 @@ package embinmc.mod.poosmp.misc;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
@@ -21,8 +23,10 @@ import net.minecraft.util.Util;
 import net.minecraft.world.entity.decoration.painting.PaintingVariant;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.EitherHolder;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gamerules.GameRule;
 import org.jetbrains.annotations.Nullable;
@@ -40,6 +44,11 @@ public class PooUtil {
     );
     public static final Component OUTLAWED_EXPLOSIVE_TEXT = Component.literal("Explosive gadgets are currently outlawed").withStyle(ChatFormatting.RED);
     public static final Component SUPPRESSED_EXPLOSIVE = Component.literal("Explosion suppressed due to explosive gadgets currently being outlawed").withStyle(ChatFormatting.RED);
+    public static final Codec<HolderSet<Item>> STRICT_ITEM_SET_CODEC = Ingredient.NON_AIR_HOLDER_SET_CODEC.validate(holders -> {
+        if (holders instanceof HolderSet.Direct<Item>)
+            return DataResult.error(() -> "Cannot allow direct holder sets here...");
+        return DataResult.success(holders);
+    });
 
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException("PooSMP: Cannot round to less than 0 places");
@@ -108,5 +117,12 @@ public class PooUtil {
             }
         }
         return null;
+    }
+
+    public static MapCodec<OptionalDouble> optionalDouble(MapCodec<Optional<Double>> mapCodec) {
+        return mapCodec.xmap(
+                optional -> optional.map(OptionalDouble::of).orElseGet(OptionalDouble::empty),
+                optionalDouble -> optionalDouble.isPresent() ? Optional.of(optionalDouble.getAsDouble()) : Optional.empty()
+        );
     }
 }

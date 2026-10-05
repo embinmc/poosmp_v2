@@ -41,4 +41,6 @@ public class Annoyances {
         ItemEntity item = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.LEATHER));
         level.addFreshEntity(item);
     }
+
+    public static void init() {}
 }

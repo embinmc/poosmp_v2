@@ -4,16 +4,14 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.HolderSet;
-import net.minecraft.core.Registry;
+import net.minecraft.core.*;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.RegistryFixedCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
@@ -124,5 +122,23 @@ public class PooUtil {
                 optional -> optional.map(OptionalDouble::of).orElseGet(OptionalDouble::empty),
                 optionalDouble -> optionalDouble.isPresent() ? Optional.of(optionalDouble.getAsDouble()) : Optional.empty()
         );
+    }
+
+    public static <T> Codec<Map<UUID, T>> uuidMapCodec(Codec<T> valueCodec) {
+        return Codec.unboundedMap(UUIDUtil.STRING_CODEC, valueCodec);
+    }
+
+    public static <T> Codec<Map<UUID, Map<Identifier, T>>> uuidMapIdCodec(Codec<T> valueCodec) {
+        return uuidMapCodec(Codec.unboundedMap(Identifier.CODEC, valueCodec));
+    }
+
+    public static <T, K, V> Map<T, Map<K, V>> fixMaps(Map<T, Map<K, V>> map) {
+        if (!map.isEmpty()) {
+            Map<T, Map<K, V>> fixedMap = HashMap.newHashMap(map.size());
+            for (T t : map.keySet()) {
+                fixedMap.put(t, new HashMap<>(map.get(t)));
+            }
+            return fixedMap;
+        } else return HashMap.newHashMap(16);
     }
 }

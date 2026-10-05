@@ -1,9 +1,11 @@
 package embinmc.mod.poosmp;
 
 import embinmc.mod.poosmp.block.PooBlocks;
+import embinmc.mod.poosmp.event.PooSMPEvents;
 import embinmc.mod.poosmp.item.PooItems;
 import embinmc.mod.poosmp.item.component.PooComponents;
 import embinmc.mod.poosmp.misc.PooRegistries;
+import embinmc.mod.poosmp.misc.PooSMPGameRules;
 import embinmc.mod.poosmp.misc.PooSoundEvents;
 import net.fabricmc.api.ModInitializer;
 
@@ -32,8 +34,10 @@ public class PooSMPMod implements ModInitializer {
 		PooRegistries.acknowledge();
 		PooSoundEvents.init();
 		PooComponents.init();
+		PooSMPGameRules.acknowledge();
 		PooBlocks.init();
 		PooItems.init();
+		PooSMPEvents.register();
 	}
 
 	public static Identifier id(String path) {

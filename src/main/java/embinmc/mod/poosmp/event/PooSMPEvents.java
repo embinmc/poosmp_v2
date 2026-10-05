@@ -4,34 +4,25 @@ import embinmc.mod.poosmp.PooSMPMod;
 import embinmc.mod.poosmp.item.component.ItemUseComponents;
 import embinmc.mod.poosmp.item.component.PooComponents;
 import embinmc.mod.poosmp.item.component.WeddingRing;
-import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
-import net.fabricmc.fabric.api.event.player.ItemEvents;
+import embinmc.mod.poosmp.upgrade.Upgrade;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientEntityEvents;
+import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.item.v1.ComponentTooltipAppenderRegistry;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
-import net.minecraft.ChatFormatting;
-import net.minecraft.core.Holder;
-import net.minecraft.core.SectionPos;
+import net.fabricmc.fabric.api.networking.v1.EntityTrackingEvents;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.item.EitherHolder;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 
 import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
 
 public class PooSMPEvents {
     public static void register() {
@@ -75,5 +66,52 @@ public class PooSMPEvents {
         ComponentTooltipAppenderRegistry.addAfter(DataComponents.JUKEBOX_PLAYABLE, PooComponents.BIOME_TRANSFORMER);
         ComponentTooltipAppenderRegistry.addAfter(DataComponents.JUKEBOX_PLAYABLE, PooComponents.MOB_SUMMONER);
         ItemUseComponents.register();
+
+        /// [Upgrade#onRespawn(int, ServerPlayer)]
+        ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
+            Upgrade.withPurchasedUpgrades(newPlayer, (upgradeHolder, bought) -> {
+                Upgrade upgrade = upgradeHolder.value();
+                upgrade.onRespawn(bought, newPlayer);
+            });
+        });
+
+        /// [Upgrade#onTick(int, ServerPlayer)]
+        embin.strangeitems.event.ServerPlayerEvents.ON_TICK.register(serverPlayer -> {
+            Upgrade.withPurchasedUpgrades(serverPlayer, (upgradeHolder, bought) -> {
+                Upgrade upgrade = upgradeHolder.value();
+                upgrade.onTick(bought, serverPlayer);
+            });
+            return InteractionResult.PASS;
+        });
+
+        /// [Upgrade#onHitEntity(int, ServerPlayer, LivingEntity)]
+        ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> {
+            if (source.getDirectEntity() instanceof ServerPlayer player) {
+                Upgrade.withPurchasedUpgrades(player, (upgradeHolder, bought) -> {
+                    Upgrade upgrade = upgradeHolder.value();
+                    upgrade.onHitEntity(bought, player, entity);
+                });
+            }
+            return true;
+        });
+
+        /// [Upgrade#onDeath(int, ServerPlayer)]
+        ServerLivingEntityEvents.ALLOW_DEATH.register((entity, source, amount) -> {
+            if (entity instanceof ServerPlayer player) {
+                Upgrade.withPurchasedUpgrades(player, (upgradeHolder, bought) -> {
+                    Upgrade upgrade = upgradeHolder.value();
+                    upgrade.onDeath(bought, player);
+                });
+            }
+            return true;
+        });
+
+        /// [Upgrade#onJoin(int, ServerPlayer)]
+        ServerPlayerEvents.JOIN.register(player -> {
+            Upgrade.withPurchasedUpgrades(player, (upgradeHolder, bought) -> {
+                Upgrade upgrade = upgradeHolder.value();
+                upgrade.onJoin(bought, player);
+            });
+        });
     }
 }

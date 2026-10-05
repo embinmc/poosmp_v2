@@ -14,6 +14,7 @@ import net.minecraft.util.Unit;
 import net.minecraft.world.item.EitherHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.dimension.LevelStem;
 
 import java.util.function.Consumer;
 
@@ -59,7 +60,7 @@ public interface PooComponents {
 
     DataComponentType<EitherHolder<Level>> DIMENSION_WARPER = register("warp_dimension", builder -> {
         builder.persistent(EitherHolder.codec(Registries.DIMENSION, RegistryFixedCodec.create(Registries.DIMENSION)));
-        builder.networkSynchronized(EitherHolder.streamCodec(Registries.DIMENSION, ByteBufCodecs.holderRegistry(Registries.DIMENSION)));
+        //builder.networkSynchronized(EitherHolder.streamCodec(Registries.DIMENSION, ByteBufCodecs.holderRegistry(Registries.DIMENSION)));
     });
     DataComponentType<Unit> JUMPSCARE_STICK = registerUnit("jumpscare_stick");
     DataComponentType<Unit> FUN_STICK = registerUnit("fun_stick");

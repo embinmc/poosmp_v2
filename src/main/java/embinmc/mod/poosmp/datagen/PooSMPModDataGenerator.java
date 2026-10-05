@@ -14,6 +14,8 @@ public class PooSMPModDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(PooSMPItemTagProvider::new);
 		pack.addProvider(PooSMPBlockTagProvider::new);
 
+		pack.addProvider(UpgradeProvider::new);
+
 		pack.addProvider(PooSMPModelProvider::new);
 		pack.addProvider(PooSMPRecipeProvider::new);
 	}

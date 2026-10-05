@@ -1,7 +1,6 @@
 package embinmc.mod.poosmp.datagen;
 
 import com.tiviacz.travelersbackpack.init.ModTags;
-import com.tiviacz.travelersbackpack.item.TravelersBackpackItem;
 import embinmc.mod.poosmp.PooSMPMod;
 import embinmc.mod.poosmp.item.PooItemKeys;
 import embinmc.mod.poosmp.item.PooItems;

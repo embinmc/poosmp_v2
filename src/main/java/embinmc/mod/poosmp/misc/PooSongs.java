@@ -11,7 +11,7 @@ public interface PooSongs {
     }
 
     ResourceKey<JukeboxSong> TRIFECTA_CAP = of("trifecta_cap");
-    ResourceKey<JukeboxSong> BUTTERFLIES_AND_HURRICANES_INSTRUMENTAL = of("butterflies_and_hurricanes_instrumental");
+    ResourceKey<JukeboxSong> BUTTERFLIES_INSTRUMENTAL = of("butterflies_and_hurricanes_instrumental");
     ResourceKey<JukeboxSong> BUDDY_HOLLY = of("buddy_holly");
     ResourceKey<JukeboxSong> STEREO_MADNESS = of("stereo_madness");
     ResourceKey<JukeboxSong> NOT_LIKE_US = of("not_like_us");

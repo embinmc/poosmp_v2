@@ -1,12 +1,11 @@
 package embinmc.mod.poosmp.item;
 
 import embinmc.mod.poosmp.PooSMPMod;
-import embinmc.mod.poosmp.item.component.BiomeStickComponent;
-import embinmc.mod.poosmp.item.component.MobSummonerComponent;
-import embinmc.mod.poosmp.item.component.PooComponents;
-import embinmc.mod.poosmp.item.component.WeddingRing;
+import embinmc.mod.poosmp.item.component.*;
+import embinmc.mod.poosmp.misc.PooSongs;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -69,7 +68,7 @@ public interface PooItems {
     Item BOOM_STICK = stick(PooItemKeys.BOOM_STICK,
             quickComponent(PooComponents.BOOM_STICK).rarity(Rarity.RARE).fireResistant()
     );
-    Item ZOMBIE_STICK = mobStick(PooItemKeys.ZOMBIE_STICK, EntityType.ZOMBIE, Rarity.RARE, MobSummonerComponent.NAMES_DEFAULT);
+    Item ZOMBIE_STICK = mobStick(PooItemKeys.ZOMBIE_STICK, EntityType.ZOMBIE, Rarity.RARE, MobSummonerComponent.NAMES_DEFAULT, false);
     Item DIAMOND_SHARD = register(PooItemKeys.DIAMOND_SHARD);
     Item WEDDING_RING = register(PooItemKeys.WEDDING_RING, new Item.Properties()
             .component(PooComponents.WEDDING_RING, new WeddingRing(
@@ -81,6 +80,43 @@ public interface PooItems {
     Item POOP_BRICK = register(PooItemKeys.POOP_BRICK);
     Item POOPLET = food(PooItemKeys.POOPLET, PooFoods.POOPLET, Consumables.DRIED_KELP);
     Item RING = register(PooItemKeys.RING);
+    Item TOTEM_OF_HEALTH = register(PooItemKeys.TOTEM_OF_HEALTH, new Item.Properties()
+            .attributes(PooTotems.healthTotemAttributes(4, ""))
+            .component(PooComponents.FROM_CREATIVE, true)
+            .rarity(Rarity.UNCOMMON).stacksTo(1)
+    );
+    Item WARP_STICK = warpStick(PooItemKeys.WARP_STICK, PooSMPMod.HYRULE);
+    Item FILL_ARMOR_TRIM_TEMPLATE = register(PooItemKeys.FILL_ARMOR_TRIM_TEMPLATE, SmithingTemplateItem::createArmorTrimTemplate, quickRarity(Rarity.UNCOMMON));
+    Item DISC_TRIFECTA_CAP = requestedDisc(PooItemKeys.DISC_TRIFECTA_CAP, PooSongs.TRIFECTA_CAP, "Embin", false);
+    Item DISC_BUTTERFLIES_INSTRUMENTAL = requestedDisc(PooItemKeys.DISC_BUTTERFLIES_INSTRUMENTAL, PooSongs.BUTTERFLIES_INSTRUMENTAL, "Embin", false);
+    Item DISC_BUDDY_HOLLY = requestedDisc(PooItemKeys.DISC_BUDDY_HOLLY, PooSongs.BUDDY_HOLLY, "ianyourgod", false);
+    Item DISC_STEREO_MADNESS = requestedDisc(PooItemKeys.DISC_STEREO_MADNESS, PooSongs.STEREO_MADNESS, "a_pc", false);
+    Item DISC_NOT_LIKE_US = requestedDisc(PooItemKeys.DISC_NOT_LIKE_US, PooSongs.NOT_LIKE_US, "a_pc", false);
+    Item DISC_RESISTANCE_INSTR = requestedDisc(PooItemKeys.DISC_RESISTANCE_INSTR, PooSongs.RESISTANCE_INSTRUMENTAL, "Embin", false);
+    Item TOTEM_OF_REACH = register(PooItemKeys.TOTEM_OF_REACH, new Item.Properties()
+            .attributes(PooTotems.reachTotemAttributes(1f, ""))
+            .component(PooComponents.FROM_CREATIVE, true)
+            .rarity(Rarity.UNCOMMON).stacksTo(1)
+    );
+    Item BLANK_MUSIC_DISC = register(PooItemKeys.BLANK_MUSIC_DISC, quickRarity(Rarity.UNCOMMON));
+    Item ENCHANTED_TOTEM_OF_REACH = register(PooItemKeys.ENCHANTED_TOTEM_OF_REACH, new Item.Properties()
+            .attributes(PooTotems.reachTotemAttributes(2f, ""))
+            .component(PooComponents.FROM_CREATIVE, true)
+            .rarity(Rarity.RARE).stacksTo(1)
+            .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
+    );
+    Item ENCHANTED_TOTEM_OF_HEALTH = register(PooItemKeys.ENCHANTED_TOTEM_OF_HEALTH, new Item.Properties()
+            .attributes(PooTotems.healthTotemAttributes(6, "_enchanted"))
+            .component(PooComponents.FROM_CREATIVE, true)
+            .rarity(Rarity.RARE).stacksTo(1)
+            .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
+    );
+    Item DISC_BLISS_INSTRUMENTAL = requestedDisc(PooItemKeys.DISC_BLISS_INSTRUMENTAL, PooSongs.BLISS_INSTRUMENTAL, "Embin", false);
+    Item DISC_ENDLESSLY_INSTRUMENTAL = requestedDisc(PooItemKeys.DISC_ENDLESSLY_INSTRUMENTAL, PooSongs.ENDLESSLY_INSTRUMENTAL, "Embin", false);
+    Item DISC_ENDLESSLY = requestedDisc(PooItemKeys.DISC_ENDLESSLY, PooSongs.ENDLESSLY, "Embin", false);
+    Item DISC_ENDLESSLY_STEREO = requestedDisc(PooItemKeys.DISC_ENDLESSLY_STEREO, PooSongs.ENDLESSLY_STEREO, "Embin", true);
+    Item ZAP_STICK = snitchStick(PooItemKeys.ZAP_STICK, quickComponent(PooComponents.LIGHTNING_SUMMONER).rarity(Rarity.UNCOMMON));
+    Item VILLAGER_STICK = mobStick(PooItemKeys.VILLAGER_STICK, EntityType.ZOMBIE, Rarity.RARE, MobSummonerComponent.NAMES_DEFAULT, true);
 
     private static Item warpStick(ResourceKey<Item> key, ResourceKey<Level> dimension) {
         return register(
@@ -100,19 +136,29 @@ public interface PooItems {
         return stick(key, properties.component(PooComponents.FROM_CREATIVE, true));
     }
 
-    private static Item mobStick(ResourceKey<Item> key, EntityType<?> entityType, Rarity rarity, List<String> names) {
-        return snitchStick(key, new Item.Properties()
+    private static Item mobStick(ResourceKey<Item> key, EntityType<?> entityType, Rarity rarity, List<String> names, boolean snitch) {
+        Item.Properties properties = new Item.Properties()
                 .fireResistant().rarity(rarity)
-                .component(PooComponents.FROM_CREATIVE, true)
-                .component(PooComponents.MOB_SUMMONER, new MobSummonerComponent(entityType, names))
-        );
+                .component(PooComponents.MOB_SUMMONER, new MobSummonerComponent(entityType, names));
+        return snitch ? snitchStick(key, properties) : stick(key, properties);
     }
 
     private static Item food(ResourceKey<Item> key, FoodProperties food, Consumable consumable) {
         return register(key, Item::new, new Item.Properties().food(food, consumable));
     }
 
+    private static Item requestedDisc(ResourceKey<Item> key, ResourceKey<JukeboxSong> song, String requester, boolean stereo) {
+        return register(key, new Item.Properties()
+                .jukeboxPlayable(song).stacksTo(1).rarity(Rarity.RARE)
+                .component(PooComponents.REQUESTED_DISC, new RequestedDiscComponent(requester, stereo))
+        );
+    }
+
     private static Item.Properties quickComponent(DataComponentType<Unit> component) {
         return new Item.Properties().component(component, Unit.INSTANCE);
+    }
+
+    private static Item.Properties quickRarity(Rarity rarity) {
+        return new Item.Properties().rarity(rarity);
     }
 }

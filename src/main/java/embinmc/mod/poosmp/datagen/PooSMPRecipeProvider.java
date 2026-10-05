@@ -3,6 +3,8 @@ package embinmc.mod.poosmp.datagen;
 import com.tiviacz.travelersbackpack.init.ModTags;
 import com.tiviacz.travelersbackpack.item.TravelersBackpackItem;
 import embinmc.mod.poosmp.PooSMPMod;
+import embinmc.mod.poosmp.item.PooItemKeys;
+import embinmc.mod.poosmp.item.PooItems;
 import embinmc.mod.poosmp.item.component.ComponentApplicationRecipe;
 import embinmc.mod.poosmp.item.component.PooComponents;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -13,12 +15,15 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Unit;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ItemLore;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
@@ -42,10 +47,29 @@ public class PooSMPRecipeProvider extends FabricRecipeProvider {
     @Override
     protected @NonNull RecipeProvider createRecipeProvider(HolderLookup.@NonNull Provider registryLookup, @NonNull RecipeOutput exporter) {
         return new RecipeProvider(registryLookup, exporter) {
+            final HolderLookup.RegistryLookup<Item> items = this.registries.lookupOrThrow(Registries.ITEM);
+
             @Override
             public void buildRecipes() {
-                HolderLookup.RegistryLookup<Item> items = this.registries.lookupOrThrow(Registries.ITEM);
                 this.smithingComponentApplication();
+                this.shapedSpecial(RecipeCategory.MISC, this.notFromCreative(PooItems.SERVER_SAYS_WHAT_STICK, 1))
+                        .pattern("4#4")
+                        .pattern("#3#")
+                        .pattern("4#4")
+                        .define('3', ConventionalItemTags.WOODEN_RODS)
+                        .define('#', PooItemKeys.DIAMOND_SHARD)
+                        .define('4', Items.DIAMOND)
+                        .unlockedBy(getHasName(Items.DIAMOND), this.has(Items.DIAMOND))
+                        .save(this.output);
+                this.shapedSpecial(RecipeCategory.MISC, this.notFromCreative(PooItems.POOP_STICK, 1))
+                        .pattern("4#4")
+                        .pattern("#3#")
+                        .pattern("4#4")
+                        .define('3', ConventionalItemTags.WOODEN_RODS)
+                        .define('#', PooItemKeys.POOP_BLOCK)
+                        .define('4', PooItemKeys.DIAMOND_SHARD)
+                        .unlockedBy(getHasName(Items.STICK), this.has(Items.STICK))
+                        .save(this.output);
             }
 
             // hardcoded, don't care
@@ -69,6 +93,16 @@ public class PooSMPRecipeProvider extends FabricRecipeProvider {
                 );
                 ResourceKey<Recipe<?>> key = ResourceKey.create(Registries.RECIPE, PooSMPMod.id("backpack_item_forcing_upgrade_transform"));
                 this.output.accept(key, recipe, null);
+            }
+
+            public ItemStack notFromCreative(Item item, int count) {
+                ItemStack itemStack = new ItemStack(item, count);
+                itemStack.set(PooComponents.FROM_CREATIVE, false);
+                return itemStack;
+            }
+
+            public SpecialShapedBuilder shapedSpecial(RecipeCategory category, ItemStack result) {
+                return new SpecialShapedBuilder(this.items, category, result);
             }
         };
     }

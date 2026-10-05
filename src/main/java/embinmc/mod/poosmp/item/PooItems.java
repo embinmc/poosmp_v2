@@ -55,6 +55,9 @@ public interface PooItems {
     Item BIOME_STICK = stick(PooItemKeys.BIOME_STICK, new Item.Properties().rarity(Rarity.UNCOMMON).fireResistant()
             .component(PooComponents.BIOME_TRANSFORMER, new BiomeStickComponent(8, new EitherHolder<>(Biomes.PLAINS)))
     );
+    Item BOOM_STICK = stick(PooItemKeys.BOOM_STICK,
+            quickComponent(PooComponents.BOOM_STICK).rarity(Rarity.RARE).fireResistant()
+    );
 
     private static Item warpStick(ResourceKey<Item> key, ResourceKey<Level> dimension) {
         return register(

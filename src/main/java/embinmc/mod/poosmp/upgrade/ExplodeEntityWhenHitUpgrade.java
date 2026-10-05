@@ -10,7 +10,7 @@ import net.minecraft.world.level.Level;
 public class ExplodeEntityWhenHitUpgrade extends AbstractUpgrade {
     public static final UpgradeType<ExplodeEntityWhenHitUpgrade> TYPE = new UpgradeType<>("Explode", simpleCodec(ExplodeEntityWhenHitUpgrade::new));
 
-    protected ExplodeEntityWhenHitUpgrade(Properties properties) {
+    public ExplodeEntityWhenHitUpgrade(Properties properties) {
         super(properties);
     }
 

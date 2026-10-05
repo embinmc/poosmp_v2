@@ -14,7 +14,7 @@ public class StatusEffectUpgrade extends AbstractUpgrade {
     public static final UpgradeType<StatusEffectUpgrade> TYPE = new UpgradeType<>("StatusEffectUpgrade", MAP_CODEC);
     protected final MobEffectInstance effectInstance;
 
-    protected StatusEffectUpgrade(Properties properties, MobEffectInstance effect) {
+    public StatusEffectUpgrade(Properties properties, MobEffectInstance effect) {
         super(properties);
         this.effectInstance = effect;
     }

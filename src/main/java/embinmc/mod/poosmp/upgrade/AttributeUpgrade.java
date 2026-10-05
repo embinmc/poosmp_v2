@@ -24,7 +24,7 @@ public class AttributeUpgrade extends AbstractUpgrade {
     public static final UpgradeType<AttributeUpgrade> TYPE = new UpgradeType<>("AttributeUpgrade", MAP_CODEC);
     protected final ItemAttributeModifiers modifiers;
 
-    protected AttributeUpgrade(Properties properties, ItemAttributeModifiers modifiers) {
+    public AttributeUpgrade(Properties properties, ItemAttributeModifiers modifiers) {
         super(properties);
         this.modifiers = modifiers;
     }

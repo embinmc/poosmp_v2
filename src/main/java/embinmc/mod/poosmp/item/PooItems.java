@@ -116,7 +116,7 @@ public interface PooItems {
     Item DISC_ENDLESSLY = requestedDisc(PooItemKeys.DISC_ENDLESSLY, PooSongs.ENDLESSLY, "Embin", false);
     Item DISC_ENDLESSLY_STEREO = requestedDisc(PooItemKeys.DISC_ENDLESSLY_STEREO, PooSongs.ENDLESSLY_STEREO, "Embin", true);
     Item ZAP_STICK = snitchStick(PooItemKeys.ZAP_STICK, quickComponent(PooComponents.LIGHTNING_SUMMONER).rarity(Rarity.UNCOMMON));
-    Item VILLAGER_STICK = mobStick(PooItemKeys.VILLAGER_STICK, EntityType.ZOMBIE, Rarity.RARE, MobSummonerComponent.NAMES_DEFAULT, true);
+    Item VILLAGER_STICK = mobStick(PooItemKeys.VILLAGER_STICK, EntityType.VILLAGER, Rarity.EPIC, MobSummonerComponent.NAMES_VILLAGER, true);
 
     private static Item warpStick(ResourceKey<Item> key, ResourceKey<Level> dimension) {
         return register(

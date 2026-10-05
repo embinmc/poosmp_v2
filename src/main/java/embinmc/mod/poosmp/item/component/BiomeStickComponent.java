@@ -10,7 +10,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.commands.FillBiomeCommand;
 import net.minecraft.server.level.ServerLevel;
@@ -31,14 +34,19 @@ import net.minecraft.world.level.biome.Biome;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-public record BiomeStickComponent(int diameter, EitherHolder<Biome> selectedBiome) implements TooltipProvider {
+public record BiomeStickComponent(byte diameter, EitherHolder<Biome> selectedBiome) implements TooltipProvider {
     public static final Codec<BiomeStickComponent> CODEC = RecordCodecBuilder.create(bsc -> bsc.group(
-            ExtraCodecs.intRange(1, 64).fieldOf("diameter").forGetter(BiomeStickComponent::diameter),
+            PooUtil.byteRange((byte) 1, (byte) 127).fieldOf("diameter").forGetter(BiomeStickComponent::diameter),
             PooUtil.quickEitherHolderCodec(Registries.BIOME).fieldOf("biome").forGetter(BiomeStickComponent::selectedBiome)
     ).apply(bsc, BiomeStickComponent::new));
+    public static final StreamCodec<RegistryFriendlyByteBuf, BiomeStickComponent> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.BYTE, BiomeStickComponent::diameter,
+            PooUtil.quickEitherHolderStreamCodec(Registries.BIOME), BiomeStickComponent::selectedBiome,
+            BiomeStickComponent::new
+    );
 
-    public BiomeStickComponent withRadius(int radius) {
-        return new BiomeStickComponent(Math.max(1, radius), this.selectedBiome());
+    public BiomeStickComponent withRadius(byte radius) {
+        return new BiomeStickComponent(radius < 1 ? 1 : radius, this.selectedBiome());
     }
 
     public BiomeStickComponent withBiome(EitherHolder<Biome> biome) {

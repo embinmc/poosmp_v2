@@ -65,13 +65,15 @@ public class ItemUseComponents {
 
     public static void register() {
         ItemEvents.USE.register(SERVER_SAYS_WHAT_STICK, require(PooComponents.SERVER_SAYS_WHAT, ItemUseComponents::serverSaysWhatStick));
-        ItemEvents.USE.register(WARP_STICK,   require(PooComponents.DIMENSION_WARPER,  ItemUseComponents::warpStick));
-        ItemEvents.USE.register(WIND_STICK,   require(PooComponents.WIND_SHOOTER,      ItemUseComponents::windStick));
-        ItemEvents.USE.register(POOP_STICK,   require(PooComponents.POOP_STICK,        ItemUseComponents::poopStick));
-        ItemEvents.USE.register(BIOME_STICK,  require(PooComponents.BIOME_TRANSFORMER, BiomeStickComponent::onUse));
-        ItemEvents.USE.register(BOOM_STICK,   require(PooComponents.BOOM_STICK,        ItemUseComponents::boomStick));
-        ItemEvents.USE.register(MAGIC_DEVICE, require(PooComponents.EXPLOSION_SPAWNER, ItemUseComponents::magicDevice));
+        ItemEvents.USE.register(WARP_STICK,   require(PooComponents.DIMENSION_WARPER,   ItemUseComponents::warpStick));
+        ItemEvents.USE.register(WIND_STICK,   require(PooComponents.WIND_SHOOTER,       ItemUseComponents::windStick));
+        ItemEvents.USE.register(POOP_STICK,   require(PooComponents.POOP_STICK,         ItemUseComponents::poopStick));
+        ItemEvents.USE.register(BIOME_STICK,  require(PooComponents.BIOME_TRANSFORMER,  BiomeStickComponent::onUse));
+        ItemEvents.USE.register(BOOM_STICK,   require(PooComponents.BOOM_STICK,         ItemUseComponents::boomStick));
+        ItemEvents.USE.register(MAGIC_DEVICE, require(PooComponents.EXPLOSION_SPAWNER,  ItemUseComponents::magicDevice));
         PooItemEvents.INTERACT_LIVING_ENTITY.register(MAGIC_DEVICE, require(PooComponents.EXPLOSION_SPAWNER, ItemUseComponents::magicDeviceInteract));
+        ItemEvents.USE.register(ZAP_STICK,    require(PooComponents.LIGHTNING_SUMMONER, ItemUseComponents::zapStick));
+        ItemEvents.USE.register(MOB_STICK,    require(PooComponents.MOB_SUMMONER,       MobSummonerComponent::onUse));
     }
 
     private record ConditionalCallback(DataComponentType<?> component, ItemEvents.UseCallback callback) implements ItemEvents.UseCallback {
@@ -259,5 +261,17 @@ public class ItemUseComponents {
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
+    }
+
+    private static InteractionResult zapStick(Level world, Player user, InteractionHand hand) {
+        if (!world.isClientSide()) {
+            Commands commandManager = world.getServer().getCommands();
+            CommandSourceStack commandSource = world.getServer().createCommandSourceStack().withSuppressedOutput();
+            String player_uuid = user.getStringUUID();
+            commandManager.performPrefixedCommand(commandSource, "execute at " + player_uuid + " run summon minecraft:lightning_bolt");
+        }
+        user.awardStat(Stats.ITEM_USED.get(user.getItemInHand(hand).getItem()));
+        user.getCooldowns().addCooldown(user.getItemInHand(hand), 10);
+        return InteractionResult.SUCCESS;
     }
 }

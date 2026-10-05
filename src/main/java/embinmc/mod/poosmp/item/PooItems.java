@@ -53,7 +53,7 @@ public interface PooItems {
             quickComponent(PooComponents.SERVER_SAYS_WHAT).rarity(Rarity.UNCOMMON).fireResistant().stacksTo(1)
     );
     Item BIOME_STICK = stick(PooItemKeys.BIOME_STICK, new Item.Properties().rarity(Rarity.UNCOMMON).fireResistant()
-            .component(PooComponents.BIOME_TRANSFORMER, new BiomeStickComponent(8, new EitherHolder<>(Biomes.PLAINS)))
+            .component(PooComponents.BIOME_TRANSFORMER, new BiomeStickComponent((byte) 8, new EitherHolder<>(Biomes.PLAINS)))
     );
     Item BOOM_STICK = stick(PooItemKeys.BOOM_STICK,
             quickComponent(PooComponents.BOOM_STICK).rarity(Rarity.RARE).fireResistant()
@@ -71,6 +71,10 @@ public interface PooItems {
 
     private static Item stick(ResourceKey<Item> key, Item.Properties properties) {
         return register(key, Item::new, properties, Items.STICK.builtInRegistryHolder().key().identifier());
+    }
+
+    private static Item snitchStick(ResourceKey<Item> key, Item.Properties properties) {
+        return stick(key, properties.component(PooComponents.FROM_CREATIVE, true));
     }
 
     private static Item.Properties quickComponent(DataComponentType<Unit> component) {

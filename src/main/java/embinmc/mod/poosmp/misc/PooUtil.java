@@ -1,6 +1,7 @@
 package embinmc.mod.poosmp.misc;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -30,6 +31,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 @SuppressWarnings("NullableProblems")
 public class PooUtil {
@@ -92,6 +94,11 @@ public class PooUtil {
                 list.add(element);
             }
         });
+    }
+
+    public static Codec<Byte> byteRange(final byte minInclusive, final byte maxInclusive) {
+        final Function<Byte, DataResult<Byte>> checker = Codec.checkRange(minInclusive, maxInclusive);
+        return Codec.BYTE.flatXmap(checker, checker);
     }
 
     public static @Nullable ServerPlayer getPlayerByName(String name, ServerLevel world) {

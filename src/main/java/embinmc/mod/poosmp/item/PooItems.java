@@ -2,6 +2,7 @@ package embinmc.mod.poosmp.item;
 
 import embinmc.mod.poosmp.PooSMPMod;
 import embinmc.mod.poosmp.item.component.BiomeStickComponent;
+import embinmc.mod.poosmp.item.component.MobSummonerComponent;
 import embinmc.mod.poosmp.item.component.PooComponents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
@@ -9,11 +10,15 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Unit;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 
+import java.util.List;
 import java.util.function.Function;
 
 public interface PooItems {
@@ -58,6 +63,8 @@ public interface PooItems {
     Item BOOM_STICK = stick(PooItemKeys.BOOM_STICK,
             quickComponent(PooComponents.BOOM_STICK).rarity(Rarity.RARE).fireResistant()
     );
+    Item ZOMBIE_STICK = mobStick(PooItemKeys.ZOMBIE_STICK, EntityType.ZOMBIE, Rarity.RARE, MobSummonerComponent.NAMES_DEFAULT);
+    Item DIAMOND_SHARD = register(PooItemKeys.DIAMOND_SHARD);
 
     private static Item warpStick(ResourceKey<Item> key, ResourceKey<Level> dimension) {
         return register(
@@ -75,6 +82,18 @@ public interface PooItems {
 
     private static Item snitchStick(ResourceKey<Item> key, Item.Properties properties) {
         return stick(key, properties.component(PooComponents.FROM_CREATIVE, true));
+    }
+
+    private static Item mobStick(ResourceKey<Item> key, EntityType<?> entityType, Rarity rarity, List<String> names) {
+        return snitchStick(key, new Item.Properties()
+                .fireResistant().rarity(rarity)
+                .component(PooComponents.FROM_CREATIVE, true)
+                .component(PooComponents.MOB_SUMMONER, new MobSummonerComponent(entityType, names))
+        );
+    }
+
+    private static Item food(ResourceKey<Item> key, FoodProperties food, Consumable consumable) {
+        return register(key, Item::new, new Item.Properties().food(food, consumable));
     }
 
     private static Item.Properties quickComponent(DataComponentType<Unit> component) {

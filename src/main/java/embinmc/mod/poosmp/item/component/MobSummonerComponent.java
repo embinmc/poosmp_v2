@@ -46,6 +46,9 @@ public record MobSummonerComponent(EntityType<?> entity, List<String> possibleNa
             ByteBufCodecs.fromCodec(Codec.string(1, 40).listOf(0, 50)), MobSummonerComponent::possibleNames,
             MobSummonerComponent::new
     );
+    public static final List<String> NAMES_DEFAULT = List.of("Goon", "Henchmen", "Minion");
+    public static final List<String> NAMES_VILLAGER = List.of("Villager", "Worker");
+    public static final List<String> NAMES_COW = List.of("Cow", "Ol' Betsey");
 
     @Override
     public void addToTooltip(Item.TooltipContext tooltipContext, Consumer<Component> consumer, TooltipFlag tooltipFlag, DataComponentGetter dataComponentGetter) {

@@ -3,6 +3,7 @@ package embinmc.mod.poosmp.item.component;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import embinmc.mod.poosmp.PooSMPMod;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -11,6 +12,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.ServerScoreboard;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -47,7 +49,9 @@ public record MobSummonerComponent(EntityType<?> entity, List<String> possibleNa
 
     @Override
     public void addToTooltip(Item.TooltipContext tooltipContext, Consumer<Component> consumer, TooltipFlag tooltipFlag, DataComponentGetter dataComponentGetter) {
-
+        String entityId = this.entity().builtInRegistryHolder().getRegisteredName();
+        Component valueComponent = Component.literal(entityId).withStyle(ChatFormatting.YELLOW);
+        consumer.accept(Component.translatable("poosmp.mob_stick.entity", valueComponent).withStyle(ChatFormatting.GRAY));
     }
 
     public static InteractionResult onUse(Level level, Player player, InteractionHand hand) {

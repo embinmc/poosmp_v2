@@ -37,7 +37,8 @@ public class UpgradeProvider extends PooCodecDataProvider<Upgrade> {
         return "PooSMP Upgrade Provider";
     }
 
-    public void generate() {
+    @Override
+    public void generate(HolderLookup.@NonNull Provider provider) {
         this.attributeUpgrade(Upgrades.HEALTH_INCREASE)
                 .addAttribute(Attributes.MAX_HEALTH, 2, AttributeModifier.Operation.ADD_VALUE)
                 .setIcon(Items.ENCHANTED_GOLDEN_APPLE)

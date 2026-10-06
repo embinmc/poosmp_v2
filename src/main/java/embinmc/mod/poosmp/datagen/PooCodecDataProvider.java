@@ -28,7 +28,7 @@ public abstract class PooCodecDataProvider<T> extends FabricCodecDataProvider<T>
     protected void configure(@NonNull BiConsumer<Identifier, T> provider, HolderLookup.@NonNull Provider lookup) {
         this.provider = provider;
         this.lookup = lookup;
-        this.generate();
+        this.generate(lookup);
     }
 
     @Override
@@ -36,5 +36,5 @@ public abstract class PooCodecDataProvider<T> extends FabricCodecDataProvider<T>
         return "PooSMP Data Provider: " + this.registryKey;
     }
 
-    public abstract void generate();
+    public abstract void generate(HolderLookup.@NonNull Provider provider);
 }

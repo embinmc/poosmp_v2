@@ -42,30 +42,52 @@ public class UpgradeProvider extends PooCodecDataProvider<Upgrade> {
         this.attributeUpgrade(Upgrades.HEALTH_INCREASE)
                 .addAttribute(Attributes.MAX_HEALTH, 2, AttributeModifier.Operation.ADD_VALUE)
                 .setIcon(Items.ENCHANTED_GOLDEN_APPLE)
-                .setPrice(4000)
+                .setPrice(4000D)
                 .setPriceMult(0.25D)
                 .build();
         this.attributeUpgrade(Upgrades.ENTITY_REACH_INCREASE)
                 .addAttribute(Attributes.ENTITY_INTERACTION_RANGE, 1, AttributeModifier.Operation.ADD_VALUE)
                 .setMaxPurchases(10)
                 .setIcon(Items.ZOMBIE_HEAD)
-                .setPrice(1600)
+                .setPrice(1600D)
                 .build();
         this.attributeUpgrade(Upgrades.BLOCK_REACH_INCREASE)
                 .addAttribute(Attributes.ENTITY_INTERACTION_RANGE, 1, AttributeModifier.Operation.ADD_VALUE)
                 .setMaxPurchases(10)
                 .setIcon(Items.STONE)
-                .setPrice(1200)
+                .setPrice(1200D)
                 .build();
         this.statusEffectUpgrade(Upgrades.FIRE_RESISTANCE)
                 .setEffect(MobEffects.FIRE_RESISTANCE, 0)
                 .setIcon(Items.MAGMA_BLOCK)
-                .setPrice(120_000)
+                .setPrice(120_000D)
                 .build();
         this.statusEffectUpgrade(Upgrades.RESISTANCE_2)
                 .setEffect(MobEffects.RESISTANCE, 1)
                 .setIcon(Items.SHIELD)
-                .setPrice(180_000)
+                .setPrice(180_000D)
+                .build();
+        this.attributeUpgrade(Upgrades.MINING_SPEED_INCREASE)
+                .addAttribute(Attributes.MINING_EFFICIENCY, 2, AttributeModifier.Operation.ADD_VALUE)
+                .setMaxPurchases(20)
+                .setIcon(Items.IRON_PICKAXE)
+                .setPrice(1000D)
+                .setPriceMult(0.15D)
+                .build();
+        this.statusEffectUpgrade(Upgrades.STRENGTH_2)
+                .setEffect(MobEffects.STRENGTH, 1)
+                .setIcon(Items.NETHERITE_SWORD)
+                .setPrice(180_000D)
+                .build();
+        this.statusEffectUpgrade(Upgrades.TRIAL_OMEN)
+                .setEffect(MobEffects.TRIAL_OMEN, 0)
+                .setIcon(Items.OMINOUS_TRIAL_KEY)
+                .setPrice(24_000D)
+                .build();
+        this.statusEffectUpgrade(Upgrades.WATER_BREATHING)
+                .setEffect(MobEffects.WATER_BREATHING, 0)
+                .setIcon(Items.WATER_BUCKET)
+                .setPrice(120_000D)
                 .build();
     }
 

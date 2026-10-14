@@ -9,12 +9,12 @@ import net.minecraft.world.level.biome.Biome;
 
 public interface PooBiomes {
     ResourceKey<Biome> DDE_PLAINS = create("ddededodediamante_plains"),
-    HYRULE = create("hyrule"),
-    OUTER_HYRULE = create("outer_hyrule"),
-    HYRULE_CASTLE = create("hyrule_castle"),
-    GRASSLANDS = create("grasslands"),
-    MISSINGNO = create("missingno"),
     SKY_ISLANDS = create("sky_islands"),
+    OUTER_HYRULE = create("outer_hyrule"),
+    GRASSLANDS = create("grasslands"),
+    HYRULE = create("hyrule"),
+    HYRULE_CASTLE = create("hyrule_castle"),
+    MISSINGNO = create("missingno"),
     SLENDERMAN_LAND = create("slenderman_land"),
     DEPTHS = create("depths"),
     HYRULE_OCEAN = create("hyrule_ocean"),

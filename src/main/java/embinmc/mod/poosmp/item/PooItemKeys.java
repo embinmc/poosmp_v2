@@ -17,7 +17,7 @@ public interface PooItemKeys {
         return ResourceKey.create(Registries.ITEM, block.identifier());
     }
 
-    // items
+    // items pre 7.0
     ResourceKey<Item> POOP_STICK =                    create("poop_stick");
     ResourceKey<Item> SERVER_SAYS_WHAT_STICK =        create("server_says_what_stick");
     ResourceKey<Item> BIOME_STICK =                   create("biome_stick");
@@ -31,7 +31,7 @@ public interface PooItemKeys {
     ResourceKey<Item> RING =                          create("ring");
     ResourceKey<Item> TOTEM_OF_HEALTH =               create("totem_of_health");
     ResourceKey<Item> WARP_STICK =                    create("warp_stick");
-    ResourceKey<Item> FILL_ARMOR_TRIM_TEMPLATE =      create("fill_armor_trim_template");
+    ResourceKey<Item> FILL_ARMOR_TRIM_TEMPLATE =      create("fill_armor_trim_smithing_template");
     ResourceKey<Item> DISC_TRIFECTA_CAP =             create("music_disc/trifecta_cap");
     ResourceKey<Item> DISC_BUTTERFLIES_INSTRUMENTAL = create("music_disc/butterflies_and_hurricanes_instrumental");
     ResourceKey<Item> DISC_BUDDY_HOLLY =              create("music_disc/buddy_holly");
@@ -83,9 +83,8 @@ public interface PooItemKeys {
     ResourceKey<Item> FROG_STICK =                    create("frog_stick");
     ResourceKey<Item> WIND_STICK =                    create("wind_stick");
     ResourceKey<Item> ITEM_FORCING_BACKPACK_UPGRADE = create("item_forcing_upgrade");
-    ResourceKey<Item> DECODE_EXCEPTION_DUMMY =        create("decode_exception_dummy");
 
-    // blocks
+    // blocks pre 7.0
     ResourceKey<Item> POOP_BLOCK =             create(PooBlockKeys.POOP_BLOCK);
     ResourceKey<Item> MISSINGNO_BLOCK =        create(PooBlockKeys.MISSINGNO_BLOCK);
     ResourceKey<Item> POOP_BRICKS =            create(PooBlockKeys.POOP_BRICKS);
@@ -106,4 +105,7 @@ public interface PooItemKeys {
     ResourceKey<Item> DIM_MOSS_BLOCK =         create(PooBlockKeys.DIM_MOSS_BLOCK);
     ResourceKey<Item> DIM_MOSS_CARPET =        create(PooBlockKeys.DIM_MOSS_CARPET);
     ResourceKey<Item> ANNOYANCE_DEHEED =       create(PooBlockKeys.ANNOYANCE_DEHEED);
+
+    // items post 7.0
+    ResourceKey<Item> DECODE_EXCEPTION_DUMMY =        create("decode_exception_dummy");
 }

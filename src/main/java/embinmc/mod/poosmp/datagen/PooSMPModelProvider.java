@@ -7,6 +7,8 @@ import embinmc.mod.poosmp.item.PooEquipmentAssets;
 import embinmc.mod.poosmp.item.PooItems;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.minecraft.client.color.item.GrassColorSource;
+import net.minecraft.client.color.item.ItemTintSources;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.MultiVariant;
@@ -63,7 +65,7 @@ public class PooSMPModelProvider extends FabricModelProvider {
         gen.registerSimpleItemModel(PooItems.FROG_STICK, stickId);
         gen.registerSimpleItemModel(PooItems.WIND_STICK, stickId);
         gen.registerSimpleItemModel(PooItems.FAKE_DIRT, ModelLocationUtils.getModelLocation(Blocks.DIRT));
-        gen.registerSimpleItemModel(PooItems.FAKE_GRASS_BLOCK, ModelLocationUtils.getModelLocation(Blocks.GRASS_BLOCK));
+        gen.registerSimpleTintedItemModel(PooBlocks.FAKE_GRASS_BLOCK, ModelLocationUtils.getModelLocation(Blocks.GRASS_BLOCK), new GrassColorSource());
         gen.registerSimpleItemModel(PooItems.FAKE_STONE, ModelLocationUtils.getModelLocation(Blocks.STONE));
         gen.registerSimpleItemModel(PooItems.RIGGED_STONE, ModelLocationUtils.getModelLocation(Blocks.STONE));
         gen.registerSimpleItemModel(PooItems.PENIS_BLOCK, PooSMPMod.id("block/penis"));

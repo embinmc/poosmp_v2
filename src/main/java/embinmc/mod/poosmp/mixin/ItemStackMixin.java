@@ -1,9 +1,18 @@
 package embinmc.mod.poosmp.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import embinmc.mod.poosmp.event.PooItemEvents;
+import embinmc.mod.poosmp.item.PooItems;
+import embinmc.mod.poosmp.item.component.DecodeExceptionComponent;
+import embinmc.mod.poosmp.item.component.PooComponents;
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Unit;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -31,5 +40,41 @@ public abstract class ItemStackMixin {
         if (result != null)
             return result;
         return original.call(instance, itemStack, player, livingEntity, interactionHand);
+    }
+
+    @WrapMethod(method = "createOptionalStreamCodec")
+    private static StreamCodec<RegistryFriendlyByteBuf, ItemStack> poosmp$allowDecode(StreamCodec<RegistryFriendlyByteBuf, DataComponentPatch> streamCodec, Operation<StreamCodec<RegistryFriendlyByteBuf, ItemStack>> original) {
+        return new StreamCodec<>() {
+            public ItemStack decode(RegistryFriendlyByteBuf registryFriendlyByteBuf) {
+                int i = registryFriendlyByteBuf.readVarInt();
+                if (i <= 0) {
+                    return ItemStack.EMPTY;
+                }
+
+                Holder<Item> holder;
+                try {
+                    holder = Item.STREAM_CODEC.decode(registryFriendlyByteBuf);
+                } catch (Exception e) {
+                    holder = PooItems.DECODE_EXCEPTION_DUMMY.builtInRegistryHolder();
+                }
+                DataComponentPatch dataComponentPatch;
+                try {
+                    dataComponentPatch = streamCodec.decode(registryFriendlyByteBuf);
+                } catch (Exception e) {
+                    dataComponentPatch = DataComponentPatch.builder().set(PooComponents.DECODE_EXCEPTION, DecodeExceptionComponent.INSTANCE).build();
+                }
+                return new ItemStack(holder, i, dataComponentPatch);
+            }
+
+            public void encode(RegistryFriendlyByteBuf registryFriendlyByteBuf, ItemStack itemStack) {
+                if (itemStack.isEmpty()) {
+                    registryFriendlyByteBuf.writeVarInt(0);
+                } else {
+                    registryFriendlyByteBuf.writeVarInt(itemStack.getCount());
+                    Item.STREAM_CODEC.encode(registryFriendlyByteBuf, itemStack.getItemHolder());
+                    streamCodec.encode(registryFriendlyByteBuf, itemStack.components.asPatch());
+                }
+            }
+        };
     }
 }

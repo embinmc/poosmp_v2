@@ -3,14 +3,15 @@
   "package": "embinmc.mod.poosmp.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "BackpackWrapperMixin",
     "CachedUserNameResolverMixin",
     "EntityMixin",
     "ExampleMixin",
     "ItemMixin",
     "ItemStackMixin",
     "PlayerListMixin",
-    "BackpackWrapperMixin",
-    "backpackfix.BackpackMixin"
+    "backpackfix.BackpackMixin",
+    "client.PacketDecoderMixin"
   ],
   "injectors": {
     "defaultRequire": 1
@@ -19,6 +20,7 @@
     "requireAnnotations": true
   },
   "client": [
-    "backpackfix.BackpackHudMixin"
+    "backpackfix.BackpackHudMixin",
+    "client.ConnectionMixin"
   ]
 }

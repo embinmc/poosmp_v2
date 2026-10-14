@@ -5,6 +5,8 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import org.jspecify.annotations.NonNull;
 
 import java.util.concurrent.CompletableFuture;
@@ -27,8 +29,24 @@ public class PooSMPBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(PooBlocks.POOP_BRICKS)
                 .add(PooBlocks.POOP_BRICK_STAIRS)
                 .add(PooBlocks.POOP_BRICK_SLAB)
-                .add(PooBlocks.POOP_BRICK_WALL)
                 .add(PooBlocks.RED_NETHER_BRICK_FENCE)
+        ;
+        this.valueLookupBuilder(BlockTags.FENCES).setReplace(false)
+                .add(PooBlocks.RED_NETHER_BRICK_FENCE)
+        ;
+        this.valueLookupBuilder(BlockTags.STAIRS).setReplace(false)
+                .add(PooBlocks.POOP_BRICK_STAIRS)
+        ;
+        this.valueLookupBuilder(BlockTags.SLABS).setReplace(false)
+                .add(PooBlocks.POOP_BRICK_SLAB)
+        ;
+        this.valueLookupBuilder(BlockTags.WALLS).setReplace(false)
+                .add(PooBlocks.POOP_BRICK_WALL)
+        ;
+        this.valueLookupBuilder(BlockTags.SMALL_DRIPLEAF_PLACEABLE).setReplace(false)
+                .add(Blocks.MUD)
+                .add(PooBlocks.POOP_BLOCK)
+                .add(Blocks.PALE_MOSS_BLOCK)
         ;
     }
 }

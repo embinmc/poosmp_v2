@@ -83,6 +83,7 @@ public interface PooItemKeys {
     ResourceKey<Item> FROG_STICK =                    create("frog_stick");
     ResourceKey<Item> WIND_STICK =                    create("wind_stick");
     ResourceKey<Item> ITEM_FORCING_BACKPACK_UPGRADE = create("item_forcing_upgrade");
+    ResourceKey<Item> DECODE_EXCEPTION_DUMMY =        create("decode_exception_dummy");
 
     // blocks
     ResourceKey<Item> POOP_BLOCK =             create(PooBlockKeys.POOP_BLOCK);

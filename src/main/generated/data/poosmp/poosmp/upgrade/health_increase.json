@@ -1,0 +1,19 @@
+{
+  "type": "poosmp:attributes",
+  "attributes": [
+    {
+      "type": "minecraft:max_health",
+      "amount": 2.0,
+      "id": "poosmp:health_increase/max_health",
+      "operation": "add_value"
+    }
+  ],
+  "icon": "minecraft:enchanted_golden_apple",
+  "name": {
+    "translate": "upgrade.poosmp.health_increase"
+  },
+  "price": {
+    "addMultiplierPerAmountPurchased": 0.25,
+    "base": 4000.0
+  }
+}

@@ -50,7 +50,7 @@ public class PooSMPRecipeProvider extends FabricRecipeProvider {
 
             @Override
             public void buildRecipes() {
-                this.smithingComponentApplication();
+                //this.smithingComponentApplication();
                 this.shapedSpecial(RecipeCategory.MISC, PooItems.SERVER_SAYS_WHAT_STICK)
                         .pattern("4#4")
                         .pattern("#3#")
@@ -60,15 +60,15 @@ public class PooSMPRecipeProvider extends FabricRecipeProvider {
                         .define('4', Items.DIAMOND)
                         .unlockedBy(getHasName(Items.DIAMOND), this.has(Items.DIAMOND))
                         .save(this.output);
-                this.shapedSpecial(RecipeCategory.MISC, PooItems.POOP_STICK)
-                        .pattern("4#4")
-                        .pattern("#3#")
-                        .pattern("4#4")
-                        .define('3', ConventionalItemTags.WOODEN_RODS)
-                        .define('#', PooItemKeys.POOP_BLOCK)
-                        .define('4', PooItemKeys.DIAMOND_SHARD)
-                        .unlockedBy(getHasName(Items.STICK), this.has(Items.STICK))
-                        .save(this.output);
+                //this.shapedSpecial(RecipeCategory.MISC, PooItems.POOP_STICK)
+                //        .pattern("4#4")
+                //        .pattern("#3#")
+                //        .pattern("4#4")
+                //        .define('3', ConventionalItemTags.WOODEN_RODS)
+                //        .define('#', PooItemKeys.POOP_BLOCK)
+                //        .define('4', PooItemKeys.DIAMOND_SHARD)
+                //        .unlockedBy(getHasName(Items.STICK), this.has(Items.STICK))
+                //        .save(this.output);
             }
 
             // hardcoded, don't care
@@ -76,7 +76,7 @@ public class PooSMPRecipeProvider extends FabricRecipeProvider {
                 HolderLookup.RegistryLookup<Item> items = this.registries.lookupOrThrow(Registries.ITEM);
                 ComponentApplicationRecipe recipe = new ComponentApplicationRecipe(
                         Ingredient.of(items.getOrThrow(ModTags.CUSTOM_TRAVELERS_BACKPACK)),
-                        Ingredient.of((ItemLike) null),
+                        Ingredient.of(Items.END_PORTAL_FRAME),
                         Optional.of(Ingredient.of(items.getOrThrow(ConventionalItemTags.LEATHERS))),
                         DataComponentPatch.builder()
                                 .set(PooComponents.FORCE_ALLOW_IN_BACKPACK, Unit.INSTANCE)

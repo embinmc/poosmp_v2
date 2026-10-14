@@ -19,6 +19,9 @@
 		"main": [
 			"embinmc.mod.poosmp.PooSMPMod"
 		],
+		"client": [
+			"embinmc.mod.poosmp.client.PooSMPClient"
+		],
 		"fabric-datagen": [
 			"embinmc.mod.poosmp.datagen.PooSMPModDataGenerator"
 		]

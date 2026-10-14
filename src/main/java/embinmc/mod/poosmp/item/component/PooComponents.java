@@ -58,10 +58,7 @@ public interface PooComponents {
         builder.networkSynchronized(ByteBufCodecs.BOOL);
     });
 
-    DataComponentType<EitherHolder<Level>> DIMENSION_WARPER = register("warp_dimension", builder -> {
-        builder.persistent(EitherHolder.codec(Registries.DIMENSION, RegistryFixedCodec.create(Registries.DIMENSION)));
-        //builder.networkSynchronized(EitherHolder.streamCodec(Registries.DIMENSION, ByteBufCodecs.holderRegistry(Registries.DIMENSION)));
-    });
+    DataComponentType<DimensionWarperComponent> DIMENSION_WARPER = registerBasic("warp_dimension", DimensionWarperComponent.CODEC, DimensionWarperComponent.STREAM_CODEC);
     DataComponentType<Unit> JUMPSCARE_STICK = registerUnit("jumpscare_stick");
     DataComponentType<Unit> FUN_STICK = registerUnit("fun_stick");
     DataComponentType<Unit> FORCE_ALLOW_IN_BACKPACK = registerUnit("force_allow_in_backpack");
@@ -76,4 +73,5 @@ public interface PooComponents {
     DataComponentType<MobSummonerComponent> MOB_SUMMONER = registerBasic("mob_summoner", MobSummonerComponent.CODEC, MobSummonerComponent.STREAM_CODEC);
     DataComponentType<WeddingRing> WEDDING_RING = registerBasic("wedding_ring", WeddingRing.CODEC, WeddingRing.STREAM_CODEC);
     DataComponentType<Unit> FORCE_MARRIED = registerUnit("force_married");
+    DataComponentType<DecodeExceptionComponent> DECODE_EXCEPTION = registerBasic("decode_exception", DecodeExceptionComponent.CODEC, DecodeExceptionComponent.STREAM_CODEC);
 }

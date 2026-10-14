@@ -1,0 +1,41 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "poosmp:block/red_nether_brick_fence_post"
+      }
+    },
+    {
+      "apply": {
+        "model": "poosmp:block/red_nether_brick_fence_side_north"
+      },
+      "when": {
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "poosmp:block/red_nether_brick_fence_side_east"
+      },
+      "when": {
+        "east": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "poosmp:block/red_nether_brick_fence_side_south"
+      },
+      "when": {
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "poosmp:block/red_nether_brick_fence_side_west"
+      },
+      "when": {
+        "west": "true"
+      }
+    }
+  ]
+}

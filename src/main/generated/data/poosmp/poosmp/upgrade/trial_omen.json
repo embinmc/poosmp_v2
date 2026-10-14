@@ -1,0 +1,19 @@
+{
+  "type": "poosmp:status_effect",
+  "icon": "minecraft:ominous_trial_key",
+  "max_purchases": 1,
+  "name": {
+    "translate": "upgrade.poosmp.trial_omen"
+  },
+  "price": {
+    "addMultiplierPerAmountPurchased": 0.2,
+    "base": 24000.0
+  },
+  "status_effect": {
+    "ambient": true,
+    "duration": -1,
+    "id": "minecraft:trial_omen",
+    "show_icon": true,
+    "show_particles": false
+  }
+}

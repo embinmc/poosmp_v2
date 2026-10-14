@@ -1,6 +1,7 @@
 package embinmc.mod.poosmp.item;
 
 import embinmc.mod.poosmp.PooSMPMod;
+import embinmc.mod.poosmp.block.PooBlocks;
 import embinmc.mod.poosmp.item.component.*;
 import embinmc.mod.poosmp.misc.PooSongs;
 import net.minecraft.core.Registry;
@@ -11,6 +12,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Unit;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
@@ -22,6 +25,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.dimension.LevelStem;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 public interface PooItems {
@@ -119,13 +123,24 @@ public interface PooItems {
     Item DISC_ENDLESSLY_STEREO = requestedDisc(PooItemKeys.DISC_ENDLESSLY_STEREO, PooSongs.ENDLESSLY_STEREO, "Embin", true);
     Item ZAP_STICK = snitchStick(PooItemKeys.ZAP_STICK, quickComponent(PooComponents.LIGHTNING_SUMMONER).rarity(Rarity.UNCOMMON));
     Item VILLAGER_STICK = mobStick(PooItemKeys.VILLAGER_STICK, EntityType.VILLAGER, Rarity.EPIC, MobSummonerComponent.NAMES_VILLAGER, true);
+    Item DECODE_EXCEPTION_DUMMY = register(PooItemKeys.DECODE_EXCEPTION_DUMMY);
+
+    Item POOP_BLOCK = registerBlock(PooItemKeys.POOP_BLOCK, PooBlocks.POOP_BLOCK);
+    Item MISSINGNO_BLOCK = registerBlock(PooItemKeys.MISSINGNO_BLOCK, PooBlocks.MISSINGNO_BLOCK, quickRarity(Rarity.EPIC));
+    Item POOP_BRICKS = registerBlock(PooItemKeys.POOP_BRICKS, PooBlocks.POOP_BRICKS);
+    Item POOP_BRICK_STAIRS = registerBlock(PooItemKeys.POOP_BRICK_STAIRS, PooBlocks.POOP_BRICK_STAIRS);
+    Item POOP_BRICK_SLAB = registerBlock(PooItemKeys.POOP_BRICK_SLAB, PooBlocks.POOP_BRICK_SLAB);
+    Item POOP_BRICK_WALL = registerBlock(PooItemKeys.POOP_BRICK_WALL, PooBlocks.POOP_BRICK_WALL);
+    Item RED_NETHER_BRICK_FENCE = registerBlock(PooItemKeys.RED_NETHER_BRICK_FENCE, PooBlocks.RED_NETHER_BRICK_FENCE);
 
     private static Item warpStick(ResourceKey<Item> key, ResourceKey<Level> dimension) {
+        MobEffectInstance effect = new MobEffectInstance(DimensionWarperComponent.DEFAULT_EFFECT);
+        DimensionWarperComponent warper = new DimensionWarperComponent(new EitherHolder<>(dimension), Optional.of(effect));
         return register(
                 key, Item::new,
                 new Item.Properties()
                         .rarity(Rarity.EPIC)
-                        .component(PooComponents.DIMENSION_WARPER, new EitherHolder<>(dimension)),
+                        .component(PooComponents.DIMENSION_WARPER, warper),
                 BuiltInRegistries.ITEM.getKey(Items.STICK)
         );
     }

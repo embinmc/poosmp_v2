@@ -20,7 +20,7 @@ public abstract class PooCodecDataProvider<T> extends FabricCodecDataProvider<T>
     protected final ResourceKey<Registry<T>> registryKey;
 
     protected PooCodecDataProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registriesFuture, ResourceKey<Registry<T>> key, Codec<T> codec) {
-        super(dataOutput, registriesFuture, PackOutput.Target.DATA_PACK, key.toString().replace(':', '/'), codec);
+        super(dataOutput, registriesFuture, PackOutput.Target.DATA_PACK, key.identifier().toShortString().replace(':', '/'), codec);
         this.registryKey = key;
     }
 

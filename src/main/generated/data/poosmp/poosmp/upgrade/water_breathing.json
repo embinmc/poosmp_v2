@@ -1,0 +1,19 @@
+{
+  "type": "poosmp:status_effect",
+  "icon": "minecraft:water_bucket",
+  "max_purchases": 1,
+  "name": {
+    "translate": "upgrade.poosmp.water_breathing"
+  },
+  "price": {
+    "addMultiplierPerAmountPurchased": 0.2,
+    "base": 120000.0
+  },
+  "status_effect": {
+    "ambient": true,
+    "duration": -1,
+    "id": "minecraft:water_breathing",
+    "show_icon": true,
+    "show_particles": false
+  }
+}

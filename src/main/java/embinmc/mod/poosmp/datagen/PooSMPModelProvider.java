@@ -1,22 +1,37 @@
 package embinmc.mod.poosmp.datagen;
 
+import embinmc.mod.poosmp.PooSMPMod;
+import embinmc.mod.poosmp.block.PooBlockFamilies;
+import embinmc.mod.poosmp.block.PooBlocks;
 import embinmc.mod.poosmp.item.PooItems;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.MultiVariant;
+import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.data.models.model.TexturedModel;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.equipment.EquipmentAssets;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import org.jspecify.annotations.NonNull;
 
 public class PooSMPModelProvider extends FabricModelProvider {
-    public static final Identifier TRIM_PREFIX_SWORD = ItemModelGenerators.prefixForSlotTrim("sword");
-    public static final Identifier TRIM_PREFIX_PICKAXE = ItemModelGenerators.prefixForSlotTrim("pickaxe");
-    public static final Identifier TRIM_PREFIX_AXE = ItemModelGenerators.prefixForSlotTrim("axe");
-    public static final Identifier TRIM_PREFIX_SHOVEL = ItemModelGenerators.prefixForSlotTrim("shovel");
-    public static final Identifier TRIM_PREFIX_HOE = ItemModelGenerators.prefixForSlotTrim("hoe");
+    public static final Identifier TRIM_PREFIX_SWORD = prefixForSlotTrim("sword");
+    public static final Identifier TRIM_PREFIX_PICKAXE = prefixForSlotTrim("pickaxe");
+    public static final Identifier TRIM_PREFIX_AXE = prefixForSlotTrim("axe");
+    public static final Identifier TRIM_PREFIX_SHOVEL = prefixForSlotTrim("shovel");
+    public static final Identifier TRIM_PREFIX_HOE = prefixForSlotTrim("hoe");
+    protected @NonNull BlockModelGenerators bmg = null;
+
+    public static Identifier prefixForSlotTrim(String string) {
+        return PooSMPMod.id("trims/items/" + string + "_trim");
+    }
 
     public PooSMPModelProvider(FabricDataOutput output) {
         super(output);
@@ -27,15 +42,50 @@ public class PooSMPModelProvider extends FabricModelProvider {
         return "PooSMP: " + super.getName();
     }
 
-    @Override
+    @Override // FOR BLOCKS, STICKS, AND PREDEFINED ITEM MODELS
     public void generateBlockStateModels(@NonNull BlockModelGenerators gen) {
+        this.bmg = gen;
+        Identifier stickId = ModelLocationUtils.getModelLocation(Items.STICK);
+        gen.registerSimpleItemModel(PooItems.POOP_STICK, stickId);
+        gen.registerSimpleItemModel(PooItems.SERVER_SAYS_WHAT_STICK, stickId);
+        gen.registerSimpleItemModel(PooItems.BIOME_STICK, stickId);
+        gen.registerSimpleItemModel(PooItems.BOOM_STICK, stickId);
+        gen.registerSimpleItemModel(PooItems.ZOMBIE_STICK, stickId);
+        gen.registerSimpleItemModel(PooItems.WEDDING_RING, PooSMPMod.id("item/wedding_ring"));
+        gen.registerSimpleItemModel(PooItems.WARP_STICK, stickId);
+        gen.registerSimpleItemModel(PooItems.ZAP_STICK, stickId);
+        gen.registerSimpleItemModel(PooItems.VILLAGER_STICK, stickId);
+
+        gen.createTrivialCube(PooBlocks.POOP_BLOCK);
+        gen.createTrivialCube(PooBlocks.MISSINGNO_BLOCK);
+        PooBlockFamilies.POOP_BRICKS.shouldGenerateModel();
+        this.createCustomFence(PooBlocks.RED_NETHER_BRICK_FENCE, Blocks.RED_NETHER_BRICKS);
     }
 
-    @Override
+    @Override // FOR NEW ITEMS
     public void generateItemModels(@NonNull ItemModelGenerators gen) {
-        this.generateTrimmedTools(gen);
-        gen.createFlatItemModel(PooItems.POOP_STICK, Items.STICK, ModelTemplates.FLAT_HANDHELD_ITEM);
-        gen.createFlatItemModel(PooItems.SERVER_SAYS_WHAT_STICK, Items.STICK, ModelTemplates.FLAT_HANDHELD_ITEM);
+        //this.generateTrimmedTools(gen);
+        gen.generateFlatItem(PooItems.DIAMOND_SHARD, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.RED_NETHER_BRICK, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.POOP_BRICK, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.POOPLET, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.RING, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.TOTEM_OF_HEALTH, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.FILL_ARMOR_TRIM_TEMPLATE, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.DISC_TRIFECTA_CAP, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.DISC_BUTTERFLIES_INSTRUMENTAL, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.DISC_BUDDY_HOLLY, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.DISC_STEREO_MADNESS, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.DISC_NOT_LIKE_US, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.DISC_RESISTANCE_INSTR, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.TOTEM_OF_REACH, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.BLANK_MUSIC_DISC, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.ENCHANTED_TOTEM_OF_REACH, PooItems.TOTEM_OF_REACH, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.ENCHANTED_TOTEM_OF_HEALTH, PooItems.TOTEM_OF_HEALTH, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.DISC_BLISS_INSTRUMENTAL, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.DISC_ENDLESSLY_INSTRUMENTAL, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.DISC_ENDLESSLY, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.DISC_ENDLESSLY_STEREO, ModelTemplates.FLAT_HANDHELD_ITEM);
     }
 
     private void generateTrimmedTools(@NonNull ItemModelGenerators gen) {
@@ -74,5 +124,42 @@ public class PooSMPModelProvider extends FabricModelProvider {
         gen.generateTrimmableItem(Items.NETHERITE_AXE    , EquipmentAssets.NETHERITE, TRIM_PREFIX_AXE    , false);
         gen.generateTrimmableItem(Items.NETHERITE_SHOVEL , EquipmentAssets.NETHERITE, TRIM_PREFIX_SHOVEL , false);
         gen.generateTrimmableItem(Items.NETHERITE_HOE    , EquipmentAssets.NETHERITE, TRIM_PREFIX_HOE    , false);
+    }
+
+    private void createCustomFence(Block fence, Block fenceOf) {
+        TextureMapping textureMapping = TextureMapping.customParticle(fenceOf);
+        MultiVariant multiVariant = BlockModelGenerators.plainVariant(
+                ModelTemplates.CUSTOM_FENCE_POST.create(fence, textureMapping, this.bmg.modelOutput)
+        );
+        MultiVariant multiVariant2 = BlockModelGenerators.plainVariant(
+                ModelTemplates.CUSTOM_FENCE_SIDE_NORTH.create(fence, textureMapping, this.bmg.modelOutput)
+        );
+        MultiVariant multiVariant3 = BlockModelGenerators.plainVariant(
+                ModelTemplates.CUSTOM_FENCE_SIDE_EAST.create(fence, textureMapping, this.bmg.modelOutput)
+        );
+        MultiVariant multiVariant4 = BlockModelGenerators.plainVariant(
+                ModelTemplates.CUSTOM_FENCE_SIDE_SOUTH.create(fence, textureMapping, this.bmg.modelOutput)
+        );
+        MultiVariant multiVariant5 = BlockModelGenerators.plainVariant(
+                ModelTemplates.CUSTOM_FENCE_SIDE_WEST.create(fence, textureMapping, this.bmg.modelOutput)
+        );
+        this.bmg.blockStateOutput
+                .accept(BlockModelGenerators.createCustomFence(fence, multiVariant, multiVariant2, multiVariant3, multiVariant4, multiVariant5));
+        Identifier identifier = ModelTemplates.CUSTOM_FENCE_INVENTORY.create(fence, textureMapping, this.bmg.modelOutput);
+        this.bmg.registerSimpleItemModel(fence, identifier);
+    }
+
+    private void createWall(Block wall, Block wallOf) {
+        TextureMapping mapping = TexturedModel.CUBE.get(wallOf).getMapping();
+        MultiVariant multiVariant = BlockModelGenerators.plainVariant(ModelTemplates.WALL_POST.create(wallOf, mapping, this.bmg.modelOutput));
+        MultiVariant multiVariant2 = BlockModelGenerators.plainVariant(
+                ModelTemplates.WALL_LOW_SIDE.create(wallOf, mapping, this.bmg.modelOutput)
+        );
+        MultiVariant multiVariant3 = BlockModelGenerators.plainVariant(
+                ModelTemplates.WALL_TALL_SIDE.create(wallOf, mapping, this.bmg.modelOutput)
+        );
+        this.bmg.blockStateOutput.accept(BlockModelGenerators.createWall(wall, multiVariant, multiVariant2, multiVariant3));
+        Identifier identifier = ModelTemplates.WALL_INVENTORY.create(wall, mapping, this.bmg.modelOutput);
+        this.bmg.registerSimpleItemModel(wall, identifier);
     }
 }

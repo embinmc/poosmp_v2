@@ -44,6 +44,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -104,30 +105,31 @@ public class ItemUseComponents {
     }
 
     private static InteractionResult warpStick(Level level, Player player, InteractionHand hand) {
-        //ItemStack itemStack = player.getItemInHand(hand);
-        //player.getCooldowns().addCooldown(itemStack, 160);
-        //if (!(level instanceof ServerLevel currentLevel) || !(player instanceof ServerPlayer serverPlayer))
-        //    return InteractionResult.SUCCESS;
-        //double posX = player.getX();
-        //double posZ = player.getZ();
-        //EitherHolder<Level> fallback = new EitherHolder<>(PooSMPMod.HYRULE);
-        //Optional<Holder<Level>> optionalDim = itemStack.getOrDefault(PooComponents.DIMENSION_WARPER, fallback).unwrap(level.registryAccess());
-        //if (optionalDim.isEmpty()) {
-        //    serverPlayer.sendSystemMessage(Component.literal("Dimension not found").withStyle(ChatFormatting.RED));
-        //    return InteractionResult.FAIL;
-        //}
-        //Holder<Level> dim = optionalDim.orElseThrow();
-        //ResourceKey<Level> dimKey = dim.unwrapKey().orElseThrow();
-        //ServerLevel targetLevel = currentLevel.getServer().getLevel(dimKey);
-        //if (targetLevel == null)
-        //    throw new IllegalStateException("ServerLevel for dimension is null but holder for it is present");
-        //ServerLevel destination = currentLevel.dimension().equals(dimKey) ? currentLevel.getServer().overworld() : targetLevel;
-        //LevelChunk chunk = destination.getChunk(SectionPos.blockToSectionCoord(posX), SectionPos.blockToSectionCoord(posZ));
-        //destination.startTickingChunk(chunk);
-        //int h = destination.getHeight(Heightmap.Types.WORLD_SURFACE, serverPlayer.getBlockX(), serverPlayer.getBlockZ());
-        //serverPlayer.teleportTo(destination, posX, h, posZ, Set.of(), serverPlayer.getYRot(), serverPlayer.getXRot(), true);
-        //serverPlayer.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 8, 5, false, true));
-        //serverPlayer.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
+        ItemStack itemStack = player.getItemInHand(hand);
+        player.getCooldowns().addCooldown(itemStack, 160);
+        if (!(level instanceof ServerLevel currentLevel) || !(player instanceof ServerPlayer serverPlayer))
+            return InteractionResult.SUCCESS;
+        double posX = player.getX();
+        double posZ = player.getZ();
+        DimensionWarperComponent component = Objects.requireNonNull(itemStack.get(PooComponents.DIMENSION_WARPER));
+        Optional<Holder<Level>> optionalDim = component.dimension().unwrap(level.registryAccess());
+        if (optionalDim.isEmpty()) {
+            serverPlayer.sendSystemMessage(Component.literal("Dimension not found").withStyle(ChatFormatting.RED));
+            return InteractionResult.FAIL;
+        }
+        Holder<Level> dim = optionalDim.orElseThrow();
+        ResourceKey<Level> dimKey = dim.unwrapKey().orElseThrow();
+        ServerLevel targetLevel = currentLevel.getServer().getLevel(dimKey);
+        if (targetLevel == null)
+            throw new IllegalStateException("ServerLevel for dimension is null but holder for it is present");
+        ServerLevel destination = currentLevel.dimension().equals(dimKey) ? currentLevel.getServer().overworld() : targetLevel;
+        LevelChunk chunk = destination.getChunk(SectionPos.blockToSectionCoord(posX), SectionPos.blockToSectionCoord(posZ));
+        destination.startTickingChunk(chunk);
+        int h = destination.getHeight(Heightmap.Types.WORLD_SURFACE, serverPlayer.getBlockX(), serverPlayer.getBlockZ());
+        serverPlayer.teleportTo(destination, posX, h, posZ, Set.of(), serverPlayer.getYRot(), serverPlayer.getXRot(), true);
+        MobEffectInstance effect = component.statusEffect().orElse(DimensionWarperComponent.DEFAULT_EFFECT);
+        serverPlayer.addEffect(new MobEffectInstance(effect));
+        serverPlayer.awardStat(Stats.ITEM_USED.get(itemStack.getItem()));
         return InteractionResult.SUCCESS;
     }
 

@@ -1,0 +1,20 @@
+{
+  "type": "poosmp:attributes",
+  "attributes": [
+    {
+      "type": "minecraft:entity_interaction_range",
+      "amount": 1.0,
+      "id": "poosmp:entity_reach_increase/entity_interaction_range",
+      "operation": "add_value"
+    }
+  ],
+  "icon": "minecraft:zombie_head",
+  "max_purchases": 10,
+  "name": {
+    "translate": "upgrade.poosmp.entity_reach_increase"
+  },
+  "price": {
+    "addMultiplierPerAmountPurchased": 0.2,
+    "base": 1600.0
+  }
+}

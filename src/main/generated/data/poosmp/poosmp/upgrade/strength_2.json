@@ -1,0 +1,20 @@
+{
+  "type": "poosmp:status_effect",
+  "icon": "minecraft:netherite_sword",
+  "max_purchases": 1,
+  "name": {
+    "translate": "upgrade.poosmp.strength_2"
+  },
+  "price": {
+    "addMultiplierPerAmountPurchased": 0.2,
+    "base": 180000.0
+  },
+  "status_effect": {
+    "ambient": true,
+    "amplifier": 1,
+    "duration": -1,
+    "id": "minecraft:strength",
+    "show_icon": true,
+    "show_particles": false
+  }
+}

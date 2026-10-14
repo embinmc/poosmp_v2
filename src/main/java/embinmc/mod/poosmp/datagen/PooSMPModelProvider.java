@@ -3,6 +3,7 @@ package embinmc.mod.poosmp.datagen;
 import embinmc.mod.poosmp.PooSMPMod;
 import embinmc.mod.poosmp.block.PooBlockFamilies;
 import embinmc.mod.poosmp.block.PooBlocks;
+import embinmc.mod.poosmp.item.PooEquipmentAssets;
 import embinmc.mod.poosmp.item.PooItems;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -55,16 +56,29 @@ public class PooSMPModelProvider extends FabricModelProvider {
         gen.registerSimpleItemModel(PooItems.WARP_STICK, stickId);
         gen.registerSimpleItemModel(PooItems.ZAP_STICK, stickId);
         gen.registerSimpleItemModel(PooItems.VILLAGER_STICK, stickId);
+        gen.registerSimpleItemModel(PooItems.NULL_STICK, stickId);
+        gen.registerSimpleItemModel(PooItems.JUMPSCARE_STICK, stickId);
+        gen.registerSimpleItemModel(PooItems.FUN_STICK, stickId);
+        gen.registerSimpleItemModel(PooItems.DIMWORLD_STICK, stickId);
+        gen.registerSimpleItemModel(PooItems.FROG_STICK, stickId);
+        gen.registerSimpleItemModel(PooItems.WIND_STICK, stickId);
 
         gen.createTrivialCube(PooBlocks.POOP_BLOCK);
         gen.createTrivialCube(PooBlocks.MISSINGNO_BLOCK);
-        PooBlockFamilies.POOP_BRICKS.shouldGenerateModel();
+        gen.family(PooBlocks.POOP_BRICKS).generateFor(PooBlockFamilies.POOP_BRICKS);
         this.createCustomFence(PooBlocks.RED_NETHER_BRICK_FENCE, Blocks.RED_NETHER_BRICKS);
+        gen.createTrivialCube(PooBlocks.ANNOYANCE_SUS);
+        gen.createTrivialCube(PooBlocks.DDE_BLOCK);
+        gen.createTrivialCube(PooBlocks.BANKERS_TABLE);
+        gen.createTrivialCube(PooBlocks.RED_POO_BLOCK);
+        gen.createTrivialCube(PooBlocks.DRAGON_ANNOYANCE);
+        gen.createFullAndCarpetBlocks(PooBlocks.DIM_MOSS_BLOCK, PooBlocks.DIM_MOSS_CARPET);
+        gen.createTrivialCube(PooBlocks.DEHEED_ANNOYANCE);
     }
 
     @Override // FOR NEW ITEMS
     public void generateItemModels(@NonNull ItemModelGenerators gen) {
-        //this.generateTrimmedTools(gen);
+        this.generateTrimmedTools(gen);
         gen.generateFlatItem(PooItems.DIAMOND_SHARD, ModelTemplates.FLAT_HANDHELD_ITEM);
         gen.generateFlatItem(PooItems.RED_NETHER_BRICK, ModelTemplates.FLAT_HANDHELD_ITEM);
         gen.generateFlatItem(PooItems.POOP_BRICK, ModelTemplates.FLAT_HANDHELD_ITEM);
@@ -86,6 +100,24 @@ public class PooSMPModelProvider extends FabricModelProvider {
         gen.generateFlatItem(PooItems.DISC_ENDLESSLY_INSTRUMENTAL, ModelTemplates.FLAT_HANDHELD_ITEM);
         gen.generateFlatItem(PooItems.DISC_ENDLESSLY, ModelTemplates.FLAT_HANDHELD_ITEM);
         gen.generateFlatItem(PooItems.DISC_ENDLESSLY_STEREO, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.ONE_DOLLAR_BILL, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.TWO_DOLLAR_BILL, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.FIVE_DOLLAR_BILL, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.TEN_DOLLAR_BILL, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.TWENTY_FIVE_DOLLAR_BILL, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.FIFTY_DOLLAR_BILL, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.HUNDRED_DOLLAR_BILL, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.DISC_STORY_OF_UNDERTALE, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.RAW_RED_POO, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.RED_POO_INGOT, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.RED_POO_UPGRADE_TEMPLATE, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.BANANA, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.GEAR, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.SCREW, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.GLASS_SHARD, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.MAGIC_DEVICE, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.NULL_SHARD, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.ITEM_FORCING_BACKPACK_UPGRADE, ModelTemplates.FLAT_HANDHELD_ITEM);
     }
 
     private void generateTrimmedTools(@NonNull ItemModelGenerators gen) {
@@ -124,6 +156,16 @@ public class PooSMPModelProvider extends FabricModelProvider {
         gen.generateTrimmableItem(Items.NETHERITE_AXE    , EquipmentAssets.NETHERITE, TRIM_PREFIX_AXE    , false);
         gen.generateTrimmableItem(Items.NETHERITE_SHOVEL , EquipmentAssets.NETHERITE, TRIM_PREFIX_SHOVEL , false);
         gen.generateTrimmableItem(Items.NETHERITE_HOE    , EquipmentAssets.NETHERITE, TRIM_PREFIX_HOE    , false);
+
+        gen.generateTrimmableItem(PooItems.RED_POO_SWORD     , PooEquipmentAssets.RED_POO, TRIM_PREFIX_SWORD  , false);
+        gen.generateTrimmableItem(PooItems.RED_POO_PICKAXE   , PooEquipmentAssets.RED_POO, TRIM_PREFIX_PICKAXE, false);
+        gen.generateTrimmableItem(PooItems.RED_POO_AXE       , PooEquipmentAssets.RED_POO, TRIM_PREFIX_AXE    , false);
+        gen.generateTrimmableItem(PooItems.RED_POO_SHOVEL    , PooEquipmentAssets.RED_POO, TRIM_PREFIX_SHOVEL , false);
+        gen.generateTrimmableItem(PooItems.RED_POO_HOE       , PooEquipmentAssets.RED_POO, TRIM_PREFIX_HOE    , false);
+        gen.generateTrimmableItem(PooItems.RED_POO_HELMET    , PooEquipmentAssets.RED_POO, ItemModelGenerators.TRIM_PREFIX_HELMET    , false);
+        gen.generateTrimmableItem(PooItems.RED_POO_CHESTPLATE, PooEquipmentAssets.RED_POO, ItemModelGenerators.TRIM_PREFIX_CHESTPLATE, false);
+        gen.generateTrimmableItem(PooItems.RED_POO_LEGGINGS  , PooEquipmentAssets.RED_POO, ItemModelGenerators.TRIM_PREFIX_LEGGINGS  , false);
+        gen.generateTrimmableItem(PooItems.RED_POO_BOOTS     , PooEquipmentAssets.RED_POO, ItemModelGenerators.TRIM_PREFIX_BOOTS     , false);
     }
 
     private void createCustomFence(Block fence, Block fenceOf) {

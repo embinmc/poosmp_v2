@@ -11,6 +11,8 @@ public class PooSMPModDataGenerator implements DataGeneratorEntrypoint {
 	@Override
 	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
 		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
+		pack.addProvider(PooSMPDamageTypeProvider::new);
+
 		pack.addProvider(PooSMPEntityTypeTagProvider::new);
 		pack.addProvider(PooSMPItemTagProvider::new);
 		pack.addProvider(PooSMPBlockTagProvider::new);
@@ -18,7 +20,6 @@ public class PooSMPModDataGenerator implements DataGeneratorEntrypoint {
 
 		pack.addProvider(UpgradeProvider::new);
 
-		pack.addProvider(PooSMPDamageTypeProvider::new);
 		pack.addProvider(PooSMPBlockLootTableProvider::new);
 		pack.addProvider(PooSMPModelProvider::new);
 		pack.addProvider(PooSMPRecipeProvider::new);

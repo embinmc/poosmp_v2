@@ -21,10 +21,10 @@ public class PooSMPDamageTypeTagProvider extends FabricTagProvider<DamageType> {
     @Override
     protected void addTags(HolderLookup.@NonNull Provider wrapperLookup) {
         this.builder(DamageTypeTags.BYPASSES_ARMOR)
-                .add(PooDamageTypes.SUICIDE_COMMAND);
+                .addOptional(PooDamageTypes.SUICIDE_COMMAND);
         this.builder(DamageTypeTags.BYPASSES_INVULNERABILITY)
-                .add(PooDamageTypes.SUICIDE_COMMAND);
+                .addOptional(PooDamageTypes.SUICIDE_COMMAND);
         this.builder(DamageTypeTags.BYPASSES_RESISTANCE)
-                .add(PooDamageTypes.SUICIDE_COMMAND);
+                .addOptional(PooDamageTypes.SUICIDE_COMMAND);
     }
 }

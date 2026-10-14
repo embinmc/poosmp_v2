@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "poosmp:item/red_poo_upgrade_smithing_template"
+  }
+}

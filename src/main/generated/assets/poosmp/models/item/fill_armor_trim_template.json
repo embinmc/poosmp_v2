@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/handheld",
-  "textures": {
-    "layer0": "poosmp:item/fill_armor_trim_template"
-  }
-}

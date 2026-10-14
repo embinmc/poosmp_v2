@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "poosmp:item/item_forcing_upgrade"
+  }
+}

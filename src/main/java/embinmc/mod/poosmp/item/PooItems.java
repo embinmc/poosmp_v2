@@ -130,7 +130,7 @@ public interface PooItems {
     Item ZAP_STICK = snitchStick(PooItemKeys.ZAP_STICK, quickComponent(PooComponents.LIGHTNING_SUMMONER).rarity(Rarity.UNCOMMON));
     Item VILLAGER_STICK = mobStick(PooItemKeys.VILLAGER_STICK, EntityType.VILLAGER, Rarity.EPIC, MobSummonerComponent.NAMES_VILLAGER, true);
     Item ONE_DOLLAR_BILL = dollar(PooItemKeys.ONE_DOLLAR_BILL, 1D, Rarity.COMMON);
-    @Deprecated Item BACON_BUCK = register(PooItemKeys.BACON_BUCKET);
+    @Deprecated Item BACON_BUCKET = register(PooItemKeys.BACON_BUCKET);
     Item TWO_DOLLAR_BILL = dollar(PooItemKeys.TWO_DOLLAR_BILL, 2D, Rarity.COMMON);
     Item FIVE_DOLLAR_BILL = dollar(PooItemKeys.FIVE_DOLLAR_BILL, 5D, Rarity.COMMON);
     Item TEN_DOLLAR_BILL = dollar(PooItemKeys.TEN_DOLLAR_BILL, 10D, Rarity.UNCOMMON);
@@ -161,7 +161,7 @@ public interface PooItems {
                     .attributes(ItemAttributeModifiers.builder().add(
                             Attributes.ENTITY_INTERACTION_RANGE,
                             new AttributeModifier(
-                                    PooSMPMod.id("poosmp:magic_device"), 17f, AttributeModifier.Operation.ADD_VALUE
+                                    PooSMPMod.id("magic_device"), 17f, AttributeModifier.Operation.ADD_VALUE
                             ),
                             EquipmentSlotGroup.HAND
                     ).build())

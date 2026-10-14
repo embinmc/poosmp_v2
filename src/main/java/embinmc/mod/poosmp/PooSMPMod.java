@@ -2,6 +2,7 @@ package embinmc.mod.poosmp;
 
 import embinmc.mod.poosmp.block.PooBlocks;
 import embinmc.mod.poosmp.event.PooSMPEvents;
+import embinmc.mod.poosmp.item.PooItemGroups;
 import embinmc.mod.poosmp.item.PooItems;
 import embinmc.mod.poosmp.item.component.PooComponents;
 import embinmc.mod.poosmp.misc.PooRegistries;
@@ -38,6 +39,7 @@ public class PooSMPMod implements ModInitializer {
 		PooBlocks.init();
 		PooItems.init();
 		PooSMPEvents.register();
+		PooItemGroups.register();
 	}
 
 	public static Identifier id(String path) {

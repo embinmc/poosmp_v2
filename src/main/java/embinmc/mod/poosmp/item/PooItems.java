@@ -4,11 +4,13 @@ import embinmc.mod.poosmp.PooSMPMod;
 import embinmc.mod.poosmp.block.PooBlocks;
 import embinmc.mod.poosmp.item.component.*;
 import embinmc.mod.poosmp.misc.PooSongs;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Unit;
@@ -19,6 +21,7 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.component.Consumables;
+import net.minecraft.world.item.component.ItemLore;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
@@ -123,7 +126,6 @@ public interface PooItems {
     Item DISC_ENDLESSLY_STEREO = requestedDisc(PooItemKeys.DISC_ENDLESSLY_STEREO, PooSongs.ENDLESSLY_STEREO, "Embin", true);
     Item ZAP_STICK = snitchStick(PooItemKeys.ZAP_STICK, quickComponent(PooComponents.LIGHTNING_SUMMONER).rarity(Rarity.UNCOMMON));
     Item VILLAGER_STICK = mobStick(PooItemKeys.VILLAGER_STICK, EntityType.VILLAGER, Rarity.EPIC, MobSummonerComponent.NAMES_VILLAGER, true);
-    Item DECODE_EXCEPTION_DUMMY = register(PooItemKeys.DECODE_EXCEPTION_DUMMY);
 
     Item POOP_BLOCK = registerBlock(PooItemKeys.POOP_BLOCK, PooBlocks.POOP_BLOCK);
     Item MISSINGNO_BLOCK = registerBlock(PooItemKeys.MISSINGNO_BLOCK, PooBlocks.MISSINGNO_BLOCK, quickRarity(Rarity.EPIC));
@@ -132,6 +134,21 @@ public interface PooItems {
     Item POOP_BRICK_SLAB = registerBlock(PooItemKeys.POOP_BRICK_SLAB, PooBlocks.POOP_BRICK_SLAB);
     Item POOP_BRICK_WALL = registerBlock(PooItemKeys.POOP_BRICK_WALL, PooBlocks.POOP_BRICK_WALL);
     Item RED_NETHER_BRICK_FENCE = registerBlock(PooItemKeys.RED_NETHER_BRICK_FENCE, PooBlocks.RED_NETHER_BRICK_FENCE);
+    Item ANNOYANCE_SUS = registerBlock(PooItemKeys.ANNOYANCE_SUS, PooBlocks.ANNOYANCE_SUS);
+    Item DDE_BLOCK = registerBlock(PooItemKeys.DDE_BLOCK, PooBlocks.DDE_BLOCK);
+    Item PENIS_BLOCK = registerBlock(PooItemKeys.PENIS_BLOCK, PooBlocks.PENIS_BLOCK);
+    Item BANKERS_TABLE = registerBlock(PooItemKeys.BANKERS_TABLE, PooBlocks.BANKERS_TABLE);
+    Item RED_POO_BLOCK = registerBlock(PooItemKeys.RED_POO_BLOCK, PooBlocks.RED_POO_BLOCK, quickRarity(Rarity.UNCOMMON));
+    Item DRAGON_ANNOYANCE = registerBlock(PooItemKeys.ANNOYANCE_DRAGON, PooBlocks.DRAGON_ANNOYANCE);
+    Item FAKE_DIRT = registerBlock(PooItemKeys.FAKE_DIRT, PooBlocks.FAKE_DIRT);
+    Item FAKE_GRASS_BLOCK = registerBlock(PooItemKeys.FAKE_GRASS_BLOCK, PooBlocks.FAKE_GRASS_BLOCK);
+    Item FAKE_STONE = registerBlock(PooItemKeys.FAKE_STONE, PooBlocks.FAKE_STONE);
+    Item RIGGED_STONE = registerBlock(PooItemKeys.RIGGED_STONE, PooBlocks.RIGGED_STONE);
+    Item DIM_MOSS_BLOCK = registerBlock(PooItemKeys.DIM_MOSS_BLOCK, PooBlocks.DIM_MOSS_BLOCK, quickRarity(Rarity.UNCOMMON));
+    Item DIM_MOSS_CARPET = registerBlock(PooItemKeys.DIM_MOSS_CARPET, PooBlocks.DIM_MOSS_CARPET, quickRarity(Rarity.UNCOMMON));
+    Item DEHEED_ANNOYANCE = registerBlock(PooItemKeys.ANNOYANCE_DEHEED, PooBlocks.DEHEED_ANNOYANCE);
+
+    Item DECODE_EXCEPTION_DUMMY = register(PooItemKeys.DECODE_EXCEPTION_DUMMY);
 
     private static Item warpStick(ResourceKey<Item> key, ResourceKey<Level> dimension) {
         MobEffectInstance effect = new MobEffectInstance(DimensionWarperComponent.DEFAULT_EFFECT);
@@ -168,6 +185,16 @@ public interface PooItems {
         return register(key, new Item.Properties()
                 .jukeboxPlayable(song).stacksTo(1).rarity(Rarity.RARE)
                 .component(PooComponents.REQUESTED_DISC, new RequestedDiscComponent(requester, stereo))
+        );
+    }
+
+    private static Item dollar(ResourceKey<Item> key, double amount, Rarity rarity) {
+        return register(key, new Item.Properties()
+                .stacksTo(99)
+                .component(DataComponents.LORE, new ItemLore(List.of(
+                        Component.literal("Worth %,.2f".formatted(amount)).withStyle(ChatFormatting.GREEN)
+                )))
+                .rarity(rarity)
         );
     }
 

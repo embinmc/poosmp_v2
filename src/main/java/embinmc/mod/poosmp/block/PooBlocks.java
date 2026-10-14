@@ -69,6 +69,7 @@ public interface PooBlocks {
     Block FAKE_DIRT = registerFake(PooBlockKeys.FAKE_DIRT);
     Block FAKE_GRASS_BLOCK = registerFake(PooBlockKeys.FAKE_GRASS_BLOCK);
     Block FAKE_STONE = registerFake(PooBlockKeys.FAKE_STONE);
+    Block RIGGED_STONE = registerRigged(PooBlockKeys.RIGGED_STONE, Blocks.STONE);
     Block DIM_MOSS_BLOCK = register(PooBlockKeys.DIM_MOSS_BLOCK,
             properties -> new BonemealableFeaturePlacerBlock(PooFeatures.DIM_MOSS_PATCH_BONEMEAL, properties),
             properties()

@@ -9,23 +9,26 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Unit;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.component.Consumables;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.ItemLore;
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.dimension.LevelStem;
 
 import java.util.List;
 import java.util.Optional;
@@ -126,6 +129,52 @@ public interface PooItems {
     Item DISC_ENDLESSLY_STEREO = requestedDisc(PooItemKeys.DISC_ENDLESSLY_STEREO, PooSongs.ENDLESSLY_STEREO, "Embin", true);
     Item ZAP_STICK = snitchStick(PooItemKeys.ZAP_STICK, quickComponent(PooComponents.LIGHTNING_SUMMONER).rarity(Rarity.UNCOMMON));
     Item VILLAGER_STICK = mobStick(PooItemKeys.VILLAGER_STICK, EntityType.VILLAGER, Rarity.EPIC, MobSummonerComponent.NAMES_VILLAGER, true);
+    Item ONE_DOLLAR_BILL = dollar(PooItemKeys.ONE_DOLLAR_BILL, 1D, Rarity.COMMON);
+    @Deprecated Item BACON_BUCK = register(PooItemKeys.BACON_BUCKET);
+    Item TWO_DOLLAR_BILL = dollar(PooItemKeys.TWO_DOLLAR_BILL, 2D, Rarity.COMMON);
+    Item FIVE_DOLLAR_BILL = dollar(PooItemKeys.FIVE_DOLLAR_BILL, 5D, Rarity.COMMON);
+    Item TEN_DOLLAR_BILL = dollar(PooItemKeys.TEN_DOLLAR_BILL, 10D, Rarity.UNCOMMON);
+    Item TWENTY_FIVE_DOLLAR_BILL = dollar(PooItemKeys.TWENTY_FIVE_DOLLAR_BILL, 25D, Rarity.UNCOMMON);
+    Item FIFTY_DOLLAR_BILL = dollar(PooItemKeys.FIFTY_DOLLAR_BILL, 50D, Rarity.RARE);
+    Item HUNDRED_DOLLAR_BILL = dollar(PooItemKeys.HUNDRED_DOLLAR_BILL, 100D, Rarity.RARE);
+    Item COW_STICK = mobStick(PooItemKeys.COW_STICK, EntityType.COW, Rarity.COMMON, MobSummonerComponent.NAMES_COW, false);
+    Item DISC_STORY_OF_UNDERTALE = requestedDisc(PooItemKeys.DISC_STORY_OF_UNDERTALE, PooSongs.SOU, "Cubey", false);
+    Item RAW_RED_POO = register(PooItemKeys.RAW_RED_POO, quickRarity(Rarity.UNCOMMON));
+    Item RED_POO_INGOT = register(PooItemKeys.RED_POO_INGOT, quickRarity(Rarity.UNCOMMON));
+    Item RED_POO_UPGRADE_TEMPLATE = register(PooItemKeys.RED_POO_UPGRADE_TEMPLATE, quickRarity(Rarity.RARE));
+    Item BANANA = food(PooItemKeys.BANANA, PooFoods.BANANA, Consumables.DRIED_KELP);
+    Item RED_POO_SWORD = sword(PooItemKeys.RED_POO_SWORD, PooToolMaterials.RED_POO, Rarity.UNCOMMON);
+    Item RED_POO_SHOVEL = shovel(PooItemKeys.RED_POO_SHOVEL, PooToolMaterials.RED_POO, Rarity.UNCOMMON);
+    Item RED_POO_PICKAXE = pickaxe(PooItemKeys.RED_POO_PICKAXE, PooToolMaterials.RED_POO, Rarity.UNCOMMON);
+    Item RED_POO_AXE = axe(PooItemKeys.RED_POO_AXE, PooToolMaterials.RED_POO, Rarity.UNCOMMON, 5f, -3f);
+    Item RED_POO_HOE = hoe(PooItemKeys.RED_POO_HOE, PooToolMaterials.RED_POO, Rarity.UNCOMMON);
+    Item RED_POO_HELMET = helmet(PooItemKeys.RED_POO_HELMET, PooArmorMaterials.RED_POO, Rarity.UNCOMMON);
+    Item RED_POO_CHESTPLATE = chestplate(PooItemKeys.RED_POO_CHESTPLATE, PooArmorMaterials.RED_POO, Rarity.UNCOMMON);
+    Item RED_POO_LEGGINGS = leggings(PooItemKeys.RED_POO_LEGGINGS, PooArmorMaterials.RED_POO, Rarity.UNCOMMON);
+    Item RED_POO_BOOTS = leggings(PooItemKeys.RED_POO_BOOTS, PooArmorMaterials.RED_POO, Rarity.UNCOMMON);
+    Item GEAR = register(PooItemKeys.GEAR);
+    Item SCREW = register(PooItemKeys.SCREW);
+    Item GLASS_SHARD = register(PooItemKeys.GLASS_SHARD);
+    Item MAGIC_DEVICE = register(PooItemKeys.MAGIC_DEVICE,
+            quickComponent(PooComponents.EXPLOSION_SPAWNER)
+                    .durability(180)
+                    .attributes(ItemAttributeModifiers.builder().add(
+                            Attributes.ENTITY_INTERACTION_RANGE,
+                            new AttributeModifier(
+                                    PooSMPMod.id("poosmp:magic_device"), 17f, AttributeModifier.Operation.ADD_VALUE
+                            ),
+                            EquipmentSlotGroup.HAND
+                    ).build())
+                    .component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
+    );
+    Item NULL_SHARD = register(PooItemKeys.NULL_SHARD, quickRarity(Rarity.EPIC));
+    Item NULL_STICK = warpStick(PooItemKeys.NULL_STICK, PooSMPMod.MISSINGNO);
+    Item JUMPSCARE_STICK = register(PooItemKeys.JUMPSCARE_STICK, quickComponent(PooComponents.JUMPSCARE_STICK).useCooldown(1f));
+    Item FUN_STICK = register(PooItemKeys.FUN_STICK, quickComponent(PooComponents.FUN_STICK).useCooldown(1f));
+    Item DIMWORLD_STICK = warpStick(PooItemKeys.DIMWORLD_STICK, PooSMPMod.DIMWORLD);
+    Item FROG_STICK = mobStick(PooItemKeys.FROG_STICK, EntityType.FROG, Rarity.UNCOMMON, MobSummonerComponent.NAMES_DEFAULT, true);
+    Item WIND_STICK = register(PooItemKeys.WIND_STICK, quickComponent(PooComponents.WIND_SHOOTER).rarity(Rarity.RARE));
+    Item ITEM_FORCING_BACKPACK_UPGRADE = register(PooItemKeys.ITEM_FORCING_BACKPACK_UPGRADE);
 
     Item POOP_BLOCK = registerBlock(PooItemKeys.POOP_BLOCK, PooBlocks.POOP_BLOCK);
     Item MISSINGNO_BLOCK = registerBlock(PooItemKeys.MISSINGNO_BLOCK, PooBlocks.MISSINGNO_BLOCK, quickRarity(Rarity.EPIC));
@@ -148,6 +197,7 @@ public interface PooItems {
     Item DIM_MOSS_CARPET = registerBlock(PooItemKeys.DIM_MOSS_CARPET, PooBlocks.DIM_MOSS_CARPET, quickRarity(Rarity.UNCOMMON));
     Item DEHEED_ANNOYANCE = registerBlock(PooItemKeys.ANNOYANCE_DEHEED, PooBlocks.DEHEED_ANNOYANCE);
 
+    // 7.0+ items
     Item DECODE_EXCEPTION_DUMMY = register(PooItemKeys.DECODE_EXCEPTION_DUMMY);
 
     private static Item warpStick(ResourceKey<Item> key, ResourceKey<Level> dimension) {
@@ -196,6 +246,42 @@ public interface PooItems {
                 )))
                 .rarity(rarity)
         );
+    }
+
+    private static Item sword(ResourceKey<Item> key, ToolMaterial material, Rarity rarity) {
+        return register(key, quickRarity(rarity).sword(material, 3f, -2.4f));
+    }
+
+    private static Item pickaxe(ResourceKey<Item> key, ToolMaterial material, Rarity rarity) {
+        return register(key, quickRarity(rarity).pickaxe(material, 1f, -2.8f));
+    }
+
+    private static Item axe(ResourceKey<Item> key, ToolMaterial material, Rarity rarity, float attackDamageBaseline, float attackSpeedBaseline) {
+        return register(key, p -> new AxeItem(material, attackDamageBaseline, attackSpeedBaseline, p), quickRarity(rarity));
+    }
+
+    private static Item shovel(ResourceKey<Item> key, ToolMaterial material, Rarity rarity) {
+        return register(key, p -> new ShovelItem(material, 1.5f, -3.0f, p), quickRarity(rarity));
+    }
+
+    private static Item hoe(ResourceKey<Item> key, ToolMaterial material, Rarity rarity) {
+        return register(key, p -> new HoeItem(material, 0f, -3.0f, p), quickRarity(rarity));
+    }
+
+    private static Item helmet(ResourceKey<Item> key, ArmorMaterial material, Rarity rarity) {
+        return register(key, quickRarity(rarity).humanoidArmor(material, ArmorType.HELMET));
+    }
+
+    private static Item chestplate(ResourceKey<Item> key, ArmorMaterial material, Rarity rarity) {
+        return register(key, quickRarity(rarity).humanoidArmor(material, ArmorType.CHESTPLATE));
+    }
+
+    private static Item leggings(ResourceKey<Item> key, ArmorMaterial material, Rarity rarity) {
+        return register(key, quickRarity(rarity).humanoidArmor(material, ArmorType.LEGGINGS));
+    }
+
+    private static Item boots(ResourceKey<Item> key, ArmorMaterial material, Rarity rarity) {
+        return register(key, quickRarity(rarity).humanoidArmor(material, ArmorType.BOOTS));
     }
 
     private static Item.Properties quickComponent(DataComponentType<Unit> component) {

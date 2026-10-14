@@ -8,7 +8,7 @@ import net.minecraft.world.item.equipment.ArmorType;
 import java.util.Map;
 
 public interface PooArmorMaterials {
-    ArmorMaterial A_RED_POO = new ArmorMaterial(
+    ArmorMaterial RED_POO = new ArmorMaterial(
             40, makeDefense(4, 7, 8, 4, 16),
             25, SoundEvents.ARMOR_EQUIP_DIAMOND, 4.5f, 0.1f,
             PooItemTags.RED_POO_REPAIR_ITEMS, PooEquipmentAssets.RED_POO

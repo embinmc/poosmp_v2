@@ -4,6 +4,7 @@ import embinmc.mod.poosmp.tag.PooEntityTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.EntityType;
 import org.jspecify.annotations.NonNull;
 
@@ -32,5 +33,6 @@ public class PooSMPEntityTypeTagProvider extends FabricTagProvider.EntityTypeTag
                 .add(EntityType.WOLF)
                 .add(EntityType.CAT)
         ;
+        this.valueLookupBuilder(EntityTypeTags.FROG_FOOD).add(EntityType.PLAYER);
     }
 }

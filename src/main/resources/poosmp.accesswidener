@@ -2,3 +2,6 @@ accessWidener v2 named
 
 accessible class net/minecraft/server/players/CachedUserNameToIdResolver$GameProfileInfo
 accessible field net/minecraft/world/item/ItemStack components Lnet/minecraft/core/component/PatchedDataComponentMap;
+accessible field net/minecraft/world/item/enchantment/Enchantment$Builder definition Lnet/minecraft/world/item/enchantment/Enchantment$EnchantmentDefinition;
+accessible field net/minecraft/world/item/enchantment/Enchantment$Builder exclusiveSet Lnet/minecraft/core/HolderSet;
+accessible field net/minecraft/world/item/enchantment/Enchantment$Builder effectMapBuilder Lnet/minecraft/core/component/DataComponentMap$Builder;

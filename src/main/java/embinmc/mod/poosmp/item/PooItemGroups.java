@@ -7,7 +7,10 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 public class PooItemGroups {
     public static void register() {
@@ -96,17 +99,7 @@ public class PooItemGroups {
                     output.accept(PooItems.ITEM_FORCING_BACKPACK_UPGRADE);
 
                     // discs
-                    output.accept(PooItems.DISC_TRIFECTA_CAP);
-                    output.accept(PooItems.DISC_BUTTERFLIES_INSTRUMENTAL);
-                    output.accept(PooItems.DISC_BUDDY_HOLLY);
-                    output.accept(PooItems.DISC_STEREO_MADNESS);
-                    output.accept(PooItems.DISC_NOT_LIKE_US);
-                    output.accept(PooItems.DISC_RESISTANCE_INSTR);
-                    output.accept(PooItems.DISC_BLISS_INSTRUMENTAL);
-                    output.accept(PooItems.DISC_ENDLESSLY_INSTRUMENTAL);
-                    output.accept(PooItems.DISC_ENDLESSLY);
-                    output.accept(PooItems.DISC_ENDLESSLY_STEREO);
-                    output.accept(PooItems.DISC_STORY_OF_UNDERTALE);
+                    PooUtil.forEachEntryInTag(provider, Registries.ITEM, PooItemTags.POOSMP_DISCS, holder -> output.accept(new ItemStack(holder)));
 
                     // mob sticks
                     output.accept(PooItems.ZOMBIE_STICK);

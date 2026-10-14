@@ -24,12 +24,17 @@ public class PooSMPBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     @Override
     protected void addTags(HolderLookup.@NonNull Provider wrapperLookup) {
         this.valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE).setReplace(false)
-                .add(PooBlocks.POOP_BLOCK)
                 .add(PooBlocks.MISSINGNO_BLOCK)
                 .add(PooBlocks.POOP_BRICKS)
                 .add(PooBlocks.POOP_BRICK_STAIRS)
                 .add(PooBlocks.POOP_BRICK_SLAB)
                 .add(PooBlocks.RED_NETHER_BRICK_FENCE)
+                .add(PooBlocks.ANNOYANCE_SUS)
+                .add(PooBlocks.DDE_BLOCK)
+                .add(PooBlocks.RED_POO_BLOCK)
+                .add(PooBlocks.RIGGED_STONE)
+                .add(PooBlocks.DRAGON_ANNOYANCE)
+                .add(PooBlocks.DEHEED_ANNOYANCE)
         ;
         this.valueLookupBuilder(BlockTags.FENCES).setReplace(false)
                 .add(PooBlocks.RED_NETHER_BRICK_FENCE)
@@ -47,6 +52,23 @@ public class PooSMPBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(Blocks.MUD)
                 .add(PooBlocks.POOP_BLOCK)
                 .add(Blocks.PALE_MOSS_BLOCK)
+        ;
+        this.valueLookupBuilder(BlockTags.MINEABLE_WITH_AXE).setReplace(false)
+                .add(PooBlocks.BANKERS_TABLE)
+        ;
+        this.valueLookupBuilder(BlockTags.MINEABLE_WITH_SHOVEL).setReplace(false)
+                .add(PooBlocks.POOP_BLOCK)
+        ;
+        this.valueLookupBuilder(BlockTags.MINEABLE_WITH_HOE).setReplace(false)
+                .add(PooBlocks.DIM_MOSS_BLOCK)
+                .add(PooBlocks.DIM_MOSS_CARPET)
+        ;
+        this.valueLookupBuilder(BlockTags.MOSS_REPLACEABLE).setReplace(false)
+                .add(PooBlocks.POOP_BLOCK)
+                .add(PooBlocks.ANNOYANCE_SUS)
+        ;
+        this.valueLookupBuilder(BlockTags.DIRT).setReplace(false)
+                .add(PooBlocks.DIM_MOSS_BLOCK)
         ;
     }
 }

@@ -184,7 +184,11 @@ public interface PooItems {
     Item POOP_BRICK_WALL = registerBlock(PooItemKeys.POOP_BRICK_WALL, PooBlocks.POOP_BRICK_WALL);
     Item RED_NETHER_BRICK_FENCE = registerBlock(PooItemKeys.RED_NETHER_BRICK_FENCE, PooBlocks.RED_NETHER_BRICK_FENCE);
     Item ANNOYANCE_SUS = registerBlock(PooItemKeys.ANNOYANCE_SUS, PooBlocks.ANNOYANCE_SUS);
-    Item DDE_BLOCK = registerBlock(PooItemKeys.DDE_BLOCK, PooBlocks.DDE_BLOCK);
+    Item DDE_BLOCK = registerBlock(PooItemKeys.DDE_BLOCK, PooBlocks.DDE_BLOCK, new Item.Properties()
+            .component(DataComponents.LORE, new ItemLore(List.of(
+                    Component.literal("He loves everybody!").withStyle(ChatFormatting.LIGHT_PURPLE)
+            )))
+    );
     Item PENIS_BLOCK = registerBlock(PooItemKeys.PENIS_BLOCK, PooBlocks.PENIS_BLOCK);
     Item BANKERS_TABLE = registerBlock(PooItemKeys.BANKERS_TABLE, PooBlocks.BANKERS_TABLE);
     Item RED_POO_BLOCK = registerBlock(PooItemKeys.RED_POO_BLOCK, PooBlocks.RED_POO_BLOCK, quickRarity(Rarity.UNCOMMON));

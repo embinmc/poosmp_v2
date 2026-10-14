@@ -1,12 +1,15 @@
 package embinmc.mod.poosmp.misc;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import embinmc.mod.poosmp.PooSMPMod;
 import embinmc.mod.poosmp.upgrade.Upgrade;
 import embinmc.mod.poosmp.upgrade.UpgradePrice;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.nbt.NbtOps;
+import net.minecraft.nbt.Tag;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
@@ -149,7 +152,29 @@ public class PooSavedData extends SavedData {
         return true;
     }
 
+    private boolean syncFrom(Tag nbtTag) {
+        DataResult<PooSavedData> decoded = PooSavedData.CODEC.parse(NbtOps.INSTANCE, nbtTag);
+        decoded.ifSuccess(savedData -> {
+            this.balance = new HashMap<>(savedData.balance);
+            this.purchasedUpgrades = PooUtil.fixMaps(savedData.purchasedUpgrades);
+        });
+        return decoded.isSuccess();
+    }
+
+    public Tag asNbt() {
+        return PooSavedData.CODEC.encodeStart(NbtOps.INSTANCE, this).getOrThrow();
+    }
+
     public static PooSavedData get(ServerPlayer serverPlayer) {
         return serverPlayer.level().getServer().overworld().getDataStorage().computeIfAbsent(PooSavedData.TYPE);
+    }
+
+    public static final class Client {
+        public static final PooSavedData INSTANCE = new PooSavedData();
+        public static boolean showBalance = false;
+
+        public static boolean sync(Tag nbtTag) {
+            return Client.INSTANCE.syncFrom(nbtTag);
+        }
     }
 }

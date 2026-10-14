@@ -13,10 +13,11 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public record PooClientConfig(boolean eatPacketErrors) {
+public record PooClientConfig(boolean eatPacketErrors, boolean showBalanceAboveZero) {
     public static final String PATH = "config/poosmp_client.json";
     public static final Codec<PooClientConfig> CODEC = RecordCodecBuilder.create(pcc -> pcc.group(
-            Codec.BOOL.fieldOf("eat_packet_errors").forGetter(PooClientConfig::eatPacketErrors)
+            Codec.BOOL.fieldOf("eat_packet_errors").forGetter(PooClientConfig::eatPacketErrors),
+            Codec.BOOL.fieldOf("show_balance_above_zero").forGetter(PooClientConfig::showBalanceAboveZero)
     ).apply(pcc, PooClientConfig::new));
 
     public static void save(Boolean ignored) {
@@ -41,6 +42,7 @@ public record PooClientConfig(boolean eatPacketErrors) {
                 }
                 PooClientConfig config = result.getOrThrow();
                 PooSMPClient.EAT_PACKET_ERRORS.set(config.eatPacketErrors());
+                PooSMPClient.SHOW_BALANCE_ABOVE_ZERO.set(config.showBalanceAboveZero());
             } catch (Exception e) {
                 if (!(e instanceof FileNotFoundException))
                     PooSMPClient.LOGGER.error("Failed to get PooSMP client config!", e);
@@ -83,7 +85,8 @@ public record PooClientConfig(boolean eatPacketErrors) {
 
     private static String saveToString() {
         PooClientConfig config = new PooClientConfig(
-                PooSMPClient.EAT_PACKET_ERRORS.get()
+                PooSMPClient.eatPacketErrors(),
+                PooSMPClient.showBalanceAboveZero()
         );
         JsonElement json = CODEC.encodeStart(JsonOps.INSTANCE, config).getOrThrow();
         return toFancyJsonString(json);

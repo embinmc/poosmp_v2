@@ -62,6 +62,11 @@ public class PooSMPModelProvider extends FabricModelProvider {
         gen.registerSimpleItemModel(PooItems.DIMWORLD_STICK, stickId);
         gen.registerSimpleItemModel(PooItems.FROG_STICK, stickId);
         gen.registerSimpleItemModel(PooItems.WIND_STICK, stickId);
+        gen.registerSimpleItemModel(PooItems.FAKE_DIRT, ModelLocationUtils.getModelLocation(Blocks.DIRT));
+        gen.registerSimpleItemModel(PooItems.FAKE_GRASS_BLOCK, ModelLocationUtils.getModelLocation(Blocks.GRASS_BLOCK));
+        gen.registerSimpleItemModel(PooItems.FAKE_STONE, ModelLocationUtils.getModelLocation(Blocks.STONE));
+        gen.registerSimpleItemModel(PooItems.RIGGED_STONE, ModelLocationUtils.getModelLocation(Blocks.STONE));
+        gen.registerSimpleItemModel(PooItems.PENIS_BLOCK, PooSMPMod.id("block/penis"));
 
         gen.createTrivialCube(PooBlocks.POOP_BLOCK);
         gen.createTrivialCube(PooBlocks.MISSINGNO_BLOCK);

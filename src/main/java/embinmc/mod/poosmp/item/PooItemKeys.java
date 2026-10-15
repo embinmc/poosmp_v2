@@ -46,7 +46,7 @@ public interface PooItemKeys {
     ResourceKey<Item> DISC_ENDLESSLY_INSTRUMENTAL =   create("music_disc/endlessly_instrumental");
     ResourceKey<Item> DISC_ENDLESSLY =                create("music_disc/endlessly");
     ResourceKey<Item> DISC_ENDLESSLY_STEREO =         create("music_disc/endlessly_stereo");
-    ResourceKey<Item> ZAP_STICK =                     create("zap_stick");
+    ResourceKey<Item> ZAP_STICK =                     create("lightning_stick");
     ResourceKey<Item> VILLAGER_STICK =                create("villager_stick");
     ResourceKey<Item> ONE_DOLLAR_BILL =               create("one_dollar_bill");
     ResourceKey<Item> BACON_BUCKET =                  create("bacon_bucket");

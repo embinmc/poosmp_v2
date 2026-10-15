@@ -158,5 +158,33 @@ public class PooSMPItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(PooItemKeys.DISC_STORY_OF_UNDERTALE)
         ;
         this.builder(ItemTags.CREEPER_DROP_MUSIC_DISCS).setReplace(false).addTag(PooItemTags.POOSMP_DISCS);
+
+        this.valueLookupBuilder(PooItemTags.RED_POO_CONVERTIBLE_SWORD)
+                .add(Items.  DIAMOND_SWORD)
+                .add(Items.NETHERITE_SWORD);
+        this.valueLookupBuilder(PooItemTags.RED_POO_CONVERTIBLE_PICKAXE)
+                .add(Items.  DIAMOND_PICKAXE)
+                .add(Items.NETHERITE_PICKAXE);
+        this.valueLookupBuilder(PooItemTags.RED_POO_CONVERTIBLE_AXE)
+                .add(Items.  DIAMOND_AXE)
+                .add(Items.NETHERITE_AXE);
+        this.valueLookupBuilder(PooItemTags.RED_POO_CONVERTIBLE_SHOVEL)
+                .add(Items.  DIAMOND_SHOVEL)
+                .add(Items.NETHERITE_SHOVEL);
+        this.valueLookupBuilder(PooItemTags.RED_POO_CONVERTIBLE_HOE)
+                .add(Items.  DIAMOND_HOE)
+                .add(Items.NETHERITE_HOE);
+        this.valueLookupBuilder(PooItemTags.RED_POO_CONVERTIBLE_HELMET)
+                .add(Items.  DIAMOND_HELMET)
+                .add(Items.NETHERITE_HELMET);
+        this.valueLookupBuilder(PooItemTags.RED_POO_CONVERTIBLE_CHESTPLATE)
+                .add(Items.  DIAMOND_CHESTPLATE)
+                .add(Items.NETHERITE_CHESTPLATE);
+        this.valueLookupBuilder(PooItemTags.RED_POO_CONVERTIBLE_LEGGINGS)
+                .add(Items.  DIAMOND_LEGGINGS)
+                .add(Items.NETHERITE_LEGGINGS);
+        this.valueLookupBuilder(PooItemTags.RED_POO_CONVERTIBLE_BOOTS)
+                .add(Items.  DIAMOND_BOOTS)
+                .add(Items.NETHERITE_BOOTS);
     }
 }

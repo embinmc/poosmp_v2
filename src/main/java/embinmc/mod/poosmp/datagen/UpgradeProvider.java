@@ -52,7 +52,7 @@ public class UpgradeProvider extends PooCodecDataProvider<Upgrade> {
                 .setPrice(1600D)
                 .build();
         this.attributeUpgrade(Upgrades.BLOCK_REACH_INCREASE)
-                .addAttribute(Attributes.ENTITY_INTERACTION_RANGE, 1, AttributeModifier.Operation.ADD_VALUE)
+                .addAttribute(Attributes.BLOCK_INTERACTION_RANGE, 1, AttributeModifier.Operation.ADD_VALUE)
                 .setMaxPurchases(10)
                 .setIcon(Items.STONE)
                 .setPrice(1200D)

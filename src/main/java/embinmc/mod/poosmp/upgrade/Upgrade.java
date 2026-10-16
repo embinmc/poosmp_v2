@@ -71,6 +71,10 @@ public interface Upgrade {
         this.onHitEntity(amountPurchased, player, hitEntity, player.level());
     }
 
+    default ResourceKey<Upgrade> getKey(Registry<Upgrade> registry) {
+        return registry.getResourceKey(this).orElseThrow();
+    }
+
     record Properties(Holder<Item> icon, Component name, UpgradePrice price, boolean canBeSold, Optional<Integer> maxPurchases) {
         public static final MapCodec<Properties> MAP_CODEC = RecordCodecBuilder.mapCodec(p -> p.group(
                 RegistryFixedCodec.create(Registries.ITEM).fieldOf("icon").forGetter(Properties::icon),

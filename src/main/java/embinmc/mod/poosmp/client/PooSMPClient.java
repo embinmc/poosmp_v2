@@ -1,20 +1,30 @@
 package embinmc.mod.poosmp.client;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import embinmc.mod.poosmp.PooSMPMod;
 import embinmc.mod.poosmp.block.PooBlocks;
+import embinmc.mod.poosmp.client.screen.UpgradesScreen;
 import embinmc.mod.poosmp.misc.PooSavedData;
 import embinmc.mod.poosmp.networking.PooMessages;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.OptionInstance;
+import net.minecraft.client.gui.screens.DeathScreen;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.CommonColors;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.level.GrassColor;
 import net.minecraft.world.level.block.Blocks;
+import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,6 +35,14 @@ public class PooSMPClient implements ClientModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger("poosmp/client");
     public static final OptionInstance<Boolean> EAT_PACKET_ERRORS = createBoolOption("option.poosmp.eat_packet_errors", true);
     public static final OptionInstance<Boolean> SHOW_BALANCE_ABOVE_ZERO = createBoolOption("option.poosmp.show_balance_above_zero", true);
+    public static final KeyMapping.Category POOSMP_KEYS = KeyMapping.Category.register(PooSMPMod.id("poosmp_keys"));
+
+    public static KeyMapping openUpgradesScreen = KeyBindingHelper.registerKeyBinding(new KeyMapping(
+        "key.poosmp.open_upgrades_screen",
+        InputConstants.Type.KEYSYM,
+        GLFW.GLFW_KEY_0,
+        POOSMP_KEYS
+    ));
 
     @Override
     public void onInitializeClient() {
@@ -68,6 +86,12 @@ public class PooSMPClient implements ClientModInitializer {
         });
 
         PooMessages.registerS2C();
+
+        ClientTickEvents.END_CLIENT_TICK.register(PooSMPMod.id("open_upgrades_screen"), client -> {
+            while (openUpgradesScreen.consumeClick()) {
+                client.setScreen(new UpgradesScreen(client.screen));
+            }
+        });
     }
 
     private static OptionInstance<Boolean> createBoolOption(String id, boolean defaultValue) {

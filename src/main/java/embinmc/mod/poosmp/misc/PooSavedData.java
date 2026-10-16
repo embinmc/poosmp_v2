@@ -110,7 +110,7 @@ public class PooSavedData extends SavedData {
         Holder<Upgrade> upgrade = registry.getOrThrow(upgradeKey);
         Upgrade direct = upgrade.value();
         int amountPurchased = this.upgradePurchaseAmount(serverPlayer, upgradeKey);
-        if (direct.properties().maxPurchases().isPresent() && direct.properties().maxPurchases().orElse(0) >= amountPurchased) {
+        if (direct.properties().maxPurchases().isPresent() && direct.properties().maxPurchases().orElse(0) <= amountPurchased) {
             PooSMPMod.LOGGER.error("Player {} tried to buy upgrade that can't be purchased anymore: {}", serverPlayer.getPlainTextName(), upgradeKey.identifier());
             return false;
         }

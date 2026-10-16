@@ -15,6 +15,7 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class AttributeUpgrade extends AbstractUpgrade {
     public static final MapCodec<AttributeUpgrade> MAP_CODEC = simpleCodec(
@@ -32,7 +33,7 @@ public class AttributeUpgrade extends AbstractUpgrade {
     @Override
     public void onSell(int amountPurchased, ServerPlayer player, ServerLevel level, MinecraftServer server) {
         List<ItemAttributeModifiers.Entry> alive = this.getAttributesForAmount(amountPurchased - 1);
-        List<ItemAttributeModifiers.Entry> dead = this.getAttributesForAmount(amountPurchased).stream().filter(alive::contains).toList();
+        List<ItemAttributeModifiers.Entry> dead = this.getAttributesForAmount(amountPurchased).stream().filter(Predicate.not(alive::contains)).toList();
         for (ItemAttributeModifiers.Entry entry : dead) {
             this.removeAttribute(player, entry);
         }
@@ -64,7 +65,7 @@ public class AttributeUpgrade extends AbstractUpgrade {
             return;
         instance.addTransientModifier(entry.modifier());
         Identifier attributeId = entry.attribute().unwrapKey().orElseThrow().identifier();
-        PooSMPMod.LOGGER.info("Added attribute {}/{} to {}", attributeId, entry.modifier().id(), player.getPlainTextName());
+        PooSMPMod.LOGGER.info("Added attribute {}@{} to {}", attributeId, entry.modifier().id(), player.getPlainTextName());
     }
 
     protected void removeAttribute(ServerPlayer player, ItemAttributeModifiers.Entry entry) {
@@ -75,7 +76,7 @@ public class AttributeUpgrade extends AbstractUpgrade {
             return;
         instance.removeModifier(entry.modifier().id());
         Identifier attributeId = entry.attribute().unwrapKey().orElseThrow().identifier();
-        PooSMPMod.LOGGER.info("Removed attribute {}/{} from {}", attributeId, entry.modifier().id(), player.getPlainTextName());
+        PooSMPMod.LOGGER.info("Removed attribute {}@{} from {}", attributeId, entry.modifier().id(), player.getPlainTextName());
     }
 
     protected List<ItemAttributeModifiers.Entry> getAttributesForAmount(int amount) {

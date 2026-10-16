@@ -289,7 +289,7 @@ public class PooSMPRecipeProvider extends FabricRecipeProvider {
                         .save(this.output);
                 this.specialStick(PooItems.VILLAGER_STICK, Items.EMERALD, Items.NETHERITE_SCRAP);
                 this.specialStick(PooItems.WARP_STICK, Items.ENDER_EYE, Items.DIAMOND);
-                this.shapedSpecial(RecipeCategory.MISC, PooItems.TOTEM_OF_REACH)
+                this.shapedSpecial(RecipeCategory.MISC, PooItems.WEDDING_RING)
                         .pattern("3")
                         .pattern("#")
                         .define('3', Items.DIAMOND)

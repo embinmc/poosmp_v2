@@ -4,12 +4,16 @@ import embinmc.mod.poosmp.block.PooBlocks;
 import embinmc.mod.poosmp.event.PooSMPEvents;
 import embinmc.mod.poosmp.item.PooItemGroups;
 import embinmc.mod.poosmp.item.PooItems;
+import embinmc.mod.poosmp.item.component.ComponentApplicationRecipe;
 import embinmc.mod.poosmp.item.component.PooComponents;
 import embinmc.mod.poosmp.misc.PooRegistries;
 import embinmc.mod.poosmp.misc.PooSMPGameRules;
+import embinmc.mod.poosmp.misc.PooSMPPoi;
 import embinmc.mod.poosmp.misc.PooSoundEvents;
 import net.fabricmc.api.ModInitializer;
 
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 
@@ -32,6 +36,7 @@ public class PooSMPMod implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		LOGGER.info("Welcome to PooSMP!");
+		Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, PooSMPMod.id("item_component_application"), ComponentApplicationRecipe.SERIALIZER);
 		PooRegistries.acknowledge();
 		PooSoundEvents.init();
 		PooComponents.init();
@@ -40,6 +45,7 @@ public class PooSMPMod implements ModInitializer {
 		PooItems.init();
 		PooSMPEvents.register();
 		PooItemGroups.register();
+		PooSMPPoi.init();
 	}
 
 	public static Identifier id(String path) {

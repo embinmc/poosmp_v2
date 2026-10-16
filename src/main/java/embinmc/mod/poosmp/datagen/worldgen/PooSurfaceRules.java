@@ -84,18 +84,15 @@ public interface PooSurfaceRules {
         RuleSource surfaceFinal = SurfaceRules.sequence(
                 SurfaceRules.ifTrue(
                         SurfaceRules.ON_FLOOR,
-                        SurfaceRules.ifTrue(notUnderwater, biomeSurfaceRule)
+                        SurfaceRules.sequence(
+                                SurfaceRules.ifTrue(notUnderwater, biomeSurfaceRule),
+                                SurfaceRules.ifTrue(notUnderDeepWater, surfaceShore),
+                                surfaceUnderwater
+                        )
                 ),
                 SurfaceRules.ifTrue(
                         notUnderDeepWater,
                         SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, underSurfaceRule)
-                ),
-                SurfaceRules.ifTrue(
-                        SurfaceRules.ON_FLOOR,
-                        SurfaceRules.sequence(
-                                SurfaceRules.ifTrue(notUnderDeepWater, surfaceShore),
-                                surfaceUnderwater
-                        )
                 )
         );
 

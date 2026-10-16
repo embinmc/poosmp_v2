@@ -95,6 +95,13 @@ public abstract class ItemStackMixin {
     @WrapOperation(method = "addDetailsToTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/Item;appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/Item$TooltipContext;Lnet/minecraft/world/item/component/TooltipDisplay;Ljava/util/function/Consumer;Lnet/minecraft/world/item/TooltipFlag;)V"))
     private void poosmp$addValueToTooltip(Item instance, ItemStack itemStack, Item.TooltipContext tooltipContext, TooltipDisplay tooltipDisplay, Consumer<Component> consumer, TooltipFlag tooltipFlag, Operation<Void> original) {
         original.call(instance, itemStack, tooltipContext, tooltipDisplay, consumer, tooltipFlag);
+        if (itemStack.has(PooComponents.CHEQUE)) {
+            double value = itemStack.get(PooComponents.CHEQUE);
+            String formatted = "Worth $%,.2f".formatted(value);
+            Component sellText = Component.literal(formatted).withStyle(ChatFormatting.GRAY);
+            consumer.accept(sellText);
+            return;
+        }
         if (tooltipContext.registries() == null || itemStack.is(PooItemTags.DOESNT_SHOW_SELL_VALUE_TOOLTIP))
             return;
         Optional<ItemValue> optionalValue = PooUtil.getValueOfStack(itemStack, tooltipContext.registries());

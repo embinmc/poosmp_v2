@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "poosmp:red_poo_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "poosmp:red_poo_ingot"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "asset_id": "poosmp:tech_tip",
+  "author": {
+    "color": "gray",
+    "text": "Requested by Embin"
+  },
+  "height": 4,
+  "title": {
+    "color": "yellow",
+    "text": "Tech Tip"
+  },
+  "width": 4
+}

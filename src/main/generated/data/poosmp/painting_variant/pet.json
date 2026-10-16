@@ -1,0 +1,13 @@
+{
+  "asset_id": "poosmp:pet",
+  "author": {
+    "color": "gray",
+    "text": "Requested by Cubey"
+  },
+  "height": 3,
+  "title": {
+    "color": "yellow",
+    "text": "Pet"
+  },
+  "width": 3
+}

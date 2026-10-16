@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:amethyst_shard",
+    "3": "minecraft:nether_star",
+    "4": "#c:leathers"
+  },
+  "pattern": [
+    "4#4",
+    "#3#",
+    "4#4"
+  ],
+  "result": {
+    "count": 1,
+    "id": "poosmp:item_forcing_upgrade"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "minecraft:emerald",
+    "3": "#c:rods/wooden",
+    "4": "minecraft:netherite_scrap"
+  },
+  "pattern": [
+    "4#4",
+    "#3#",
+    "4#4"
+  ],
+  "result": {
+    "components": {
+      "poosmp:from_creative": false
+    },
+    "count": 1,
+    "id": "poosmp:villager_stick"
+  }
+}

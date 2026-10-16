@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "poosmp:diamond_shard",
+    "3": "minecraft:copper_ingot"
+  },
+  "pattern": [
+    "3#3",
+    "3#3",
+    "333"
+  ],
+  "result": {
+    "count": 1,
+    "id": "poosmp:fill_armor_trim_smithing_template"
+  }
+}

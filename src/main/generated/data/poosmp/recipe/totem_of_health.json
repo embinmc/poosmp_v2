@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "poosmp:red_nether_brick",
+    "3": "minecraft:diamond",
+    "4": "minecraft:enchanted_golden_apple"
+  },
+  "pattern": [
+    "343",
+    " # "
+  ],
+  "result": {
+    "components": {
+      "poosmp:from_creative": false
+    },
+    "count": 1,
+    "id": "poosmp:totem_of_health"
+  }
+}

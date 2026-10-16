@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:iron_nugget",
+    "3": "minecraft:quartz"
+  },
+  "pattern": [
+    "3#3",
+    "# #",
+    "3#3"
+  ],
+  "result": {
+    "count": 1,
+    "id": "poosmp:ring"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": "#c:leathers",
+    "3": "poosmp:im_gonna_kill_myself"
+  },
+  "pattern": [
+    "###",
+    "#3#",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "poosmp:glue_factory"
+  }
+}

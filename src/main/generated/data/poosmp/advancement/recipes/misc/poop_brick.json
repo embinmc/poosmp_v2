@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_pooplet": {
+      "conditions": {
+        "items": [
+          {
+            "items": "poosmp:pooplet"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "poosmp:poop_brick"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_pooplet"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "poosmp:poop_brick"
+    ]
+  }
+}

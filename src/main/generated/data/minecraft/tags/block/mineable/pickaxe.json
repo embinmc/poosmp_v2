@@ -1,10 +1,15 @@
 {
   "values": [
-    "poosmp:poop_block",
     "poosmp:missingno",
     "poosmp:poop_bricks",
     "poosmp:poop_brick_stairs",
     "poosmp:poop_brick_slab",
-    "poosmp:red_nether_brick_fence"
+    "poosmp:red_nether_brick_fence",
+    "poosmp:im_gonna_kill_myself",
+    "poosmp:ddededodediamante_block",
+    "poosmp:red_poo_block",
+    "poosmp:rigged_stone",
+    "poosmp:ear_destroyer_9000",
+    "poosmp:glue_factory"
   ]
 }

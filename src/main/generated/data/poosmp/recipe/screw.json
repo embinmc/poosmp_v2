@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:iron_ingot",
+    "3": "minecraft:iron_nugget"
+  },
+  "pattern": [
+    "#",
+    "3",
+    "3"
+  ],
+  "result": {
+    "count": 1,
+    "id": "poosmp:screw"
+  }
+}

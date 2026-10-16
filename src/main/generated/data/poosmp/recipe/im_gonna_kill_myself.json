@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "blocks",
+  "cookingtime": 60,
+  "experience": 20.0,
+  "ingredient": "poosmp:poop_block",
+  "result": {
+    "id": "poosmp:im_gonna_kill_myself"
+  }
+}

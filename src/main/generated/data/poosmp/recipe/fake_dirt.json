@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": "minecraft:dirt",
+    "3": "minecraft:glow_ink_sac"
+  },
+  "pattern": [
+    " # ",
+    "#3#",
+    " # "
+  ],
+  "result": {
+    "count": 4,
+    "id": "poosmp:fake_dirt"
+  }
+}

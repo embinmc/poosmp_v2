@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "#poosmp:red_poo_repair_items",
+  "base": "#poosmp:red_poo_convertibles/shovel",
+  "result": {
+    "id": "poosmp:red_poo_shovel"
+  },
+  "template": "minecraft:netherite_upgrade_smithing_template"
+}

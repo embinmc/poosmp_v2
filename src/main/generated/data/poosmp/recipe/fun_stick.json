@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:copper_nugget",
+    "3": "#c:rods/wooden"
+  },
+  "pattern": [
+    "###",
+    "#3#",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "poosmp:fun_stick"
+  }
+}

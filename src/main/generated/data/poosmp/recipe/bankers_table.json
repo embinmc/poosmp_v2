@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "#poosmp:bank_notes",
+    "3": "#minecraft:planks"
+  },
+  "pattern": [
+    "##",
+    "33",
+    "33"
+  ],
+  "result": {
+    "count": 1,
+    "id": "poosmp:bankers_table"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "minecraft:gunpowder",
+    "3": "#c:rods/wooden",
+    "4": "minecraft:diamond"
+  },
+  "pattern": [
+    "4#4",
+    "#3#",
+    "4#4"
+  ],
+  "result": {
+    "count": 1,
+    "id": "poosmp:boom_stick"
+  }
+}

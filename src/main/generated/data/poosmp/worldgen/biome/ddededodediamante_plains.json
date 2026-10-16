@@ -1,0 +1,56 @@
+{
+  "attributes": {
+    "minecraft:audio/background_music": {
+      "default": {
+        "max_delay": 60,
+        "min_delay": 20,
+        "sound": "minecraft:music.credits"
+      }
+    },
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "minecraft:cherry_leaves"
+        },
+        "probability": 0.01
+      }
+    ],
+    "minecraft:visual/fog_color": "#ffc2fd",
+    "minecraft:visual/sky_color": "#f07aff",
+    "minecraft:visual/water_fog_color": "#330532"
+  },
+  "carvers": [],
+  "downfall": 0.8,
+  "effects": {
+    "foliage_color": "#f5a314",
+    "water_color": "#d93fe4"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "minecraft:flower_cherry",
+      "minecraft:jungle_bush"
+    ]
+  ],
+  "has_precipitation": true,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.85
+}

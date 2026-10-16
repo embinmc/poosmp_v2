@@ -1,0 +1,77 @@
+{
+  "attributes": {
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "minecraft:copper_fire_flame"
+        },
+        "probability": 4.0E-4
+      },
+      {
+        "particle": {
+          "type": "minecraft:firefly"
+        },
+        "probability": 0.006
+      }
+    ],
+    "minecraft:visual/fog_color": "#2f0f16",
+    "minecraft:visual/fog_end_distance": 240.0,
+    "minecraft:visual/fog_start_distance": 8.0,
+    "minecraft:visual/sky_color": "#444444",
+    "minecraft:visual/water_fog_color": "#ad8d9d"
+  },
+  "carvers": [],
+  "downfall": 0.5,
+  "effects": {
+    "foliage_color": "#553344",
+    "grass_color": "#553344",
+    "water_color": "#553344"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [
+      "minecraft:monster_room",
+      "minecraft:monster_room_deep"
+    ],
+    [],
+    [],
+    [
+      "minecraft:ore_coal_upper",
+      "minecraft:ore_coal_lower",
+      "minecraft:ore_gold",
+      "minecraft:ore_gold_lower",
+      "minecraft:ore_redstone",
+      "minecraft:ore_redstone_lower",
+      "minecraft:ore_diamond",
+      "minecraft:ore_diamond_medium",
+      "minecraft:ore_diamond_large",
+      "minecraft:ore_diamond_buried",
+      "minecraft:ore_lapis",
+      "minecraft:ore_lapis_buried",
+      "minecraft:ore_copper",
+      "minecraft:disk_sand",
+      "minecraft:disk_clay",
+      "minecraft:disk_gravel"
+    ],
+    [],
+    [],
+    [
+      "minecraft:patch_firefly_bush_near_water"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.8
+}

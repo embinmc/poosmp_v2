@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:diamond",
+    "3": "minecraft:golden_apple",
+    "4": "minecraft:piston"
+  },
+  "pattern": [
+    "4",
+    "3",
+    "#"
+  ],
+  "result": {
+    "components": {
+      "poosmp:from_creative": false
+    },
+    "count": 1,
+    "id": "poosmp:totem_of_reach"
+  }
+}

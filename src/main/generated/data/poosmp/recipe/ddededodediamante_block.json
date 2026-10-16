@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": "poosmp:poop_block",
+    "3": "poosmp:diamond_shard"
+  },
+  "pattern": [
+    "###",
+    "#3#",
+    "###"
+  ],
+  "result": {
+    "count": 8,
+    "id": "poosmp:ddededodediamante_block"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": "poosmp:diamond_shard",
+    "3": "minecraft:stone"
+  },
+  "pattern": [
+    " # ",
+    "#3#",
+    " # "
+  ],
+  "result": {
+    "count": 16,
+    "id": "poosmp:missingno"
+  }
+}

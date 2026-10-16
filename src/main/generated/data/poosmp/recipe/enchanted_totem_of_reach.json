@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:diamond",
+    "3": "poosmp:totem_of_reach"
+  },
+  "pattern": [
+    "###",
+    "#3#",
+    "###"
+  ],
+  "result": {
+    "components": {
+      "poosmp:from_creative": false
+    },
+    "count": 1,
+    "id": "poosmp:enchanted_totem_of_reach"
+  }
+}

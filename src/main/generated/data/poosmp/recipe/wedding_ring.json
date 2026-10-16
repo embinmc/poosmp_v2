@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "poosmp:ring",
+    "3": "minecraft:diamond"
+  },
+  "pattern": [
+    "3",
+    "#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "poosmp:wedding_ring"
+  }
+}

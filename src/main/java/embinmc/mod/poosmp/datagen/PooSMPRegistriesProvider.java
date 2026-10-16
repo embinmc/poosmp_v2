@@ -2,6 +2,7 @@ package embinmc.mod.poosmp.datagen;
 
 import embinmc.mod.poosmp.item.PooEnchantments;
 import embinmc.mod.poosmp.misc.PooDamageTypes;
+import embinmc.mod.poosmp.misc.PooRegistries;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.advancements.criterion.DamageSourcePredicate;
@@ -37,6 +38,7 @@ public class PooSMPRegistriesProvider extends FabricDynamicRegistryProvider {
     protected void configure(HolderLookup.@NonNull Provider registries, @NonNull Entries entries) {
         entries.addAll(registries.lookupOrThrow(Registries.DAMAGE_TYPE));
         entries.addAll(registries.lookupOrThrow(Registries.ENCHANTMENT));
+        entries.addAll(registries.lookupOrThrow(PooRegistries.Keys.SHOP_CATEGORY));
     }
 
     public static void enchantmentBootstrap(BootstrapContext<Enchantment> context) {

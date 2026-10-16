@@ -3,8 +3,10 @@ package embinmc.mod.poosmp.datagen;
 import embinmc.mod.poosmp.PooSMPMod;
 import embinmc.mod.poosmp.datagen.tag.*;
 import embinmc.mod.poosmp.datagen.worldgen.PooNoiseGenSettingsProvider;
+import embinmc.mod.poosmp.economy.ShopCategories;
 import embinmc.mod.poosmp.misc.PooBiomes;
 import embinmc.mod.poosmp.misc.PooPaintings;
+import embinmc.mod.poosmp.misc.PooRegistries;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.core.RegistrySetBuilder;
@@ -45,5 +47,6 @@ public class PooSMPModDataGenerator implements DataGeneratorEntrypoint {
 		registryBuilder.add(Registries.TRIM_PATTERN, bootstrapContext -> {
 			TrimPatterns.register(bootstrapContext, ResourceKey.create(Registries.TRIM_PATTERN, PooSMPMod.id("fill")));
 		});
+		registryBuilder.add(PooRegistries.Keys.SHOP_CATEGORY, ShopCategories::bootstrap);
 	}
 }

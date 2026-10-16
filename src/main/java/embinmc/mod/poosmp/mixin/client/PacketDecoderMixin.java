@@ -34,12 +34,8 @@ public abstract class PacketDecoderMixin<T extends PacketListener> {
             original.call(channelHandlerContext, byteBuf, list);
         } catch (Exception e) {
             //LOGGER.error("Ignoring packet decoding exception", e);
-            Minecraft.getInstance().doRunTask(() -> {
+            Minecraft.getInstance().schedule(() -> {
                 Minecraft minecraft = Minecraft.getInstance();
-                if (minecraft.player == null)
-                    return;
-                //minecraft.player.connection.sendChat("Ignoring packet decoding exception: " + e.getClass().getSimpleName());
-                //minecraft.player.connection.sendChat(e.getMessage());
                 Component h = Component.literal("Ignoring packet decoding exception: " + e.getClass().getSimpleName())
                         .withStyle(ChatFormatting.RED, ChatFormatting.BOLD);
                 Component b = Component.literal(e.getMessage()).withStyle(ChatFormatting.RED);

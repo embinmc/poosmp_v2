@@ -3,6 +3,8 @@ package embinmc.mod.poosmp.misc;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
+import embinmc.mod.poosmp.economy.ItemValue;
+import embinmc.mod.poosmp.economy.ShopCategory;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.*;
 import net.minecraft.core.component.DataComponents;
@@ -140,5 +142,19 @@ public class PooUtil {
             }
             return fixedMap;
         } else return HashMap.newHashMap(16);
+    }
+
+    public static Optional<ItemValue> getValueOfStack(ItemStack itemStack, HolderLookup.Provider registries) {
+        Optional<? extends HolderLookup.RegistryLookup<ShopCategory>> optional = registries.lookup(PooRegistries.Keys.SHOP_CATEGORY);
+        if (optional.isEmpty())
+            return Optional.empty();
+        HolderLookup.RegistryLookup<ShopCategory> lookup = optional.orElseThrow();
+        Optional<Holder.Reference<ShopCategory>> optional2 = lookup.listElements()
+                .filter(category -> category.value().getItemValue(itemStack) != null)
+                .findFirst();
+        if (optional2.isEmpty())
+            return Optional.empty();
+        ShopCategory shopCategory = optional2.orElseThrow().value();
+        return Optional.ofNullable(shopCategory.getItemValue(itemStack));
     }
 }

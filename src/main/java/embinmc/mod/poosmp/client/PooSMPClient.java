@@ -3,6 +3,7 @@ package embinmc.mod.poosmp.client;
 import embinmc.mod.poosmp.PooSMPMod;
 import embinmc.mod.poosmp.block.PooBlocks;
 import embinmc.mod.poosmp.misc.PooSavedData;
+import embinmc.mod.poosmp.networking.PooMessages;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
@@ -65,6 +66,8 @@ public class PooSMPClient implements ClientModInitializer {
                 }
             }
         });
+
+        PooMessages.registerS2C();
     }
 
     private static OptionInstance<Boolean> createBoolOption(String id, boolean defaultValue) {

@@ -11,6 +11,7 @@ import embinmc.mod.poosmp.item.PooItems;
 import embinmc.mod.poosmp.item.component.DecodeExceptionComponent;
 import embinmc.mod.poosmp.item.component.PooComponents;
 import embinmc.mod.poosmp.misc.PooRegistries;
+import embinmc.mod.poosmp.misc.PooUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -94,19 +95,12 @@ public abstract class ItemStackMixin {
     @WrapOperation(method = "addDetailsToTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/Item;appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/Item$TooltipContext;Lnet/minecraft/world/item/component/TooltipDisplay;Ljava/util/function/Consumer;Lnet/minecraft/world/item/TooltipFlag;)V"))
     private void poosmp$addValueToTooltip(Item instance, ItemStack itemStack, Item.TooltipContext tooltipContext, TooltipDisplay tooltipDisplay, Consumer<Component> consumer, TooltipFlag tooltipFlag, Operation<Void> original) {
         original.call(instance, itemStack, tooltipContext, tooltipDisplay, consumer, tooltipFlag);
-        if (itemStack.is(PooItemTags.DOESNT_SHOW_SELL_VALUE_TOOLTIP))
+        if (tooltipContext.registries() == null || itemStack.is(PooItemTags.DOESNT_SHOW_SELL_VALUE_TOOLTIP))
             return;
-        Optional<? extends HolderLookup.RegistryLookup<ShopCategory>> optional = tooltipContext.registries().lookup(PooRegistries.Keys.SHOP_CATEGORY);
-        if (optional.isEmpty())
+        Optional<ItemValue> optionalValue = PooUtil.getValueOfStack(itemStack, tooltipContext.registries());
+        if (optionalValue.isEmpty())
             return;
-        HolderLookup.RegistryLookup<ShopCategory> lookup = optional.orElseThrow();
-        Optional<Holder.Reference<ShopCategory>> optional2 = lookup.listElements()
-                .filter(category -> category.value().getItemValue(itemStack) != null)
-                .findFirst();
-        if (optional2.isEmpty())
-            return;
-        ShopCategory shopCategory = optional2.orElseThrow().value();
-        ItemValue value = Objects.requireNonNull(shopCategory.getItemValue(itemStack));
+        ItemValue value = optionalValue.orElseThrow();
         String formatted = "Sells for $%,.2f".formatted(value.sellValue());
         Component sellText = Component.literal(formatted).withStyle(ChatFormatting.GRAY);
         consumer.accept(sellText);

@@ -10,6 +10,7 @@ import embinmc.mod.poosmp.misc.PooRegistries;
 import embinmc.mod.poosmp.misc.PooSMPGameRules;
 import embinmc.mod.poosmp.misc.PooSMPPoi;
 import embinmc.mod.poosmp.misc.PooSoundEvents;
+import embinmc.mod.poosmp.networking.PooMessages;
 import net.fabricmc.api.ModInitializer;
 
 import net.minecraft.core.Registry;
@@ -46,6 +47,8 @@ public class PooSMPMod implements ModInitializer {
 		PooSMPEvents.register();
 		PooItemGroups.register();
 		PooSMPPoi.init();
+		PooMessages.register();
+		PooMessages.registerC2S();
 	}
 
 	public static Identifier id(String path) {

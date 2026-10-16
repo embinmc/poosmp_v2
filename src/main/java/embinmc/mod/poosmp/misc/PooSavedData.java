@@ -12,6 +12,7 @@ import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.saveddata.SavedData;
@@ -102,12 +103,7 @@ public class PooSavedData extends SavedData {
     public boolean buyUpgrade(ServerPlayer serverPlayer, ResourceKey<Upgrade> upgradeKey) {
         this.addPlayerName(serverPlayer);
         Registry<Upgrade> registry = getUpgradeRegistry(serverPlayer);
-        Optional<? extends Holder<Upgrade>> optionalUpgrade = registry.get(upgradeKey);
-        if (optionalUpgrade.isEmpty()) {
-            PooSMPMod.LOGGER.error("Player {} tried to buy unknown upgrade: {}", serverPlayer.getPlainTextName(), upgradeKey.identifier());
-            return false;
-        }
-        Holder<Upgrade> upgrade = optionalUpgrade.orElseThrow();
+        Holder<Upgrade> upgrade = registry.getOrThrow(upgradeKey);
         Upgrade direct = upgrade.value();
         int amountPurchased = this.upgradePurchaseAmount(serverPlayer, upgradeKey);
         if (direct.properties().maxPurchases().isPresent() && direct.properties().maxPurchases().orElse(0) >= amountPurchased) {
@@ -131,12 +127,7 @@ public class PooSavedData extends SavedData {
     public boolean sellUpgrade(ServerPlayer serverPlayer, ResourceKey<Upgrade> upgradeKey) {
         this.addPlayerName(serverPlayer);
         Registry<Upgrade> registry = getUpgradeRegistry(serverPlayer);
-        Optional<? extends Holder<Upgrade>> optionalUpgrade = registry.get(upgradeKey);
-        if (optionalUpgrade.isEmpty()) {
-            PooSMPMod.LOGGER.error("Player {} tried to sell unknown upgrade: {}", serverPlayer.getPlainTextName(), upgradeKey.identifier());
-            return false;
-        }
-        Holder<Upgrade> upgrade = optionalUpgrade.orElseThrow();
+        Holder<Upgrade> upgrade = registry.getOrThrow(upgradeKey);
         Upgrade direct = upgrade.value();
         int amountPurchased = this.upgradePurchaseAmount(serverPlayer, upgradeKey);
         if (0 >= amountPurchased) {
@@ -167,6 +158,10 @@ public class PooSavedData extends SavedData {
 
     public static PooSavedData get(ServerPlayer serverPlayer) {
         return serverPlayer.level().getServer().overworld().getDataStorage().computeIfAbsent(PooSavedData.TYPE);
+    }
+
+    public static PooSavedData get(MinecraftServer server) {
+        return server.overworld().getDataStorage().computeIfAbsent(PooSavedData.TYPE);
     }
 
     public static final class Client {

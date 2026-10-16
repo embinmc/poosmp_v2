@@ -1,6 +1,7 @@
 package embinmc.mod.poosmp;
 
 import embinmc.mod.poosmp.block.PooBlocks;
+import embinmc.mod.poosmp.command.PooSMPCommands;
 import embinmc.mod.poosmp.event.PooSMPEvents;
 import embinmc.mod.poosmp.item.PooItemGroups;
 import embinmc.mod.poosmp.item.PooItems;
@@ -13,6 +14,7 @@ import embinmc.mod.poosmp.misc.PooSoundEvents;
 import embinmc.mod.poosmp.networking.PooMessages;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -49,6 +51,9 @@ public class PooSMPMod implements ModInitializer {
 		PooSMPPoi.init();
 		PooMessages.register();
 		PooMessages.registerC2S();
+		CommandRegistrationCallback.EVENT.register((dispatcher, commandBuildContext, commandSelection) -> {
+			PooSMPCommands.register(dispatcher, commandBuildContext);
+		});
 	}
 
 	public static Identifier id(String path) {

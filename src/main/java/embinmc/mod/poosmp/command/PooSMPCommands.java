@@ -202,9 +202,15 @@ public interface PooSMPCommands {
                     Commands.argument("amount", DoubleArgumentType.doubleArg(0.01D))
                         .executes(context -> {
                             double amount = PooUtil.roundTwo(DoubleArgumentType.getDouble(context, "amount"));
+                            ServerPlayer player = context.getSource().getPlayerOrException();
+                            PooSavedData savedData = PooSavedData.get(context.getSource().getServer());
+                            if (savedData.getBalance(player) < amount) {
+                                player.sendSystemMessage(Component.literal("You are too broke to write this cheque.").withStyle(ChatFormatting.RED));
+                                return -2;
+                            }
                             ItemStack cheque = new ItemStack(PooItems.CHEQUE, 1);
                             cheque.set(PooComponents.CHEQUE, amount);
-                            ServerPlayer player = context.getSource().getPlayerOrException();
+                            savedData.addBalance(player, -amount);
                             ServerLevel level = player.level();
                             level.addFreshEntity(new ItemEntity(level, player.getX(), player.getY(), player.getZ(), cheque));
                             return 1;

@@ -2,6 +2,7 @@ package embinmc.mod.poosmp.datagen;
 
 import embinmc.mod.poosmp.PooSMPMod;
 import embinmc.mod.poosmp.datagen.tag.*;
+import embinmc.mod.poosmp.datagen.worldgen.PooNoiseGenSettingsProvider;
 import embinmc.mod.poosmp.misc.PooBiomes;
 import embinmc.mod.poosmp.misc.PooPaintings;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
@@ -31,7 +32,7 @@ public class PooSMPModDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(PooSMPBlockLootTableProvider::new);
 		pack.addProvider(PooSMPRecipeProvider::new);
 		pack.addProvider(PooSMPModelProvider::new);
-		//pack.addProvider(PooNoiseGenSettingsProvider::new);
+		pack.addProvider(PooNoiseGenSettingsProvider::new);
 	}
 
 	@Override

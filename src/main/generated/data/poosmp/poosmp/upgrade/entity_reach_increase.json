@@ -4,7 +4,7 @@
     {
       "type": "minecraft:entity_interaction_range",
       "amount": 1.0,
-      "id": "poosmp:entity_reach_increase/entity_interaction_range",
+      "id": "poosmp:upgrade/entity_interaction_range",
       "operation": "add_value"
     }
   ],

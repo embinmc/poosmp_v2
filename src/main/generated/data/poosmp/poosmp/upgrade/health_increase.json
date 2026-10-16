@@ -4,7 +4,7 @@
     {
       "type": "minecraft:max_health",
       "amount": 2.0,
-      "id": "poosmp:health_increase/max_health",
+      "id": "poosmp:upgrade/max_health",
       "operation": "add_value"
     }
   ],

@@ -1,5 +1,6 @@
 package embinmc.mod.poosmp.datagen;
 
+import embinmc.mod.poosmp.PooSMPMod;
 import embinmc.mod.poosmp.misc.PooRegistries;
 import embinmc.mod.poosmp.misc.Temporary;
 import embinmc.mod.poosmp.upgrade.*;
@@ -174,7 +175,7 @@ public class UpgradeProvider extends PooCodecDataProvider<Upgrade> {
         protected Upgrade buildUpgrade() {
             ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder();
             for (Attrib attrib : this.attribs) {
-                Identifier modId = this.key.identifier().withSuffix("/" + attrib.attribute().unwrapKey().orElseThrow().identifier().getPath());
+                Identifier modId = PooSMPMod.id("upgrade/" + attrib.attribute().unwrapKey().orElseThrow().identifier().getPath());
                 AttributeModifier modifier = new AttributeModifier(modId, attrib.val(), attrib.op());
                 builder.add(attrib.attribute(), modifier, EquipmentSlotGroup.ANY);
             }

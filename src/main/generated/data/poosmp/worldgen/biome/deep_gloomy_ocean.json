@@ -48,6 +48,9 @@
     [],
     [
       "minecraft:sea_pickle"
+    ],
+    [
+      "minecraft:freeze_top_layer"
     ]
   ],
   "has_precipitation": false,

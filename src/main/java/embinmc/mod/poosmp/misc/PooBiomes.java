@@ -502,6 +502,7 @@ public interface PooBiomes {
                 builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_LAPIS_BURIED);
                 builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_COPPER);
                 BiomeDefaultFeatures.addDefaultSoftDisks(builder);
+                builder.addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, MiscOverworldPlacements.FREEZE_TOP_LAYER);
             }
         };
         bootstrap.bootstrap();

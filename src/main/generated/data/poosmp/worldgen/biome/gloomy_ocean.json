@@ -51,6 +51,9 @@
       "minecraft:flower_default",
       "minecraft:patch_dead_bush_badlands",
       "minecraft:patch_firefly_bush_near_water"
+    ],
+    [
+      "minecraft:freeze_top_layer"
     ]
   ],
   "has_precipitation": false,

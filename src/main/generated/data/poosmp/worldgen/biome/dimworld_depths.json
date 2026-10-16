@@ -59,6 +59,9 @@
     [],
     [
       "minecraft:patch_firefly_bush_near_water"
+    ],
+    [
+      "minecraft:freeze_top_layer"
     ]
   ],
   "has_precipitation": false,

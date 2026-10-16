@@ -50,6 +50,9 @@
     [
       "minecraft:patch_firefly_bush_near_water",
       "minecraft:patch_dead_bush_badlands"
+    ],
+    [
+      "minecraft:freeze_top_layer"
     ]
   ],
   "has_precipitation": false,

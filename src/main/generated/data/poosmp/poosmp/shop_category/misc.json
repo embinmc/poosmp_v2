@@ -1,0 +1,15 @@
+{
+  "display_icon": "minecraft:trial_key",
+  "display_name": "Misc.",
+  "price_map": {
+    "minecraft:ominous_trial_key": {
+      "price": 200.0,
+      "sell_value": 180.0
+    },
+    "minecraft:trial_key": {
+      "price": 50.0,
+      "sell_value": 40.0
+    },
+    "poosmp:im_gonna_kill_myself": 0.5
+  }
+}

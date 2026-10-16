@@ -43,7 +43,7 @@ public class PooUtil {
     public static final Component OUTLAWED_EXPLOSIVE_TEXT = Component.literal("Explosive gadgets are currently outlawed").withStyle(ChatFormatting.RED);
     public static final Component SUPPRESSED_EXPLOSIVE = Component.literal("Explosion suppressed due to explosive gadgets currently being outlawed").withStyle(ChatFormatting.RED);
     public static final Codec<HolderSet<Item>> STRICT_ITEM_SET_CODEC = Ingredient.NON_AIR_HOLDER_SET_CODEC.validate(holders -> {
-        if (holders instanceof HolderSet.Direct<Item>)
+        if (holders instanceof HolderSet.Direct<Item> direct && direct.size() != 1)
             return DataResult.error(() -> "Cannot allow direct holder sets here...");
         return DataResult.success(holders);
     });

@@ -1,0 +1,34 @@
+{
+  "display_icon": "poosmp:one_dollar_bill",
+  "display_name": "Bank Notes",
+  "price_map": {
+    "poosmp:fifty_dollar_bill": {
+      "price": 50.0,
+      "sell_value": 50.0
+    },
+    "poosmp:five_dollar_bill": {
+      "price": 5.0,
+      "sell_value": 5.0
+    },
+    "poosmp:hundred_dollar_bill": {
+      "price": 100.0,
+      "sell_value": 100.0
+    },
+    "poosmp:one_dollar_bill": {
+      "price": 1.0,
+      "sell_value": 1.0
+    },
+    "poosmp:ten_dollar_bill": {
+      "price": 10.0,
+      "sell_value": 10.0
+    },
+    "poosmp:twenty_five_dollar_bill": {
+      "price": 25.0,
+      "sell_value": 25.0
+    },
+    "poosmp:two_dollar_bill": {
+      "price": 2.0,
+      "sell_value": 2.0
+    }
+  }
+}

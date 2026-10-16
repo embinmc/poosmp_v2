@@ -3,13 +3,20 @@ package embinmc.mod.poosmp.mixin;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import embinmc.mod.poosmp.economy.ItemValue;
+import embinmc.mod.poosmp.economy.ShopCategory;
 import embinmc.mod.poosmp.event.PooItemEvents;
+import embinmc.mod.poosmp.item.PooItemTags;
 import embinmc.mod.poosmp.item.PooItems;
 import embinmc.mod.poosmp.item.component.DecodeExceptionComponent;
 import embinmc.mod.poosmp.item.component.PooComponents;
+import embinmc.mod.poosmp.misc.PooRegistries;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Unit;
@@ -21,8 +28,14 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+
+import java.util.Objects;
+import java.util.Optional;
+import java.util.function.Consumer;
 
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin {
@@ -76,5 +89,26 @@ public abstract class ItemStackMixin {
                 }
             }
         };
+    }
+
+    @WrapOperation(method = "addDetailsToTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/Item;appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/Item$TooltipContext;Lnet/minecraft/world/item/component/TooltipDisplay;Ljava/util/function/Consumer;Lnet/minecraft/world/item/TooltipFlag;)V"))
+    private void poosmp$addValueToTooltip(Item instance, ItemStack itemStack, Item.TooltipContext tooltipContext, TooltipDisplay tooltipDisplay, Consumer<Component> consumer, TooltipFlag tooltipFlag, Operation<Void> original) {
+        original.call(instance, itemStack, tooltipContext, tooltipDisplay, consumer, tooltipFlag);
+        if (itemStack.is(PooItemTags.DOESNT_SHOW_SELL_VALUE_TOOLTIP))
+            return;
+        Optional<? extends HolderLookup.RegistryLookup<ShopCategory>> optional = tooltipContext.registries().lookup(PooRegistries.Keys.SHOP_CATEGORY);
+        if (optional.isEmpty())
+            return;
+        HolderLookup.RegistryLookup<ShopCategory> lookup = optional.orElseThrow();
+        Optional<Holder.Reference<ShopCategory>> optional2 = lookup.listElements()
+                .filter(category -> category.value().getItemValue(itemStack) != null)
+                .findFirst();
+        if (optional2.isEmpty())
+            return;
+        ShopCategory shopCategory = optional2.orElseThrow().value();
+        ItemValue value = Objects.requireNonNull(shopCategory.getItemValue(itemStack));
+        String formatted = "Sells for $%,.2f".formatted(value.sellValue());
+        Component sellText = Component.literal(formatted).withStyle(ChatFormatting.GRAY);
+        consumer.accept(sellText);
     }
 }

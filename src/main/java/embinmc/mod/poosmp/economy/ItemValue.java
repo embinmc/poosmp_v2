@@ -2,10 +2,8 @@ package embinmc.mod.poosmp.economy;
 
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import embinmc.mod.poosmp.misc.PooUtil;
-import net.minecraft.util.ExtraCodecs;
 
 import java.util.OptionalDouble;
 

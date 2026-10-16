@@ -25,6 +25,8 @@ public interface PooSurfaceRules {
     RuleSource ROOTED_DIRT = makeStateRule(Blocks.ROOTED_DIRT);
     RuleSource CLAY = makeStateRule(Blocks.CLAY);
     RuleSource MUD = makeStateRule(Blocks.MUD);
+    RuleSource BLACKSTONE = makeStateRule(Blocks.BLACKSTONE);
+    RuleSource COARSE_DIRT = makeStateRule(Blocks.COARSE_DIRT);
 
     private static RuleSource makeStateRule(final Block block) {
         return SurfaceRules.state(block.defaultBlockState());
@@ -39,18 +41,18 @@ public interface PooSurfaceRules {
         RuleSource surfaceGravel = SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.ON_CEILING, STONE), GRAVEL);
         RuleSource surfaceSand = SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.ON_CEILING, SANDSTONE), SAND);
         RuleSource surfaceUnderwater = SurfaceRules.sequence(
-                SurfaceRules.ifTrue(SurfaceRules.noiseCondition(Noises.CALCITE, -0.02, 0.02), CLAY),
+                SurfaceRules.ifTrue(SurfaceRules.noiseCondition(Noises.GRAVEL, -0.01, 0.01), CLAY),
                 surfaceSand
         );
-        RuleSource surfaceShore = SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.noiseCondition(Noises.CALCITE, -0.02, 0.02), MUD), DIRT);
+        RuleSource surfaceShore = SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.noiseCondition(Noises.GRAVEL, -0.02, 0.02), MUD), DIRT);
         RuleSource surfaceLand = SurfaceRules.sequence(SurfaceRules.ifTrue(aboveWater, GRASS_BLOCK), DIRT);
 
         RuleSource underSurfaceRule = SurfaceRules.sequence(
                 SurfaceRules.ifTrue(
                         SurfaceRules.isBiome(PooBiomes.DIMWORLD_GRAVELY_FIELDS),
                         SurfaceRules.sequence(
-                                SurfaceRules.ifTrue(surfaceNoiseAbove(2.0), ROOTED_DIRT),
-                                SurfaceRules.ifTrue(surfaceNoiseAbove(1.6), surfaceGravel),
+                                SurfaceRules.ifTrue(surfaceNoiseAbove(1.2), surfaceGravel),
+                                SurfaceRules.ifTrue(surfaceNoiseAbove(0.8), ROOTED_DIRT),
                                 surfaceLand
                         )
                 ),
@@ -61,8 +63,16 @@ public interface PooSurfaceRules {
                 SurfaceRules.ifTrue(
                         SurfaceRules.isBiome(PooBiomes.DIMWORLD_GRAVELY_FIELDS),
                         SurfaceRules.sequence(
-                                SurfaceRules.ifTrue(surfaceNoiseAbove(2.0), ROOTED_DIRT),
-                                SurfaceRules.ifTrue(surfaceNoiseAbove(1.6), surfaceGravel),
+                                SurfaceRules.ifTrue(surfaceNoiseAbove(1.2), surfaceGravel),
+                                SurfaceRules.ifTrue(surfaceNoiseAbove(0.8), ROOTED_DIRT),
+                                surfaceLand
+                        )
+                ),
+                SurfaceRules.ifTrue(
+                        SurfaceRules.isBiome(PooBiomes.DIMWORLD_BARRENS),
+                        SurfaceRules.sequence(
+                                SurfaceRules.ifTrue(surfaceNoiseAbove(1.1), BLACKSTONE),
+                                SurfaceRules.ifTrue(surfaceNoiseAbove(0.4), COARSE_DIRT),
                                 surfaceLand
                         )
                 ),

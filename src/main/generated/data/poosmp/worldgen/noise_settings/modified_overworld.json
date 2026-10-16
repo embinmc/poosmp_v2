@@ -337,22 +337,7 @@
                             "if_true": {
                               "type": "minecraft:noise_threshold",
                               "max_threshold": 1.7976931348623157E308,
-                              "min_threshold": 0.24242424242424243,
-                              "noise": "minecraft:surface"
-                            },
-                            "then_run": {
-                              "type": "minecraft:block",
-                              "result_state": {
-                                "Name": "minecraft:rooted_dirt"
-                              }
-                            }
-                          },
-                          {
-                            "type": "minecraft:condition",
-                            "if_true": {
-                              "type": "minecraft:noise_threshold",
-                              "max_threshold": 1.7976931348623157E308,
-                              "min_threshold": 0.19393939393939394,
+                              "min_threshold": 0.14545454545454545,
                               "noise": "minecraft:surface"
                             },
                             "then_run": {
@@ -381,6 +366,94 @@
                                   }
                                 }
                               ]
+                            }
+                          },
+                          {
+                            "type": "minecraft:condition",
+                            "if_true": {
+                              "type": "minecraft:noise_threshold",
+                              "max_threshold": 1.7976931348623157E308,
+                              "min_threshold": 0.09696969696969697,
+                              "noise": "minecraft:surface"
+                            },
+                            "then_run": {
+                              "type": "minecraft:block",
+                              "result_state": {
+                                "Name": "minecraft:rooted_dirt"
+                              }
+                            }
+                          },
+                          {
+                            "type": "minecraft:sequence",
+                            "sequence": [
+                              {
+                                "type": "minecraft:condition",
+                                "if_true": {
+                                  "type": "minecraft:water",
+                                  "add_stone_depth": false,
+                                  "offset": 0,
+                                  "surface_depth_multiplier": 0
+                                },
+                                "then_run": {
+                                  "type": "minecraft:block",
+                                  "result_state": {
+                                    "Name": "minecraft:grass_block",
+                                    "Properties": {
+                                      "snowy": "false"
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "type": "minecraft:block",
+                                "result_state": {
+                                  "Name": "minecraft:dirt"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "minecraft:condition",
+                      "if_true": {
+                        "type": "minecraft:biome",
+                        "biome_is": [
+                          "poosmp:dim_barrens"
+                        ]
+                      },
+                      "then_run": {
+                        "type": "minecraft:sequence",
+                        "sequence": [
+                          {
+                            "type": "minecraft:condition",
+                            "if_true": {
+                              "type": "minecraft:noise_threshold",
+                              "max_threshold": 1.7976931348623157E308,
+                              "min_threshold": 0.13333333333333333,
+                              "noise": "minecraft:surface"
+                            },
+                            "then_run": {
+                              "type": "minecraft:block",
+                              "result_state": {
+                                "Name": "minecraft:blackstone"
+                              }
+                            }
+                          },
+                          {
+                            "type": "minecraft:condition",
+                            "if_true": {
+                              "type": "minecraft:noise_threshold",
+                              "max_threshold": 1.7976931348623157E308,
+                              "min_threshold": 0.048484848484848485,
+                              "noise": "minecraft:surface"
+                            },
+                            "then_run": {
+                              "type": "minecraft:block",
+                              "result_state": {
+                                "Name": "minecraft:coarse_dirt"
+                              }
                             }
                           },
                           {
@@ -484,22 +557,7 @@
                             "if_true": {
                               "type": "minecraft:noise_threshold",
                               "max_threshold": 1.7976931348623157E308,
-                              "min_threshold": 0.24242424242424243,
-                              "noise": "minecraft:surface"
-                            },
-                            "then_run": {
-                              "type": "minecraft:block",
-                              "result_state": {
-                                "Name": "minecraft:rooted_dirt"
-                              }
-                            }
-                          },
-                          {
-                            "type": "minecraft:condition",
-                            "if_true": {
-                              "type": "minecraft:noise_threshold",
-                              "max_threshold": 1.7976931348623157E308,
-                              "min_threshold": 0.19393939393939394,
+                              "min_threshold": 0.14545454545454545,
                               "noise": "minecraft:surface"
                             },
                             "then_run": {
@@ -528,6 +586,21 @@
                                   }
                                 }
                               ]
+                            }
+                          },
+                          {
+                            "type": "minecraft:condition",
+                            "if_true": {
+                              "type": "minecraft:noise_threshold",
+                              "max_threshold": 1.7976931348623157E308,
+                              "min_threshold": 0.09696969696969697,
+                              "noise": "minecraft:surface"
+                            },
+                            "then_run": {
+                              "type": "minecraft:block",
+                              "result_state": {
+                                "Name": "minecraft:rooted_dirt"
+                              }
                             }
                           },
                           {
@@ -601,7 +674,7 @@
                             "type": "minecraft:noise_threshold",
                             "max_threshold": 0.02,
                             "min_threshold": -0.02,
-                            "noise": "minecraft:calcite"
+                            "noise": "minecraft:gravel"
                           },
                           "then_run": {
                             "type": "minecraft:block",
@@ -626,9 +699,9 @@
                         "type": "minecraft:condition",
                         "if_true": {
                           "type": "minecraft:noise_threshold",
-                          "max_threshold": 0.02,
-                          "min_threshold": -0.02,
-                          "noise": "minecraft:calcite"
+                          "max_threshold": 0.01,
+                          "min_threshold": -0.01,
+                          "noise": "minecraft:gravel"
                         },
                         "then_run": {
                           "type": "minecraft:block",

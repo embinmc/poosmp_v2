@@ -34,17 +34,16 @@ public interface PooSurfaceRules {
 
     // kill me
     static RuleSource modifiedOverworld(boolean includeExtraSurfaceRules) {
-        ConditionSource aboveOverworldSeaLevel = SurfaceRules.yBlockCheck(VerticalAnchor.absolute(63), 0);
         ConditionSource notUnderwater = SurfaceRules.waterBlockCheck(-1, 0);
         ConditionSource aboveWater = SurfaceRules.waterBlockCheck(0, 0);
-        ConditionSource notUnderDeepWater = SurfaceRules.waterStartCheck(-4, -1);
+        ConditionSource notUnderDeepWater = SurfaceRules.waterStartCheck(-3, -1);
         RuleSource surfaceGravel = SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.ON_CEILING, STONE), GRAVEL);
         RuleSource surfaceSand = SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.ON_CEILING, SANDSTONE), SAND);
         RuleSource surfaceUnderwater = SurfaceRules.sequence(
-                SurfaceRules.ifTrue(SurfaceRules.noiseCondition(Noises.GRAVEL, -0.01, 0.01), CLAY),
+                SurfaceRules.ifTrue(surfaceNoiseAbove(1.3), CLAY),
                 surfaceSand
         );
-        RuleSource surfaceShore = SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.noiseCondition(Noises.GRAVEL, -0.02, 0.02), MUD), DIRT);
+        RuleSource surfaceShore = SurfaceRules.sequence(SurfaceRules.ifTrue(surfaceNoiseAbove(1.4), MUD), DIRT);
         RuleSource surfaceLand = SurfaceRules.sequence(SurfaceRules.ifTrue(aboveWater, GRASS_BLOCK), DIRT);
 
         RuleSource underSurfaceRule = SurfaceRules.sequence(

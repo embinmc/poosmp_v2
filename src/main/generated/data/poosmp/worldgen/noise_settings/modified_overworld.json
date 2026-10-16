@@ -526,7 +526,7 @@
               "if_true": {
                 "type": "minecraft:water",
                 "add_stone_depth": true,
-                "offset": -4,
+                "offset": -3,
                 "surface_depth_multiplier": -1
               },
               "then_run": {
@@ -657,7 +657,7 @@
                     "if_true": {
                       "type": "minecraft:water",
                       "add_stone_depth": true,
-                      "offset": -4,
+                      "offset": -3,
                       "surface_depth_multiplier": -1
                     },
                     "then_run": {
@@ -667,9 +667,9 @@
                           "type": "minecraft:condition",
                           "if_true": {
                             "type": "minecraft:noise_threshold",
-                            "max_threshold": 0.02,
-                            "min_threshold": -0.02,
-                            "noise": "minecraft:gravel"
+                            "max_threshold": 1.7976931348623157E308,
+                            "min_threshold": 0.16969696969696968,
+                            "noise": "minecraft:surface"
                           },
                           "then_run": {
                             "type": "minecraft:block",
@@ -694,9 +694,9 @@
                         "type": "minecraft:condition",
                         "if_true": {
                           "type": "minecraft:noise_threshold",
-                          "max_threshold": 0.01,
-                          "min_threshold": -0.01,
-                          "noise": "minecraft:gravel"
+                          "max_threshold": 1.7976931348623157E308,
+                          "min_threshold": 0.1575757575757576,
+                          "noise": "minecraft:surface"
                         },
                         "then_run": {
                           "type": "minecraft:block",

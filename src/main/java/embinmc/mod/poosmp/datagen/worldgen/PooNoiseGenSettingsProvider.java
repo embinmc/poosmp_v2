@@ -1,13 +1,9 @@
 package embinmc.mod.poosmp.datagen.worldgen;
 
-import com.mojang.serialization.Codec;
-import embinmc.mod.poosmp.PooSMPMod;
 import embinmc.mod.poosmp.datagen.PooCodecDataProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -22,6 +18,8 @@ import java.util.concurrent.CompletableFuture;
 public class PooNoiseGenSettingsProvider extends PooCodecDataProvider<NoiseGeneratorSettings> {
     public static final ResourceKey<DensityFunction> SHIFT_X = createKey("shift_x");
     public static final ResourceKey<DensityFunction> SHIFT_Z = createKey("shift_z");
+    public static final ResourceKey<DensityFunction> Y = createKey("y");
+    private static final ResourceKey<DensityFunction> SLOPED_CHEESE = createKey("overworld/sloped_cheese");
 
     public PooNoiseGenSettingsProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(dataOutput, registriesFuture, Registries.NOISE_SETTINGS, NoiseGeneratorSettings.DIRECT_CODEC);
@@ -29,7 +27,7 @@ public class PooNoiseGenSettingsProvider extends PooCodecDataProvider<NoiseGener
 
     @Override
     public void generate(HolderLookup.@NonNull Provider provider) {
-        this.provider.accept(NoiseGeneratorSettings.OVERWORLD.identifier(), modifiedOverworld(provider));
+        this.provider.accept(PooWorldConsts.MODIFIED_OVERWORLD.identifier(), modifiedOverworld(provider));
     }
 
     private static NoiseGeneratorSettings modifiedOverworld(HolderLookup.@NonNull Provider provider) {
@@ -40,32 +38,66 @@ public class PooNoiseGenSettingsProvider extends PooCodecDataProvider<NoiseGener
                 PooWorldConsts.NOISE_SETTINGS,
                 Blocks.STONE.defaultBlockState(),
                 Blocks.WATER.defaultBlockState(),
-                noNewCaves(functions, provider.lookupOrThrow(Registries.NOISE), preliminarySurfaceLevel(offset, factor)),
+                noCaves(functions, provider.lookupOrThrow(Registries.NOISE), preliminarySurfaceLevel(offset, factor)),
                 PooSurfaceRules.modifiedOverworld(true),
                 new OverworldBiomeBuilder().spawnTarget(),
                 63, false, false, false, false
         );
     }
 
-    private static NoiseRouter noNewCaves(final HolderGetter<DensityFunction> functions, final HolderGetter<NormalNoise.NoiseParameters> noises, final DensityFunction slide) {
+    private static NoiseRouter noCaves(final HolderGetter<DensityFunction> functions, final HolderGetter<NormalNoise.NoiseParameters> noises, final DensityFunction slide) {
         DensityFunction shiftX = getFunction(functions, SHIFT_X);
         DensityFunction shiftZ = getFunction(functions, SHIFT_Z);
-        DensityFunction temperature = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.25, noises.getOrThrow(Noises.TEMPERATURE));
+        DensityFunction temperature = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.16, noises.getOrThrow(Noises.TEMPERATURE));
         DensityFunction vegetation = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.25, noises.getOrThrow(Noises.VEGETATION));
         DensityFunction fullNoise = postProcess(slide);
         return new NoiseRouter(
                 DensityFunctions.zero(),
-                DensityFunctions.zero(),
-                DensityFunctions.zero(),
-                DensityFunctions.zero(),
+                DensityFunctions.constant(-1),
+                DensityFunctions.constant(-1),
+                DensityFunctions.constant(-1),
                 temperature,
                 vegetation,
-                DensityFunctions.zero(),
-                DensityFunctions.zero(),
-                DensityFunctions.zero(),
-                DensityFunctions.zero(),
-                DensityFunctions.zero(),
+                getFunction(functions, NoiseRouterData.CONTINENTS),
+                getFunction(functions, NoiseRouterData.EROSION),
+                DensityFunctions.rangeChoice(
+                        getFunction(functions, Y),
+                        -128, 0, DensityFunctions.constant(-1),
+                        DensityFunctions.rangeChoice(
+                                getFunction(functions, Y),
+                                        380, 512,
+                                DensityFunctions.constant(1),
+                                DensityFunctions.constant(0)
+                        )
+                ),
+                getFunction(functions, NoiseRouterData.RIDGES),
                 fullNoise,
+                DensityFunctions.map(
+                        DensityFunctions.mul(
+                                DensityFunctions.constant(0.64D),
+                                DensityFunctions.interpolated(
+                                        DensityFunctions.blendDensity(
+                                                DensityFunctions.add(
+                                                        DensityFunctions.constant(0.1171875),
+                                                        DensityFunctions.mul(
+                                                                DensityFunctions.yClampedGradient(-64, -40, 0, 1),
+                                                                DensityFunctions.add(
+                                                                        DensityFunctions.constant(-0.1171875),
+                                                                        DensityFunctions.mul(
+                                                                                DensityFunctions.yClampedGradient(240, 256, 1, 0),
+                                                                                DensityFunctions.add(
+                                                                                        DensityFunctions.constant(0.078125),
+                                                                                        getFunction(functions, SLOPED_CHEESE)
+                                                                                )
+                                                                        )
+                                                                )
+                                                        )
+                                                )
+                                        )
+                                )
+                        ),
+                        DensityFunctions.Mapped.Type.SQUEEZE
+                ),
                 DensityFunctions.zero(),
                 DensityFunctions.zero(),
                 DensityFunctions.zero()
@@ -95,7 +127,7 @@ public class PooNoiseGenSettingsProvider extends PooCodecDataProvider<NoiseGener
                 ),
                 1.5,
                 -1.5,
-                -64.0,
+                -128.0,
                 320.0
         );
         upperBound = upperBound.clamp(-40.0, 320.0);

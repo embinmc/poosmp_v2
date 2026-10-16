@@ -186,5 +186,6 @@ public class PooSMPItemTagProvider extends FabricTagProvider.ItemTagProvider {
         this.valueLookupBuilder(PooItemTags.RED_POO_CONVERTIBLE_BOOTS)
                 .add(Items.  DIAMOND_BOOTS)
                 .add(Items.NETHERITE_BOOTS);
+        this.builder(PooItemTags.RED_POO_REPAIR_ITEMS).add(PooItemKeys.RED_POO_INGOT);
     }
 }

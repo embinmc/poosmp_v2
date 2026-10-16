@@ -1,5 +1,6 @@
 package embinmc.mod.poosmp.datagen.tag;
 
+import embinmc.mod.poosmp.block.PooBlockTags;
 import embinmc.mod.poosmp.block.PooBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
@@ -70,5 +71,6 @@ public class PooSMPBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         this.valueLookupBuilder(BlockTags.DIRT).setReplace(false)
                 .add(PooBlocks.DIM_MOSS_BLOCK)
         ;
+        this.builder(PooBlockTags.INCORRECT_FOR_RED_POO_TOOLS);
     }
 }

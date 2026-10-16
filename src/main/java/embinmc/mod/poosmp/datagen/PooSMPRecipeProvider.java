@@ -63,7 +63,7 @@ public class PooSMPRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy("has_bank_note", this.has(PooItemTags.BANK_NOTES))
                         .save(this.output);
                 this.specialStick(PooItems.BIOME_STICK, ItemTags.DIRT, ItemTags.DIRT);
-                this.shapedSpecial(RecipeCategory.BUILDING_BLOCKS, PooItems.BLANK_MUSIC_DISC, 1)
+                this.shapedSpecial(RecipeCategory.MISC, PooItems.BLANK_MUSIC_DISC, 1)
                         .pattern("###")
                         .pattern("#3#")
                         .pattern("###")

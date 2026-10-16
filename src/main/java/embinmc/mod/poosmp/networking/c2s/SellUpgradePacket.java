@@ -56,6 +56,7 @@ public record SellUpgradePacket(int upgrade) implements CustomPacketPayload {
                 String message = "Player " + player.getPlainTextName() + " successfully sold upgrade: " + key.identifier();
                 server.sendSystemMessage(Component.literal(message).withStyle(ChatFormatting.YELLOW));
             }
+            PooSavedData.syncToClient(player);
         });
     }
 }

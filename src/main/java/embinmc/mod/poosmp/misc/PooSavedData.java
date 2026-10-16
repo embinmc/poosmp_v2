@@ -4,16 +4,20 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import embinmc.mod.poosmp.PooSMPMod;
+import embinmc.mod.poosmp.networking.s2c.DataSyncPacket;
 import embinmc.mod.poosmp.upgrade.Upgrade;
 import embinmc.mod.poosmp.upgrade.UpgradePrice;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Util;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.saveddata.SavedDataType;
@@ -154,6 +158,20 @@ public class PooSavedData extends SavedData {
 
     public Tag asNbt() {
         return PooSavedData.CODEC.encodeStart(NbtOps.INSTANCE, this).getOrThrow();
+    }
+
+    public static void syncToClient(ServerPlayer player) {
+        CompoundTag data = new CompoundTag();
+        PooSavedData savedData = PooSavedData.get(player.level().getServer());
+        PooSavedData sendData = Util.make(new PooSavedData(), poodata -> {
+            poodata.balance = Util.make(HashMap.newHashMap(1), map -> map.put(player.getUUID(), savedData.getBalance(player)));
+            poodata.purchasedUpgrades = Util.make(HashMap.newHashMap(1), map -> {
+                Map<Identifier, Integer> mapSync = savedData.getPurchasedUpgradesIdMap(player);
+                map.put(player.getUUID(), mapSync);
+            });
+        });
+        data.put(KEY, sendData.asNbt());
+        ServerPlayNetworking.send(player, new DataSyncPacket(data));
     }
 
     public static PooSavedData get(ServerPlayer serverPlayer) {

@@ -4,6 +4,7 @@ import embinmc.mod.poosmp.PooSMPMod;
 import embinmc.mod.poosmp.item.component.ItemUseComponents;
 import embinmc.mod.poosmp.item.component.PooComponents;
 import embinmc.mod.poosmp.item.component.WeddingRing;
+import embinmc.mod.poosmp.misc.PooSavedData;
 import embinmc.mod.poosmp.upgrade.Upgrade;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
@@ -78,6 +79,8 @@ public class PooSMPEvents {
 
         /// [Upgrade#onTick(int, ServerPlayer)]
         embin.strangeitems.event.ServerPlayerEvents.ON_TICK.register(serverPlayer -> {
+            if (serverPlayer.tickCount % 5 == 0)
+                PooSavedData.syncToClient(serverPlayer);
             Upgrade.withPurchasedUpgrades(serverPlayer, (upgradeHolder, bought) -> {
                 Upgrade upgrade = upgradeHolder.value();
                 upgrade.onTick(bought, serverPlayer);

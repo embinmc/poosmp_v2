@@ -247,7 +247,7 @@ public interface PooItems {
         return register(key, new Item.Properties()
                 .stacksTo(99)
                 .component(DataComponents.LORE, new ItemLore(List.of(
-                        Component.literal("Worth %,.2f".formatted(amount)).withStyle(ChatFormatting.GREEN)
+                        Component.literal("Worth $%,.2f".formatted(amount)).withStyle(ChatFormatting.RESET, ChatFormatting.GREEN)
                 )))
                 .rarity(rarity)
         );

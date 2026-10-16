@@ -27,7 +27,7 @@
     "minecraft:visual/water_fog_color": "#050533",
     "minecraft:visual/fog_color": "#0f0f16",
     "minecraft:visual/sky_color": "#271a5b",
-    "minecraft:visual/sky_light_color": "#7a7aff",
+    "minecraft:visual/sky_light_color": "#7c7cff",
     "minecraft:visual/sky_light_factor": 0.64,
     "minecraft:gameplay/sky_light_level": 0.28,
     "minecraft:gameplay/respawn_anchor_works": true,

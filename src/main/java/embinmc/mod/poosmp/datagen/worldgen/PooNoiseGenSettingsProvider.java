@@ -1,5 +1,6 @@
 package embinmc.mod.poosmp.datagen.worldgen;
 
+import embinmc.mod.poosmp.block.PooBlocks;
 import embinmc.mod.poosmp.datagen.PooCodecDataProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.core.HolderGetter;
@@ -8,6 +9,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.OverworldBiomeBuilder;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.*;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
@@ -19,7 +21,7 @@ public class PooNoiseGenSettingsProvider extends PooCodecDataProvider<NoiseGener
     public static final ResourceKey<DensityFunction> SHIFT_X = createKey("shift_x");
     public static final ResourceKey<DensityFunction> SHIFT_Z = createKey("shift_z");
     public static final ResourceKey<DensityFunction> Y = createKey("y");
-    private static final ResourceKey<DensityFunction> SLOPED_CHEESE = createKey("overworld/sloped_cheese");
+    public static final ResourceKey<DensityFunction> SLOPED_CHEESE = createKey("overworld/sloped_cheese");
 
     public PooNoiseGenSettingsProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(dataOutput, registriesFuture, Registries.NOISE_SETTINGS, NoiseGeneratorSettings.DIRECT_CODEC);
@@ -27,19 +29,24 @@ public class PooNoiseGenSettingsProvider extends PooCodecDataProvider<NoiseGener
 
     @Override
     public void generate(HolderLookup.@NonNull Provider provider) {
-        this.provider.accept(PooWorldConsts.MODIFIED_OVERWORLD.identifier(), modifiedOverworld(provider));
+        this.register(PooWorldConsts.MODIFIED_OVERWORLD, modifiedOverworld(provider, Blocks.STONE, PooSurfaceRules.modifiedOverworld(true)));
+        this.register(PooWorldConsts.MISSINGNO, modifiedOverworld(provider, PooBlocks.MISSINGNO_BLOCK, PooSurfaceRules.bedrockFloor()));
     }
 
-    private static NoiseGeneratorSettings modifiedOverworld(HolderLookup.@NonNull Provider provider) {
+    public void register(ResourceKey<NoiseGeneratorSettings> key, NoiseGeneratorSettings settings) {
+        this.provider.accept(key.identifier(), settings);
+    }
+
+    private static NoiseGeneratorSettings modifiedOverworld(HolderLookup.@NonNull Provider provider, Block baseBlock, SurfaceRules.RuleSource surfaceRule) {
         HolderLookup.RegistryLookup<DensityFunction> functions = provider.lookupOrThrow(Registries.DENSITY_FUNCTION);
         DensityFunction offset = getFunction(functions, NoiseRouterData.OFFSET);
         DensityFunction factor = getFunction(functions, NoiseRouterData.FACTOR);
         return new NoiseGeneratorSettings(
                 PooWorldConsts.NOISE_SETTINGS,
-                Blocks.STONE.defaultBlockState(),
+                baseBlock.defaultBlockState(),
                 Blocks.WATER.defaultBlockState(),
                 noCaves(functions, provider.lookupOrThrow(Registries.NOISE), preliminarySurfaceLevel(offset, factor)),
-                PooSurfaceRules.modifiedOverworld(true),
+                surfaceRule,
                 new OverworldBiomeBuilder().spawnTarget(),
                 63, false, false, false, false
         );
@@ -72,36 +79,37 @@ public class PooNoiseGenSettingsProvider extends PooCodecDataProvider<NoiseGener
                 ),
                 getFunction(functions, NoiseRouterData.RIDGES),
                 fullNoise,
-                DensityFunctions.map(
-                        DensityFunctions.mul(
-                                DensityFunctions.constant(0.64D),
-                                DensityFunctions.interpolated(
-                                        DensityFunctions.blendDensity(
+                finalDensity(functions),
+                DensityFunctions.zero(),
+                DensityFunctions.zero(),
+                DensityFunctions.zero()
+        );
+    }
+
+    public static DensityFunction finalDensity(final HolderGetter<DensityFunction> functions) {
+        return DensityFunctions.mul(
+                DensityFunctions.constant(0.64D),
+                DensityFunctions.interpolated(
+                        DensityFunctions.blendDensity(
+                                DensityFunctions.add(
+                                        DensityFunctions.constant(0.1171875),
+                                        DensityFunctions.mul(
+                                                DensityFunctions.yClampedGradient(-64, -40, 0, 1),
                                                 DensityFunctions.add(
-                                                        DensityFunctions.constant(0.1171875),
+                                                        DensityFunctions.constant(-0.1171875),
                                                         DensityFunctions.mul(
-                                                                DensityFunctions.yClampedGradient(-64, -40, 0, 1),
+                                                                DensityFunctions.yClampedGradient(240, 256, 1, 0),
                                                                 DensityFunctions.add(
-                                                                        DensityFunctions.constant(-0.1171875),
-                                                                        DensityFunctions.mul(
-                                                                                DensityFunctions.yClampedGradient(240, 256, 1, 0),
-                                                                                DensityFunctions.add(
-                                                                                        DensityFunctions.constant(0.078125),
-                                                                                        getFunction(functions, SLOPED_CHEESE)
-                                                                                )
-                                                                        )
+                                                                        DensityFunctions.constant(0.078125),
+                                                                        getFunction(functions, SLOPED_CHEESE)
                                                                 )
                                                         )
                                                 )
                                         )
                                 )
-                        ),
-                        DensityFunctions.Mapped.Type.SQUEEZE
-                ),
-                DensityFunctions.zero(),
-                DensityFunctions.zero(),
-                DensityFunctions.zero()
-        );
+                        )
+                )
+        ).squeeze();
     }
 
     private static ResourceKey<DensityFunction> createKey(final String name) {
@@ -138,7 +146,7 @@ public class PooNoiseGenSettingsProvider extends PooCodecDataProvider<NoiseGener
                 ),
                 DensityFunctions.constant(-0.390625)
         );
-        return DensityFunctions.findTopSurface(density, upperBound, -64, PooWorldConsts.NOISE_SETTINGS.getCellHeight());
+        return DensityFunctions.findTopSurface(density, upperBound, -128, PooWorldConsts.NOISE_SETTINGS.getCellHeight());
     }
 
     private static DensityFunction remap(DensityFunction input, double fromMin, double fromMax, double toMin, double toMax) {

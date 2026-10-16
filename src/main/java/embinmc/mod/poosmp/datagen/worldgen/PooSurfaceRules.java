@@ -52,9 +52,12 @@ public interface PooSurfaceRules {
                         SurfaceRules.isBiome(PooBiomes.DIMWORLD_GRAVELY_FIELDS),
                         SurfaceRules.sequence(
                                 SurfaceRules.ifTrue(surfaceNoiseAbove(1.2), surfaceGravel),
-                                SurfaceRules.ifTrue(surfaceNoiseAbove(0.8), ROOTED_DIRT),
-                                surfaceLand
+                                SurfaceRules.ifTrue(surfaceNoiseAbove(0.8), ROOTED_DIRT)
                         )
+                ),
+                SurfaceRules.ifTrue(
+                        SurfaceRules.isBiome(PooBiomes.DIMWORLD_BARRENS),
+                        SurfaceRules.ifTrue(surfaceNoiseAbove(1.1), BLACKSTONE)
                 ),
                 DIRT
         );
@@ -99,14 +102,18 @@ public interface PooSurfaceRules {
 
         return SurfaceRules.sequence(
                 SurfaceRules.ifTrue(SurfaceRules.abovePreliminarySurface(), surfaceFinal), // final surface
-                SurfaceRules.ifTrue(
-                        SurfaceRules.verticalGradient("bedrock_floor", VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(5)),
-                        BEDROCK
-                ),
+                bedrockFloor(),
                 SurfaceRules.ifTrue(
                         SurfaceRules.verticalGradient("deepslate", VerticalAnchor.absolute(-25), VerticalAnchor.absolute(-20)),
                         DEEPSLATE
                 )
+        );
+    }
+
+    static RuleSource bedrockFloor() {
+        return SurfaceRules.ifTrue(
+                SurfaceRules.verticalGradient("bedrock_floor", VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(5)),
+                BEDROCK
         );
     }
 

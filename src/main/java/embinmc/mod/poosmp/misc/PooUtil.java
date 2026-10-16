@@ -5,6 +5,7 @@ import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import embinmc.mod.poosmp.economy.ItemValue;
 import embinmc.mod.poosmp.economy.ShopCategory;
+import embinmc.mod.poosmp.item.component.PooComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.*;
 import net.minecraft.core.component.DataComponents;
@@ -144,7 +145,12 @@ public class PooUtil {
         } else return HashMap.newHashMap(16);
     }
 
+    @SuppressWarnings({"DataFlowIssue"})
     public static Optional<ItemValue> getValueOfStack(ItemStack itemStack, HolderLookup.Provider registries) {
+        if (itemStack.has(PooComponents.CHEQUE)) {
+            double value = itemStack.get(PooComponents.CHEQUE);
+            return Optional.of(new ItemValue(value, OptionalDouble.of(value)));
+        }
         Optional<? extends HolderLookup.RegistryLookup<ShopCategory>> optional = registries.lookup(PooRegistries.Keys.SHOP_CATEGORY);
         if (optional.isEmpty())
             return Optional.empty();

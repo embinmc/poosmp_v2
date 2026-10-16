@@ -203,6 +203,7 @@ public interface PooItems {
 
     // 7.0+ items
     Item DECODE_EXCEPTION_DUMMY = register(PooItemKeys.DECODE_EXCEPTION_DUMMY);
+    Item CHEQUE = register(PooItemKeys.CHEQUE);
 
     private static Item warpStick(ResourceKey<Item> key, ResourceKey<Level> dimension) {
         MobEffectInstance effect = new MobEffectInstance(DimensionWarperComponent.DEFAULT_EFFECT);

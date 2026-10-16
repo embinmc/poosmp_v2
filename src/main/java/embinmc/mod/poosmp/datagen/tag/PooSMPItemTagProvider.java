@@ -124,13 +124,14 @@ public class PooSMPItemTagProvider extends FabricTagProvider.ItemTagProvider {
         ;
 
         this.builder(PooItemTags.BANK_NOTES)
-                .add(PooItemKeys.ONE_DOLLAR_BILL)
-                .add(PooItemKeys.TWO_DOLLAR_BILL)
-                .add(PooItemKeys.FIVE_DOLLAR_BILL)
-                .add(PooItemKeys.TEN_DOLLAR_BILL)
-                .add(PooItemKeys.TWENTY_FIVE_DOLLAR_BILL)
-                .add(PooItemKeys.FIFTY_DOLLAR_BILL)
-                .add(PooItemKeys.HUNDRED_DOLLAR_BILL)
+            .add(PooItemKeys.ONE_DOLLAR_BILL)
+            .add(PooItemKeys.TWO_DOLLAR_BILL)
+            .add(PooItemKeys.FIVE_DOLLAR_BILL)
+            .add(PooItemKeys.TEN_DOLLAR_BILL)
+            .add(PooItemKeys.TWENTY_FIVE_DOLLAR_BILL)
+            .add(PooItemKeys.FIFTY_DOLLAR_BILL)
+            .add(PooItemKeys.HUNDRED_DOLLAR_BILL)
+            .add(PooItemKeys.CHEQUE)
         ;
         this.builder(PooItemTags.DOESNT_SHOW_SELL_VALUE_TOOLTIP)
                 .addTag(PooItemTags.BANK_NOTES)

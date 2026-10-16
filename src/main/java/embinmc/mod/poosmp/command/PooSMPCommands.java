@@ -3,8 +3,13 @@ package embinmc.mod.poosmp.command;
 import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.DoubleArgumentType;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.builder.ArgumentBuilder;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import embinmc.mod.poosmp.economy.ItemValue;
+import embinmc.mod.poosmp.item.PooItems;
 import embinmc.mod.poosmp.item.component.PooComponents;
 import embinmc.mod.poosmp.misc.*;
 import net.minecraft.ChatFormatting;
@@ -190,6 +195,32 @@ public interface PooSMPCommands {
             });
             return totalDeaths;
         })));
+
+        dispatcher.register(Commands.literal("withdraw")
+            .then(Commands.literal("cheque")
+                .then(
+                    Commands.argument("amount", DoubleArgumentType.doubleArg(0.01D))
+                        .executes(context -> {
+                            double amount = PooUtil.roundTwo(DoubleArgumentType.getDouble(context, "amount"));
+                            ItemStack cheque = new ItemStack(PooItems.CHEQUE, 1);
+                            cheque.set(PooComponents.CHEQUE, amount);
+                            ServerPlayer player = context.getSource().getPlayerOrException();
+                            ServerLevel level = player.level();
+                            level.addFreshEntity(new ItemEntity(level, player.getX(), player.getY(), player.getZ(), cheque));
+                            return 1;
+                        })
+                )
+            )
+            .then(Commands.literal("money")
+                .then(withdrawMoneyItem("1", PooItems.ONE_DOLLAR_BILL))
+                .then(withdrawMoneyItem("2", PooItems.TWO_DOLLAR_BILL))
+                .then(withdrawMoneyItem("5", PooItems.FIVE_DOLLAR_BILL))
+                .then(withdrawMoneyItem("10", PooItems.TEN_DOLLAR_BILL))
+                .then(withdrawMoneyItem("25", PooItems.TWENTY_FIVE_DOLLAR_BILL))
+                .then(withdrawMoneyItem("50", PooItems.FIFTY_DOLLAR_BILL))
+                .then(withdrawMoneyItem("100", PooItems.HUNDRED_DOLLAR_BILL))
+            )
+        );
     }
 
     private static int getDeathCount(CommandContext<CommandSourceStack> context, NameAndId player) {
@@ -205,6 +236,21 @@ public interface PooSMPCommands {
         //PooSMPMod.LOGGER.info("Trying to get stats for player {} ({})", player.name(), player.id());
         ServerStatsCounter stats = pooPlayerList.poosmp$getPlayerStats(new GameProfile(player.id(), player.name()));
         return stats.getValue(Stats.CUSTOM.get(Stats.DEATHS));
+    }
+
+    private static ArgumentBuilder<CommandSourceStack, LiteralArgumentBuilder<CommandSourceStack>> withdrawMoneyItem(String name, Item moneyItem) {
+        var com = Commands.literal(name).executes(c -> getMoneyItem(c.getSource(), moneyItem));
+        return com.then(Commands.argument("amount", IntegerArgumentType.integer(1, 99)).executes(context -> {
+            final int amount = IntegerArgumentType.getInteger(context, "amount");
+            int remaining = amount;
+            while (remaining > 0) {
+                int result = getMoneyItem(context.getSource(), moneyItem);
+                remaining--;
+                if (result < 1)
+                    return result;
+            }
+            return amount;
+        }));
     }
 
     private static int getMoneyItem(CommandSourceStack context, Item moneyItem) {

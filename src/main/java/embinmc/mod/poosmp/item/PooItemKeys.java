@@ -107,5 +107,6 @@ public interface PooItemKeys {
     ResourceKey<Item> ANNOYANCE_DEHEED =       create(PooBlockKeys.ANNOYANCE_DEHEED);
 
     // items post 7.0
-    ResourceKey<Item> DECODE_EXCEPTION_DUMMY =        create("decode_exception_dummy");
+    ResourceKey<Item> DECODE_EXCEPTION_DUMMY =  create("decode_exception_dummy");
+    ResourceKey<Item> CHEQUE =                  create("cheque");
 }

@@ -125,6 +125,7 @@ public class PooSMPModelProvider extends FabricModelProvider {
         gen.generateFlatItem(PooItems.MAGIC_DEVICE, ModelTemplates.FLAT_HANDHELD_ITEM);
         gen.generateFlatItem(PooItems.NULL_SHARD, ModelTemplates.FLAT_HANDHELD_ITEM);
         gen.generateFlatItem(PooItems.ITEM_FORCING_BACKPACK_UPGRADE, ModelTemplates.FLAT_HANDHELD_ITEM);
+        gen.generateFlatItem(PooItems.CHEQUE, ModelTemplates.FLAT_HANDHELD_ITEM);
     }
 
     private void generateTrimmedTools(@NonNull ItemModelGenerators gen) {

@@ -74,4 +74,5 @@ public interface PooComponents {
     DataComponentType<WeddingRing> WEDDING_RING = registerBasic("wedding_ring", WeddingRing.CODEC, WeddingRing.STREAM_CODEC);
     DataComponentType<Unit> FORCE_MARRIED = registerUnit("force_married");
     DataComponentType<DecodeExceptionComponent> DECODE_EXCEPTION = registerBasic("decode_exception", DecodeExceptionComponent.CODEC, DecodeExceptionComponent.STREAM_CODEC);
+    DataComponentType<Double> CHEQUE = registerBasic("cheque", Codec.doubleRange(0.01D, Double.MAX_VALUE), ByteBufCodecs.DOUBLE);
 }

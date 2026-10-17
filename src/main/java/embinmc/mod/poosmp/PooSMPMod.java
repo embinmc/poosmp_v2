@@ -7,10 +7,7 @@ import embinmc.mod.poosmp.item.PooItemGroups;
 import embinmc.mod.poosmp.item.PooItems;
 import embinmc.mod.poosmp.item.component.ComponentApplicationRecipe;
 import embinmc.mod.poosmp.item.component.PooComponents;
-import embinmc.mod.poosmp.misc.PooRegistries;
-import embinmc.mod.poosmp.misc.PooSMPGameRules;
-import embinmc.mod.poosmp.misc.PooSMPPoi;
-import embinmc.mod.poosmp.misc.PooSoundEvents;
+import embinmc.mod.poosmp.misc.*;
 import embinmc.mod.poosmp.networking.PooMessages;
 import net.fabricmc.api.ModInitializer;
 
@@ -54,6 +51,8 @@ public class PooSMPMod implements ModInitializer {
 		CommandRegistrationCallback.EVENT.register((dispatcher, commandBuildContext, commandSelection) -> {
 			PooSMPCommands.register(dispatcher, commandBuildContext);
 		});
+		PooSMPVillagers.init();
+		TradeConstructors.register_villager_trades();
 	}
 
 	public static Identifier id(String path) {

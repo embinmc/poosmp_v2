@@ -10,9 +10,8 @@
     "minecraft:copper_block": 22.5,
     "minecraft:copper_ingot": 2.5,
     "minecraft:copper_nugget": 0.28,
-    "minecraft:diamond": 9.0,
-    "minecraft:diamond_block": 81.0,
-    "minecraft:echo_shard": 64.0,
+    "minecraft:diamond": 18.0,
+    "minecraft:diamond_block": 162.0,
     "minecraft:emerald": 5.0,
     "minecraft:emerald_block": 45.0,
     "minecraft:feather": 0.04,
@@ -44,6 +43,6 @@
     "minecraft:string": 0.06,
     "minecraft:waxed_copper_block": 23.0,
     "minecraft:waxed_oxidized_copper": 27.0,
-    "poosmp:diamond_shard": 1.0
+    "poosmp:diamond_shard": 2.0
   }
 }

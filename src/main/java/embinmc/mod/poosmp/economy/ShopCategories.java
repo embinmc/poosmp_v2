@@ -40,7 +40,7 @@ public interface ShopCategories {
             @Override
             public void bootstrap() {
                 double emeraldPrice = 5.00D;
-                double diamondPrice = 9.00D;
+                double diamondPrice = 18.00D;
                 double ironPrice = 4.50D;
                 double goldPrice = 7.00D;
                 double copperPrice = 2.50D;
@@ -71,7 +71,6 @@ public interface ShopCategories {
                         .setVal(Items.NETHERITE_SCRAP, netheriteScrapPrice)
                         .setVal(Items.NETHERITE_INGOT, (netheriteScrapPrice * 4) + (goldPrice * 4))
                         .setVal(Items.NETHERITE_BLOCK, ((netheriteScrapPrice * 4) + (goldPrice * 4)) * 9)
-                        .setVal(Items.ECHO_SHARD, 64)
                         .setVal(Items.REDSTONE, 1)
                         .setVal(Items.REDSTONE_BLOCK, 9)
                         .setVal(Items.STICK, 0.02)
@@ -100,30 +99,37 @@ public interface ShopCategories {
                         .build();
                 double mossPrice = 0.3;
                 this.category(NATURE, "Nature", Items.GRASS_BLOCK)
-                        .setVal(Items.GRASS_BLOCK, 0.06)
-                        .setVal(Items.DIRT, 0.04)
-                        .setVal(ItemTags.LOGS, 0.40)
-                        .setVal(ItemTags.PLANKS, 0.10)
-                        .setVal(Items.STONE, stonePrice)
-                        .setVal(Items.COBBLESTONE, stonePrice)
-                        .setVal(Items.ANDESITE, stonePrice)
-                        .setVal(Items.DIORITE, stonePrice)
-                        .setVal(Items.GRANITE, stonePrice)
-                        .setVal(Items.DEEPSLATE, stonePrice * 2)
-                        .setVal(Items.COBBLED_DEEPSLATE, stonePrice * 2)
-                        .setVal(Items.MOSS_BLOCK, mossPrice)
-                        .setVal(Items.PALE_MOSS_BLOCK, mossPrice)
-                        .setVal(PooItems.DIM_MOSS_BLOCK, mossPrice)
-                        .setVal(ItemTags.SAND, 0.10)
-                        .setVal(Items.GRAVEL, 0.16)
-                        .setVal(Items.LEATHER, 0.10)
-                        .setVal(Items.SUGAR_CANE, 0.10)
-                        .build();
+                    .setVal(Items.GRASS_BLOCK, 0.06)
+                    .setVal(Items.DIRT, 0.04)
+                    .setVal(ItemTags.LOGS, 0.40)
+                    .setVal(ItemTags.PLANKS, 0.10)
+                    .setVal(Items.STONE, stonePrice)
+                    .setVal(Items.COBBLESTONE, stonePrice)
+                    .setVal(Items.ANDESITE, stonePrice)
+                    .setVal(Items.DIORITE, stonePrice)
+                    .setVal(Items.GRANITE, stonePrice)
+                    .setVal(Items.DEEPSLATE, stonePrice * 2)
+                    .setVal(Items.COBBLED_DEEPSLATE, stonePrice * 2)
+                    .setVal(Items.MOSS_BLOCK, mossPrice)
+                    .setVal(Items.PALE_MOSS_BLOCK, mossPrice)
+                    .setVal(PooItems.DIM_MOSS_BLOCK, mossPrice)
+                    .setVal(Items.SAND, 0.10)
+                    .setVal(Items.RED_SAND, 0.20)
+                    .setVal(Items.GRAVEL, 0.16)
+                    .setVal(Items.LEATHER, 0.10)
+                    .setVal(Items.SUGAR_CANE, 0.10)
+                    .setVal(Items.SHROOMLIGHT, 0.2)
+                    .setVal(Items.GLOWSTONE, 0.1)
+                    .setVal(Items.NETHERRACK, 0.02)
+                    .setVal(Items.BASALT, 0.06)
+                    .setVal(Items.BLACKSTONE, 0.06)
+                    .build();
                 this.category(MISC, "Misc.", Items.TRIAL_KEY)
                     .setVal(PooItems.ANNOYANCE_SUS, 0.5)
                     .setVal(Items.TRIAL_KEY, 50, 40)
                     .setVal(Items.OMINOUS_TRIAL_KEY, 200, 180)
                     .setVal(Items.ENDER_EYE, 32)
+                    .setVal(Items.ECHO_SHARD, 64)
                     .build();
                 this.category(DYES, "Dyes & Colored Blocks", Items.RED_DYE)
                         .setVal(Items.WHITE_DYE,      0.02)

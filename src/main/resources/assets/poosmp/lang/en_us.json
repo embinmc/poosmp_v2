@@ -1,8 +1,10 @@
 {
   "poosmp.creative_snitch": "%s took a %s from Creative Mode or /give",
   "poosmp.requested_disc": "Requested by %s",
-  "poosmp.biome_stick.diameter": "Diameter: %s",
+  "poosmp.biome_stick.diameter": "Horizontal Diameter: %s",
+  "poosmp.biome_stick.diameter_vertical": "Vertical Diameter: %s",
   "poosmp.biome_stick.current_biome": "Selected biome: %s",
+  "poosmp.biome_stick.crouch_tip": "Hold %s while using to configure!",
   "poosmp.mob_stick.entity": "Entity: %s",
   "trim_pattern.poosmp.fill": "Fill Armor Trim",
   "item.poosmp.poop_stick": "Poop Stick!",

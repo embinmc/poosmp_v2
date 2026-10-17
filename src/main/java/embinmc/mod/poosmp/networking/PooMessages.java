@@ -1,6 +1,7 @@
 package embinmc.mod.poosmp.networking;
 
 import embinmc.mod.poosmp.networking.c2s.BuyUpgradePacket;
+import embinmc.mod.poosmp.networking.c2s.ModifyBiomeStickPacket;
 import embinmc.mod.poosmp.networking.c2s.PurchaseItemPacket;
 import embinmc.mod.poosmp.networking.c2s.SellUpgradePacket;
 import embinmc.mod.poosmp.networking.s2c.DataSyncPacket;
@@ -17,6 +18,7 @@ public class PooMessages {
         PayloadTypeRegistry.playC2S().register(BuyUpgradePacket.TYPE, BuyUpgradePacket.CODEC);
         PayloadTypeRegistry.playC2S().register(SellUpgradePacket.TYPE, SellUpgradePacket.CODEC);
         PayloadTypeRegistry.playC2S().register(PurchaseItemPacket.TYPE, PurchaseItemPacket.CODEC);
+        PayloadTypeRegistry.playC2S().register(ModifyBiomeStickPacket.TYPE, ModifyBiomeStickPacket.CODEC);
     }
 
     public static void registerS2C() {
@@ -27,5 +29,6 @@ public class PooMessages {
         ServerPlayNetworking.registerGlobalReceiver(BuyUpgradePacket.TYPE, BuyUpgradePacket::receiver);
         ServerPlayNetworking.registerGlobalReceiver(SellUpgradePacket.TYPE, SellUpgradePacket::receiver);
         ServerPlayNetworking.registerGlobalReceiver(PurchaseItemPacket.TYPE, PurchaseItemPacket::receiver);
+        ServerPlayNetworking.registerGlobalReceiver(ModifyBiomeStickPacket.TYPE, ModifyBiomeStickPacket::receiver);
     }
 }

@@ -30,8 +30,8 @@ import org.jspecify.annotations.NonNull;
 import java.util.List;
 
 public class ShopScreen extends Screen {
-    protected final HeaderAndFooterLayout layout = new HeaderAndFooterLayout(this);
-    protected final BalanceWidget widget = new BalanceWidget(4, 16);
+    protected HeaderAndFooterLayout layout;
+    protected BalanceWidget widget;
 
     public ShopScreen() {
         super(Component.literal("Shop"));
@@ -39,6 +39,8 @@ public class ShopScreen extends Screen {
 
     @Override
     protected void init() {
+        this.layout = new HeaderAndFooterLayout(this);
+        this.widget = new BalanceWidget(4, 16);
         this.layout.addToFooter(Button.builder(Component.literal("Exit"), button -> this.onClose()).width(160).build());
         this.layout.addTitleHeader(this.title, this.font);
         if (this.minecraft.player != null) {
@@ -47,17 +49,12 @@ public class ShopScreen extends Screen {
         }
         this.layout.visitWidgets(this::addRenderableWidget);
         this.addRenderableWidget(this.widget);
-        this.repositionElements();
+        this.layout.arrangeElements();
     }
 
     @Override
     public boolean isPauseScreen() {
         return false;
-    }
-
-    @Override
-    protected void repositionElements() {
-        this.layout.arrangeElements();
     }
 
     @Override

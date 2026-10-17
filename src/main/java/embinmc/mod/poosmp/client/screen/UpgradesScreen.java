@@ -29,6 +29,7 @@ public class UpgradesScreen extends OptionsSubScreen {
         this.addRenderableWidget(this.upgradesList);
         this.widget = new BalanceWidget(4, 4);
         this.addRenderableWidget(this.widget);
+        this.layout.arrangeElements();
     }
 
     @Override
@@ -51,6 +52,5 @@ public class UpgradesScreen extends OptionsSubScreen {
         this.widget.setY(22);
         super.render(context, mouseX, mouseY, delta);
         this.upgradesList.update();
-        this.layout.arrangeElements();
     }
 }

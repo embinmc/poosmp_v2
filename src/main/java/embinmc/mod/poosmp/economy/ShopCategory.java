@@ -3,6 +3,7 @@ package embinmc.mod.poosmp.economy;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import embinmc.mod.poosmp.PooSMPMod;
 import embinmc.mod.poosmp.misc.PooUtil;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
@@ -14,6 +15,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.jspecify.annotations.Nullable;
 
+import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -41,17 +43,22 @@ public class ShopCategory {
     }
 
     public @Nullable ItemValue getItemValue(Holder<Item> itemHolder) {
-        ItemValue value = this.priceCache.computeIfAbsent(itemHolder, item -> {
-            for (HolderSet<Item> items: this.priceMap.keySet()) {
-                if (items.contains(itemHolder))
-                    return this.priceMap.get(items);
-            }
+        try {
+            ItemValue value = this.priceCache.computeIfAbsent(itemHolder, item -> {
+                for (HolderSet<Item> items: this.priceMap.keySet()) {
+                    if (items.contains(itemHolder))
+                        return this.priceMap.get(items);
+                }
+                return null;
+            });
+            // it won't be put in automatically if it's null
+            if (!this.priceCache.containsKey(itemHolder) && value == null)
+                this.priceCache.put(itemHolder, null);
+            return value;
+        } catch (ConcurrentModificationException e) {
+            PooSMPMod.LOGGER.error("Concurrent modification exception occurred when trying to get item value of {}", itemHolder.getRegisteredName());
             return null;
-        });
-        // it won't be put in automatically if it's null
-        if (!this.priceCache.containsKey(itemHolder) && value == null)
-            this.priceCache.put(itemHolder, null);
-        return value;
+        }
     }
 
     public Set<HolderSet<Item>> keys() {

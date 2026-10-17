@@ -2,6 +2,7 @@
   "display_icon": "minecraft:trial_key",
   "display_name": "Misc.",
   "price_map": {
+    "minecraft:ender_eye": 32.0,
     "minecraft:ominous_trial_key": {
       "price": 200.0,
       "sell_value": 180.0

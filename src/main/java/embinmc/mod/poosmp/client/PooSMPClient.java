@@ -3,6 +3,7 @@ package embinmc.mod.poosmp.client;
 import com.mojang.blaze3d.platform.InputConstants;
 import embinmc.mod.poosmp.PooSMPMod;
 import embinmc.mod.poosmp.block.PooBlocks;
+import embinmc.mod.poosmp.client.screen.BiomeStickScreen;
 import embinmc.mod.poosmp.client.screen.ShopScreen;
 import embinmc.mod.poosmp.client.screen.UpgradesScreen;
 import embinmc.mod.poosmp.misc.PooSavedData;
@@ -49,6 +50,13 @@ public class PooSMPClient implements ClientModInitializer {
         "key.poosmp.open_shop_screen",
         InputConstants.Type.KEYSYM,
         GLFW.GLFW_KEY_MINUS,
+        POOSMP_KEYS
+    ));
+
+    public static KeyMapping testKeybind = KeyBindingHelper.registerKeyBinding(new KeyMapping(
+        "key.poosmp.test_keybind",
+        InputConstants.Type.KEYSYM,
+        GLFW.GLFW_KEY_KP_1,
         POOSMP_KEYS
     ));
 
@@ -101,6 +109,9 @@ public class PooSMPClient implements ClientModInitializer {
             }
             while (openShopScreen.consumeClick()) {
                 client.setScreen(new ShopScreen());
+            }
+            while (testKeybind.consumeClick()) {
+                client.setScreen(new BiomeStickScreen());
             }
         });
     }

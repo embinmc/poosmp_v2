@@ -50,7 +50,7 @@ public class TradeConstructors {
         TradeOfferHelper.registerVillagerOffers(PooSMPVillagers.BANKER_KEY, 3, factories -> {
             factories.add(trade(PooBlocks.DRAGON_ANNOYANCE, 8, PooItems.FIVE_DOLLAR_BILL, 3));
             factories.add(enchantedBook(BANKER_MID, PooItems.HUNDRED_DOLLAR_BILL, 1));
-            factories.add(trade(Items.DIAMOND, 1, PooItems.ONE_DOLLAR_BILL, 18));
+            factories.add(trade(Items.BLUE_ICE, 1, PooItems.ONE_DOLLAR_BILL, 18));
             factories.add(trade(Items.ECHO_SHARD, 1, PooItems.ONE_DOLLAR_BILL, 64));
         });
         TradeOfferHelper.registerVillagerOffers(PooSMPVillagers.BANKER_KEY, 4, factories -> {

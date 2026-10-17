@@ -31,6 +31,7 @@ import java.util.List;
 
 public class ShopScreen extends Screen {
     protected final HeaderAndFooterLayout layout = new HeaderAndFooterLayout(this);
+    protected final BalanceWidget widget = new BalanceWidget(4, 16);
 
     public ShopScreen() {
         super(Component.literal("Shop"));
@@ -40,14 +41,12 @@ public class ShopScreen extends Screen {
     protected void init() {
         this.layout.addToFooter(Button.builder(Component.literal("Exit"), button -> this.onClose()).width(160).build());
         this.layout.addTitleHeader(this.title, this.font);
-        this.layout.addToHeader(new BalanceWidget(4, 16));
-        this.layout.setFooterHeight(28);
-        this.layout.setHeaderHeight(32);
         if (this.minecraft.player != null) {
             RegistryAccess registries = this.minecraft.player.registryAccess();
             this.layout.addToContents(new ShopCategoryWidget(this.minecraft, registries));
         }
         this.layout.visitWidgets(this::addRenderableWidget);
+        this.addWidget(this.widget);
         this.repositionElements();
     }
 
@@ -59,6 +58,13 @@ public class ShopScreen extends Screen {
     @Override
     protected void repositionElements() {
         this.layout.arrangeElements();
+    }
+
+    @Override
+    public void render(@NonNull GuiGraphics guiGraphics, int i, int j, float f) {
+        this.widget.setX(guiGraphics.guiWidth() / 2);
+        this.widget.setY(22);
+        super.render(guiGraphics, i, j, f);
     }
 
     private class ShopCategoryWidget extends ContainerObjectSelectionList<ShopCategoryWidget.AbstractEntry> {

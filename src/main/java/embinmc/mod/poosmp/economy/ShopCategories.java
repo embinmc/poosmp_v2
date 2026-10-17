@@ -120,10 +120,11 @@ public interface ShopCategories {
                         .setVal(Items.SUGAR_CANE, 0.10)
                         .build();
                 this.category(MISC, "Misc.", Items.TRIAL_KEY)
-                        .setVal(PooItems.ANNOYANCE_SUS, 0.5)
-                        .setVal(Items.TRIAL_KEY, 50, 40)
-                        .setVal(Items.OMINOUS_TRIAL_KEY, 200, 180)
-                        .build();
+                    .setVal(PooItems.ANNOYANCE_SUS, 0.5)
+                    .setVal(Items.TRIAL_KEY, 50, 40)
+                    .setVal(Items.OMINOUS_TRIAL_KEY, 200, 180)
+                    .setVal(Items.ENDER_EYE, 32)
+                    .build();
                 this.category(DYES, "Dyes & Colored Blocks", Items.RED_DYE)
                         .setVal(Items.WHITE_DYE,      0.02)
                         .setVal(Items.LIGHT_GRAY_DYE, 0.02)

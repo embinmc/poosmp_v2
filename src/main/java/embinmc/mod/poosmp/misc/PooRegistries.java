@@ -1,6 +1,5 @@
 package embinmc.mod.poosmp.misc;
 
-import com.mojang.serialization.MapCodec;
 import embinmc.mod.poosmp.PooSMPMod;
 import embinmc.mod.poosmp.annoyance.Annoyance;
 import embinmc.mod.poosmp.annoyance.Annoyances;

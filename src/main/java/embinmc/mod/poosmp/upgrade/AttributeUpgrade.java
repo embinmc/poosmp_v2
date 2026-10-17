@@ -63,7 +63,7 @@ public class AttributeUpgrade extends AbstractUpgrade {
         AttributeInstance instance = player.getAttributes().getInstance(entry.attribute());
         if (instance == null)
             return;
-        instance.addTransientModifier(entry.modifier());
+        instance.addPermanentModifier(entry.modifier());
         Identifier attributeId = entry.attribute().unwrapKey().orElseThrow().identifier();
         PooSMPMod.LOGGER.info("Added attribute {}@{} to {}", attributeId, entry.modifier().id(), player.getPlainTextName());
     }

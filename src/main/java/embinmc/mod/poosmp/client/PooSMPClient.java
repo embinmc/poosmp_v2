@@ -3,6 +3,7 @@ package embinmc.mod.poosmp.client;
 import com.mojang.blaze3d.platform.InputConstants;
 import embinmc.mod.poosmp.PooSMPMod;
 import embinmc.mod.poosmp.block.PooBlocks;
+import embinmc.mod.poosmp.client.screen.ShopScreen;
 import embinmc.mod.poosmp.client.screen.UpgradesScreen;
 import embinmc.mod.poosmp.misc.PooSavedData;
 import embinmc.mod.poosmp.networking.PooMessages;
@@ -41,6 +42,13 @@ public class PooSMPClient implements ClientModInitializer {
         "key.poosmp.open_upgrades_screen",
         InputConstants.Type.KEYSYM,
         GLFW.GLFW_KEY_0,
+        POOSMP_KEYS
+    ));
+
+    public static KeyMapping openShopScreen = KeyBindingHelper.registerKeyBinding(new KeyMapping(
+        "key.poosmp.open_shop_screen",
+        InputConstants.Type.KEYSYM,
+        GLFW.GLFW_KEY_MINUS,
         POOSMP_KEYS
     ));
 
@@ -90,6 +98,9 @@ public class PooSMPClient implements ClientModInitializer {
         ClientTickEvents.END_CLIENT_TICK.register(PooSMPMod.id("open_upgrades_screen"), client -> {
             while (openUpgradesScreen.consumeClick()) {
                 client.setScreen(new UpgradesScreen(client.screen));
+            }
+            while (openShopScreen.consumeClick()) {
+                client.setScreen(new ShopScreen());
             }
         });
     }

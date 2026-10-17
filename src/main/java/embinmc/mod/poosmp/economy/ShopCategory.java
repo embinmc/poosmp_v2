@@ -16,6 +16,7 @@ import org.jspecify.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class ShopCategory {
     public static final MapCodec<ShopCategory> MAP_CODEC = RecordCodecBuilder.mapCodec(sc -> sc.group(
@@ -51,6 +52,10 @@ public class ShopCategory {
         if (!this.priceCache.containsKey(itemHolder) && value == null)
             this.priceCache.put(itemHolder, null);
         return value;
+    }
+
+    public Set<HolderSet<Item>> keys() {
+        return this.priceMap.keySet();
     }
 
     public @Nullable ItemValue getItemValue(ItemStack stack) {

@@ -46,7 +46,7 @@ public class ShopScreen extends Screen {
             this.layout.addToContents(new ShopCategoryWidget(this.minecraft, registries));
         }
         this.layout.visitWidgets(this::addRenderableWidget);
-        this.addWidget(this.widget);
+        this.addRenderableWidget(this.widget);
         this.repositionElements();
     }
 

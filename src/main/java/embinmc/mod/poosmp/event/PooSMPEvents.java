@@ -11,13 +11,18 @@ import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.item.v1.ComponentTooltipAppenderRegistry;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.networking.v1.EntityTrackingEvents;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
@@ -54,14 +59,6 @@ public class PooSMPEvents {
                     return true;
                 }
         );
-
-        LootTableEvents.MODIFY_DROPS.register(PooSMPMod.id("dimworld_stick"), (holder, lootContext, list) -> {
-            if (holder.is(BuiltInLootTables.SIMPLE_DUNGEON) || holder.is(BuiltInLootTables.ANCIENT_CITY)) {
-                if (lootContext.getRandom().nextBoolean()) {
-
-                }
-            }
-        });
 
         ComponentTooltipAppenderRegistry.addAfter(DataComponents.JUKEBOX_PLAYABLE, PooComponents.DECODE_EXCEPTION);
         ComponentTooltipAppenderRegistry.addAfter(DataComponents.JUKEBOX_PLAYABLE, PooComponents.REQUESTED_DISC);
@@ -116,6 +113,32 @@ public class PooSMPEvents {
                 Upgrade upgrade = upgradeHolder.value();
                 upgrade.onJoin(bought, player);
             });
+        });
+
+        ServerTickEvents.START_SERVER_TICK.register(server -> {
+            if (server.getTickCount() % 8000 == 400) {
+                MutableComponent[] pooTips = {
+                    Component.literal("Use ").append(Component.literal("/sell").withStyle(ChatFormatting.ITALIC, ChatFormatting.YELLOW)).append(" to sell items!"),
+                    Component.literal("Hit ").append(Component.keybind("key.poosmp.open_upgrades_screen").withStyle(ChatFormatting.ITALIC, ChatFormatting.YELLOW)).append(" to open the Upgrade screen!"),
+                    Component.literal("Hit ").append(Component.keybind("key.poosmp.open_shop_screen").withStyle(ChatFormatting.ITALIC, ChatFormatting.YELLOW)).append(" to open the Shop!"),
+                    Component.literal("Dirt can be crafted into a Block of Poop!"),
+                    Component.literal("Pooplets are a very good food source!"),
+                    Component.literal("There are many unique sticks you can craft!")
+                };
+                int tip = server.overworld().getRandom().nextIntBetweenInclusive(0, pooTips.length);
+                if (tip == pooTips.length) {
+                    server.getPlayerList().broadcastSystemMessage(Component.literal("SUPER POOP EVENT: STARTING IN 67 YEARS!!!!!").withColor(0xFF0000), false);
+                    server.getPlayerList().getPlayers().forEach(player -> {
+                        player.giveExperiencePoints(4000);
+                        player.playSound(SoundEvents.COW_DEATH);
+                        player.playSound(SoundEvents.HORSE_DEATH);
+                        player.playSound(SoundEvents.SHEEP_DEATH);
+                        player.playSound(SoundEvents.VILLAGER_DEATH);
+                    });
+                } else {
+                    server.getPlayerList().broadcastSystemMessage(Component.translatable("poosmp.poo_tip", pooTips[tip]).withStyle(ChatFormatting.GOLD), false);
+                }
+            }
         });
     }
 }

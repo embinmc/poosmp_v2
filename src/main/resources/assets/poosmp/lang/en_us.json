@@ -6,6 +6,7 @@
   "poosmp.biome_stick.current_biome": "Selected biome: %s",
   "poosmp.biome_stick.crouch_tip": "Hold %s while using to configure!",
   "poosmp.mob_stick.entity": "Entity: %s",
+  "poosmp.poo_tip": "POO TIP: %s",
   "trim_pattern.poosmp.fill": "Fill Armor Trim",
   "item.poosmp.poop_stick": "Poop Stick!",
   "item.poosmp.server_says_what_stick": "Server Says What?",

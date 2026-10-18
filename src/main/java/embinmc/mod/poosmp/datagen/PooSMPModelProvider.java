@@ -195,7 +195,7 @@ public class PooSMPModelProvider extends FabricModelProvider {
     }
 
     private void createCustomFence(Block fence, Block fenceOf) {
-        TextureMapping textureMapping = TextureMapping.customParticle(fenceOf);
+        TextureMapping textureMapping = TextureMapping.particle(fenceOf).put(TextureSlot.TEXTURE, TextureMapping.getBlockTexture(fenceOf));
         MultiVariant multiVariant = BlockModelGenerators.plainVariant(
                 ModelTemplates.CUSTOM_FENCE_POST.create(fence, textureMapping, this.bmg.modelOutput)
         );

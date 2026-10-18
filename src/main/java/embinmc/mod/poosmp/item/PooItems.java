@@ -151,7 +151,7 @@ public interface PooItems {
     Item RED_POO_HELMET = helmet(PooItemKeys.RED_POO_HELMET, PooArmorMaterials.RED_POO, Rarity.UNCOMMON);
     Item RED_POO_CHESTPLATE = chestplate(PooItemKeys.RED_POO_CHESTPLATE, PooArmorMaterials.RED_POO, Rarity.UNCOMMON);
     Item RED_POO_LEGGINGS = leggings(PooItemKeys.RED_POO_LEGGINGS, PooArmorMaterials.RED_POO, Rarity.UNCOMMON);
-    Item RED_POO_BOOTS = leggings(PooItemKeys.RED_POO_BOOTS, PooArmorMaterials.RED_POO, Rarity.UNCOMMON);
+    Item RED_POO_BOOTS = boots(PooItemKeys.RED_POO_BOOTS, PooArmorMaterials.RED_POO, Rarity.UNCOMMON);
     Item GEAR = register(PooItemKeys.GEAR);
     Item SCREW = register(PooItemKeys.SCREW);
     Item GLASS_SHARD = register(PooItemKeys.GLASS_SHARD);

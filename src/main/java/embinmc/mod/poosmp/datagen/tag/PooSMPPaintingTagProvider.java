@@ -25,6 +25,7 @@ public class PooSMPPaintingTagProvider extends FabricTagProvider<PaintingVariant
                 .add(PooPaintings.PENGUINMOD)
                 .add(PooPaintings.TECH_TIP)
                 .add(PooPaintings.THE_GLUE_FACTORY)
+            .add(PooPaintings.THE_PURPLE_AWARDS)
         ;
         this.builder(PooPaintings.Tags.NON_PLACEABLE_POOSMP_PAINTINGS)
                 .add(PooPaintings.DRAGON_ANNOYANCE);

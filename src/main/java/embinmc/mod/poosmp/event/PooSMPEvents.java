@@ -116,7 +116,7 @@ public class PooSMPEvents {
         });
 
         ServerTickEvents.START_SERVER_TICK.register(server -> {
-            if (server.getTickCount() % 200 == 100) {
+            if (server.getTickCount() % 8000 == 1000) {
                 MutableComponent[] pooTips = {
                     Component.literal("Use ").append(Component.literal("/sell").withStyle(ChatFormatting.ITALIC, ChatFormatting.YELLOW)).append(" to sell items!"), // intentionally doubled
                     Component.literal("Use ").append(Component.literal("/sell").withStyle(ChatFormatting.ITALIC, ChatFormatting.YELLOW)).append(" to sell items!"),
@@ -135,6 +135,7 @@ public class PooSMPEvents {
                     Component.literal("The Gloomy Stick will take you to a very dark dimension."),
                     Component.literal("Cubey is a cheater"),
                     Component.literal("You have gout."),
+                    Component.literal("JeremyGamer13 is evil."),
                 };
                 int tip = server.overworld().getRandom().nextIntBetweenInclusive(0, pooTips.length);
                 if (tip == pooTips.length) {

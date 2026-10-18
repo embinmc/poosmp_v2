@@ -96,7 +96,7 @@ public class ShopScreen extends Screen {
             if (mouseX < this.getRowLeft() || mouseX > this.getRowLeft() + 32)
                 return;
             if (hovered instanceof ShopEntry shopEntry) {
-                Component name = shopEntry.item.value().getName();
+                Component name = shopEntry.item.value().getDefaultInstance().getDisplayName();
                 Component id = Component.literal(shopEntry.item.getRegisteredName()).withStyle(ChatFormatting.DARK_GRAY);
                 guiGraphics.setComponentTooltipForNextFrame(this.minecraft.font, List.of(name, id), mouseX, mouseY);
             }
@@ -177,8 +177,7 @@ public class ShopScreen extends Screen {
             }
 
             @Override
-            public void renderContent(GuiGraphics guiGraphics, int mouseX, int mouseY, boolean hovered, float f) {
-                // dddd
+            public void renderContent(@NonNull GuiGraphics guiGraphics, int mouseX, int mouseY, boolean hovered, float f) {
                 this.buyOne.setPosition(this.fromCenter(guiGraphics, 4), this.getY() + 4);
                 this.buyStack.setPosition(this.fromCenter(guiGraphics, 64), this.getY() + 4);
                 guiGraphics.fill(this.getX(), this.getY() + 1, this.getX() + this.getWidth(), this.getY() + this.getHeight() - 1, 0x44FFAAFF);

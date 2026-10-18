@@ -116,27 +116,42 @@ public class PooSMPEvents {
         });
 
         ServerTickEvents.START_SERVER_TICK.register(server -> {
-            if (server.getTickCount() % 8000 == 400) {
+            if (server.getTickCount() % 200 == 100) {
                 MutableComponent[] pooTips = {
+                    Component.literal("Use ").append(Component.literal("/sell").withStyle(ChatFormatting.ITALIC, ChatFormatting.YELLOW)).append(" to sell items!"), // intentionally doubled
                     Component.literal("Use ").append(Component.literal("/sell").withStyle(ChatFormatting.ITALIC, ChatFormatting.YELLOW)).append(" to sell items!"),
                     Component.literal("Hit ").append(Component.keybind("key.poosmp.open_upgrades_screen").withStyle(ChatFormatting.ITALIC, ChatFormatting.YELLOW)).append(" to open the Upgrade screen!"),
+                    Component.literal("Hit ").append(Component.keybind("key.poosmp.open_upgrades_screen").withStyle(ChatFormatting.ITALIC, ChatFormatting.YELLOW)).append(" to open the Upgrade screen!"),
+                    Component.literal("Hit ").append(Component.keybind("key.poosmp.open_shop_screen").withStyle(ChatFormatting.ITALIC, ChatFormatting.YELLOW)).append(" to open the Shop!"),
                     Component.literal("Hit ").append(Component.keybind("key.poosmp.open_shop_screen").withStyle(ChatFormatting.ITALIC, ChatFormatting.YELLOW)).append(" to open the Shop!"),
                     Component.literal("Dirt can be crafted into a Block of Poop!"),
                     Component.literal("Pooplets are a very good food source!"),
-                    Component.literal("There are many unique sticks you can craft!")
+                    Component.literal("Pooplets are a very good food source!"),
+                    Component.literal("The \"Banker\" villager exists! They do anything but banking, because they're a fraud."),
+                    Component.literal("Using ").append(Component.literal("/sell inv").withStyle(ChatFormatting.ITALIC, ChatFormatting.YELLOW))
+                        .append(" will sell everything in your inventory that can be sold!"),
+                    Component.literal("The Red Poo tool and armor set is stronger than Netherite!"),
+                    Component.literal("The Warp Stick will take you to a very empty dimension."),
+                    Component.literal("The Gloomy Stick will take you to a very dark dimension."),
+                    Component.literal("Cubey is a cheater"),
+                    Component.literal("You have gout."),
                 };
                 int tip = server.overworld().getRandom().nextIntBetweenInclusive(0, pooTips.length);
                 if (tip == pooTips.length) {
                     server.getPlayerList().broadcastSystemMessage(Component.literal("SUPER POOP EVENT: STARTING IN 67 YEARS!!!!!").withColor(0xFF0000), false);
                     server.getPlayerList().getPlayers().forEach(player -> {
                         player.giveExperiencePoints(4000);
-                        player.playSound(SoundEvents.COW_DEATH);
-                        player.playSound(SoundEvents.HORSE_DEATH);
-                        player.playSound(SoundEvents.SHEEP_DEATH);
-                        player.playSound(SoundEvents.VILLAGER_DEATH);
+                        player.level().playSound(null, player.blockPosition(), SoundEvents.COW_DEATH, SoundSource.HOSTILE);
+                        player.level().playSound(null, player.blockPosition(), SoundEvents.HORSE_DEATH, SoundSource.HOSTILE);
+                        player.level().playSound(null, player.blockPosition(), SoundEvents.SHEEP_DEATH, SoundSource.HOSTILE);
+                        player.level().playSound(null, player.blockPosition(), SoundEvents.VILLAGER_DEATH, SoundSource.HOSTILE);
                     });
                 } else {
                     server.getPlayerList().broadcastSystemMessage(Component.translatable("poosmp.poo_tip", pooTips[tip]).withStyle(ChatFormatting.GOLD), false);
+                    server.getPlayerList().getPlayers().forEach(player -> {
+                        player.giveExperiencePoints(120);
+                        player.level().playSound(null, player.blockPosition(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS);
+                    });
                 }
             }
         });

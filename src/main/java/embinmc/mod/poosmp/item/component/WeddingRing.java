@@ -42,12 +42,6 @@ public record WeddingRing(ItemAttributeModifiers notMarriedAttributes, ItemAttri
 
     public static ItemAttributeModifiers defaultMarriedAttributes() {
         return ItemAttributeModifiers.builder().add(
-                Attributes.MAX_HEALTH,
-                new AttributeModifier(
-                        PooSMPMod.id("wedding_ring_hp_buff"), 10, AttributeModifier.Operation.ADD_VALUE
-                ),
-                EquipmentSlotGroup.OFFHAND
-        ).add(
                 Attributes.ENTITY_INTERACTION_RANGE,
                 new AttributeModifier(
                         PooSMPMod.id("wedding_ring_entity_reach_buff"), 1.0F, AttributeModifier.Operation.ADD_VALUE

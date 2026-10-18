@@ -20,6 +20,7 @@ public interface PooPaintings {
     ResourceKey<PaintingVariant> TECH_TIP = create("tech_tip");
     ResourceKey<PaintingVariant> THE_GLUE_FACTORY = create("the_glue_factory");
     ResourceKey<PaintingVariant> DRAGON_ANNOYANCE = create("dragon_annoyance");
+    ResourceKey<PaintingVariant> THE_PURPLE_AWARDS = create("the_purple_awards");
 
     private static ResourceKey<PaintingVariant> create(String id) {
         return ResourceKey.create(Registries.PAINTING_VARIANT, PooSMPMod.id(id));
@@ -46,6 +47,7 @@ public interface PooPaintings {
                 this.register(PooPaintings.TECH_TIP, 4, 4, "Tech Tip", "Embin");
                 this.register(PooPaintings.THE_GLUE_FACTORY, 3, 3, "The Glue Factory", "Embin");
                 this.register(PooPaintings.DRAGON_ANNOYANCE, 1, 1, "Dragon Annoyance", null);
+                this.register(PooPaintings.THE_PURPLE_AWARDS, 3, 3, "The Purple Awards", "Embin");
             }
 
             private void register(ResourceKey<PaintingVariant> key, int width, int height, String name, @Nullable String requester) {

@@ -174,7 +174,11 @@ public interface PooItems {
     Item DIMWORLD_STICK = warpStick(PooItemKeys.DIMWORLD_STICK, PooSMPMod.DIMWORLD);
     Item FROG_STICK = mobStick(PooItemKeys.FROG_STICK, EntityType.FROG, Rarity.UNCOMMON, MobSummonerComponent.NAMES_DEFAULT, true);
     Item WIND_STICK = register(PooItemKeys.WIND_STICK, quickComponent(PooComponents.WIND_SHOOTER).rarity(Rarity.RARE));
-    Item ITEM_FORCING_BACKPACK_UPGRADE = register(PooItemKeys.ITEM_FORCING_BACKPACK_UPGRADE);
+    Item ITEM_FORCING_BACKPACK_UPGRADE = register(PooItemKeys.ITEM_FORCING_BACKPACK_UPGRADE, new Item.Properties()
+        .component(DataComponents.LORE, new ItemLore(List.of(
+            Component.literal("Apply to a backpack with a smithing table and leather").withStyle(ChatFormatting.BLUE)
+        )))
+    );
 
     Item POOP_BLOCK = registerBlock(PooItemKeys.POOP_BLOCK, PooBlocks.POOP_BLOCK);
     Item MISSINGNO_BLOCK = registerBlock(PooItemKeys.MISSINGNO_BLOCK, PooBlocks.MISSINGNO_BLOCK, quickRarity(Rarity.EPIC));
@@ -247,7 +251,7 @@ public interface PooItems {
         return register(key, new Item.Properties()
                 .stacksTo(99)
                 .component(DataComponents.LORE, new ItemLore(List.of(
-                        Component.literal("Worth $%,.2f".formatted(amount)).withStyle(ChatFormatting.RESET, ChatFormatting.GREEN)
+                        Component.literal("Worth $%,.2f".formatted(amount)).withStyle(ChatFormatting.GREEN)
                 )))
                 .rarity(rarity)
         );

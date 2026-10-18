@@ -27,6 +27,7 @@
     "minecraft:iron_nugget": 0.5,
     "minecraft:lapis_block": 1.8,
     "minecraft:lapis_lazuli": 0.2,
+    "minecraft:nether_brick": 0.02,
     "minecraft:nether_star": {
       "price": 1000.0,
       "sell_value": 1000.0
@@ -43,6 +44,7 @@
     "minecraft:string": 0.06,
     "minecraft:waxed_copper_block": 23.0,
     "minecraft:waxed_oxidized_copper": 27.0,
-    "poosmp:diamond_shard": 2.0
+    "poosmp:diamond_shard": 2.0,
+    "poosmp:red_nether_brick": 0.04
   }
 }

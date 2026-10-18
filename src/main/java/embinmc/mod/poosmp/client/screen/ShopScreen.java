@@ -96,7 +96,7 @@ public class ShopScreen extends Screen {
             if (mouseX < this.getRowLeft() || mouseX > this.getRowLeft() + 32)
                 return;
             if (hovered instanceof ShopEntry shopEntry) {
-                Component name = shopEntry.item.value().getDefaultInstance().getDisplayName();
+                Component name = shopEntry.item.value().getDefaultInstance().getStyledHoverName();
                 Component id = Component.literal(shopEntry.item.getRegisteredName()).withStyle(ChatFormatting.DARK_GRAY);
                 guiGraphics.setComponentTooltipForNextFrame(this.minecraft.font, List.of(name, id), mouseX, mouseY);
             }

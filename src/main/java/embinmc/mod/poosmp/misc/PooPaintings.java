@@ -29,7 +29,7 @@ public interface PooPaintings {
     interface Tags {
         TagKey<PaintingVariant> POOSMP_PAINTINGS = tag("poosmp_paintings");
         TagKey<PaintingVariant> PLACEABLE_POOSMP_PAINTINGS = tag("placeable_poosmp_paintings");
-        TagKey<PaintingVariant> NON_PLACEABLE_POOSMP_PAINTINGS = tag("placeable_poosmp_paintings");
+        TagKey<PaintingVariant> NON_PLACEABLE_POOSMP_PAINTINGS = tag("non_placeable_poosmp_paintings");
 
         private static TagKey<PaintingVariant> tag(String id) {
             return TagKey.create(Registries.PAINTING_VARIANT, PooSMPMod.id(id));

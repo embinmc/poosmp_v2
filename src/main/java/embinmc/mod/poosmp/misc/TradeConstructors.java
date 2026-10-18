@@ -42,6 +42,8 @@ public class TradeConstructors {
         TradeOfferHelper.registerVillagerOffers(PooSMPVillagers.BANKER_KEY, 2, factories -> {
             factories.add(enchantedBook(BANKER_MID, PooItems.TWENTY_FIVE_DOLLAR_BILL, 2));
             factories.add(trade(PooItems.WARP_STICK, 1, PooItems.TEN_DOLLAR_BILL, 5));
+            factories.add(trade(Items.EXPERIENCE_BOTTLE, 1, PooItems.ONE_DOLLAR_BILL, 3));
+            factories.add(trade(Items.PHANTOM_MEMBRANE, 1, PooItems.ONE_DOLLAR_BILL, 4));
 
             ItemStack omBottle = new ItemStack(Items.OMINOUS_BOTTLE);
             omBottle.set(DataComponents.OMINOUS_BOTTLE_AMPLIFIER, new OminousBottleAmplifier(4));
@@ -52,15 +54,18 @@ public class TradeConstructors {
             factories.add(enchantedBook(BANKER_MID, PooItems.HUNDRED_DOLLAR_BILL, 1));
             factories.add(trade(Items.BLUE_ICE, 1, PooItems.ONE_DOLLAR_BILL, 18));
             factories.add(trade(Items.ECHO_SHARD, 1, PooItems.ONE_DOLLAR_BILL, 64));
+            factories.add(trade(Items.FLOW_ARMOR_TRIM_SMITHING_TEMPLATE, 1, PooItems.TEN_DOLLAR_BILL, 6));
         });
         TradeOfferHelper.registerVillagerOffers(PooSMPVillagers.BANKER_KEY, 4, factories -> {
             factories.add(trade(Items.NETHERITE_SCRAP, 1, PooItems.HUNDRED_DOLLAR_BILL, 4));
+            factories.add(trade(Items.SILENCE_ARMOR_TRIM_SMITHING_TEMPLATE, 1, PooItems.HUNDRED_DOLLAR_BILL, 3));
+            factories.add(trade(Items.EYE_ARMOR_TRIM_SMITHING_TEMPLATE, 1, PooItems.HUNDRED_DOLLAR_BILL, 2));
             factories.add(enchantedBook(BANKER_HIGH, PooItems.HUNDRED_DOLLAR_BILL, 4));
         });
         TradeOfferHelper.registerVillagerOffers(PooSMPVillagers.BANKER_KEY, 5, factories -> {
-            factories.add(trade(Items.ELYTRA, 1, PooItems.HUNDRED_DOLLAR_BILL, 40));
-            factories.add(trade(PooItems.RAW_RED_POO, 1, PooItems.HUNDRED_DOLLAR_BILL, 64));
-            factories.add(trade(PooItems.RED_POO_UPGRADE_TEMPLATE, 1, PooItems.HUNDRED_DOLLAR_BILL, 10));
+            factories.add(trade(Items.ELYTRA, 1, PooItems.HUNDRED_DOLLAR_BILL, 48));
+            factories.add(trade(PooItems.RAW_RED_POO, 1, PooItems.HUNDRED_DOLLAR_BILL, 40));
+            factories.add(trade(PooItems.RED_POO_UPGRADE_TEMPLATE, 1, PooItems.HUNDRED_DOLLAR_BILL, 12));
         });
         TradeOfferHelper.registerVillagerOffers(VillagerProfession.FARMER, 5, factories -> {
             factories.add(trade(Items.SHULKER_SHELL, 2, PooItems.HUNDRED_DOLLAR_BILL, 1));

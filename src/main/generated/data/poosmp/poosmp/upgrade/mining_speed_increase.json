@@ -4,7 +4,7 @@
     {
       "type": "minecraft:mining_efficiency",
       "amount": 2.0,
-      "id": "poosmp:upgrade/mining_efficiency",
+      "id": "poosmp:upgrade/mining_speed_increase",
       "operation": "add_value"
     }
   ],

@@ -1,5 +1,6 @@
 package embinmc.mod.poosmp.datagen.worldgen;
 
+import embinmc.mod.poosmp.block.PooBlocks;
 import embinmc.mod.poosmp.misc.PooBiomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -27,6 +28,7 @@ public interface PooSurfaceRules {
     RuleSource MUD = makeStateRule(Blocks.MUD);
     RuleSource BLACKSTONE = makeStateRule(Blocks.BLACKSTONE);
     RuleSource COARSE_DIRT = makeStateRule(Blocks.COARSE_DIRT);
+    RuleSource DIM_MOSS = makeStateRule(PooBlocks.DIM_MOSS_BLOCK);
 
     private static RuleSource makeStateRule(final Block block) {
         return SurfaceRules.state(block.defaultBlockState());
@@ -40,45 +42,51 @@ public interface PooSurfaceRules {
         RuleSource surfaceGravel = SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.ON_CEILING, STONE), GRAVEL);
         RuleSource surfaceSand = SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.ON_CEILING, SANDSTONE), SAND);
         RuleSource surfaceUnderwater = SurfaceRules.sequence(
-                SurfaceRules.ifTrue(surfaceNoiseAbove(1.3), CLAY),
-                surfaceSand
+            SurfaceRules.ifTrue(surfaceNoiseAbove(1.3), CLAY),
+            surfaceSand
         );
-        RuleSource surfaceShore = SurfaceRules.sequence(SurfaceRules.ifTrue(surfaceNoiseAbove(1.4), MUD), DIRT);
+        RuleSource surfaceShore = SurfaceRules.sequence(
+            SurfaceRules.ifTrue(surfaceNoiseAbove(1.4), MUD),
+            DIRT
+        );
         RuleSource surfaceLand = SurfaceRules.sequence(SurfaceRules.ifTrue(aboveWater, GRASS_BLOCK), DIRT);
 
-        RuleSource underSurfaceRule = SurfaceRules.sequence(
-                SurfaceRules.ifTrue(
-                        SurfaceRules.isBiome(PooBiomes.DIMWORLD_GRAVELY_FIELDS),
-                        SurfaceRules.sequence(
-                                SurfaceRules.ifTrue(surfaceNoiseAbove(1.2), surfaceGravel),
-                                SurfaceRules.ifTrue(surfaceNoiseAbove(0.8), ROOTED_DIRT)
-                        )
-                ),
-                SurfaceRules.ifTrue(
-                        SurfaceRules.isBiome(PooBiomes.DIMWORLD_BARRENS),
-                        SurfaceRules.ifTrue(surfaceNoiseAbove(1.1), BLACKSTONE)
-                ),
-                DIRT
+        RuleSource biomeSurfaceRule = SurfaceRules.sequence(
+            SurfaceRules.ifTrue(
+                SurfaceRules.isBiome(PooBiomes.DIMWORLD_GRAVELY_FIELDS),
+                SurfaceRules.sequence(
+                    SurfaceRules.ifTrue(surfaceNoiseAbove(0.3), surfaceGravel),
+                    SurfaceRules.ifTrue(surfaceNoiseAbove(-0.4), DIM_MOSS)
+                )
+            ),
+            SurfaceRules.ifTrue(
+                SurfaceRules.isBiome(PooBiomes.DIMWORLD_BARRENS),
+                SurfaceRules.sequence(
+                    SurfaceRules.ifTrue(surfaceNoiseAbove(0.6), ROOTED_DIRT),
+                    SurfaceRules.ifTrue(surfaceNoiseAbove(0.2), BLACKSTONE),
+                    SurfaceRules.ifTrue(surfaceNoiseAbove(-0.7), COARSE_DIRT)
+                )
+            ),
+            surfaceLand
         );
 
-        RuleSource biomeSurfaceRule = SurfaceRules.sequence(
-                SurfaceRules.ifTrue(
-                        SurfaceRules.isBiome(PooBiomes.DIMWORLD_GRAVELY_FIELDS),
-                        SurfaceRules.sequence(
-                                SurfaceRules.ifTrue(surfaceNoiseAbove(1.2), surfaceGravel),
-                                SurfaceRules.ifTrue(surfaceNoiseAbove(0.8), ROOTED_DIRT),
-                                surfaceLand
-                        )
-                ),
-                SurfaceRules.ifTrue(
-                        SurfaceRules.isBiome(PooBiomes.DIMWORLD_BARRENS),
-                        SurfaceRules.sequence(
-                                SurfaceRules.ifTrue(surfaceNoiseAbove(1.1), BLACKSTONE),
-                                SurfaceRules.ifTrue(surfaceNoiseAbove(0.4), COARSE_DIRT),
-                                surfaceLand
-                        )
-                ),
-                surfaceLand
+        RuleSource underSurfaceRule = SurfaceRules.sequence(
+            SurfaceRules.ifTrue(
+                SurfaceRules.isBiome(PooBiomes.DIMWORLD_GRAVELY_FIELDS),
+                SurfaceRules.sequence(
+                    SurfaceRules.ifTrue(surfaceNoiseAbove(0.3), surfaceGravel),
+                    SurfaceRules.ifTrue(surfaceNoiseAbove(-0.4), DIM_MOSS)
+                )
+            ),
+            SurfaceRules.ifTrue(
+                SurfaceRules.isBiome(PooBiomes.DIMWORLD_BARRENS),
+                SurfaceRules.sequence(
+                    SurfaceRules.ifTrue(surfaceNoiseAbove(0.6), ROOTED_DIRT),
+                    SurfaceRules.ifTrue(surfaceNoiseAbove(0.2), BLACKSTONE),
+                    SurfaceRules.ifTrue(surfaceNoiseAbove(-0.7), COARSE_DIRT)
+                )
+            ),
+            DIRT
         );
 
         RuleSource surfaceFinal = SurfaceRules.sequence(

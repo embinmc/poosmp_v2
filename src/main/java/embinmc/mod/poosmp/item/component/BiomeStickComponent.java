@@ -4,7 +4,6 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import embinmc.mod.poosmp.client.screen.BiomeStickScreen;
 import embinmc.mod.poosmp.misc.PooUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -97,7 +96,7 @@ public record BiomeStickComponent(byte horizontalDiameter, byte verticalDiameter
         BiomeStickComponent biomeStick = stackInHand.get(PooComponents.BIOME_TRANSFORMER);
         if (player.isCrouching()) {
             if (level.isClientSide()) {
-                Minecraft.getInstance().setScreen(new BiomeStickScreen());
+                ComponentC.openBiomeStickScreen();
             }
             return InteractionResult.SUCCESS;
         }

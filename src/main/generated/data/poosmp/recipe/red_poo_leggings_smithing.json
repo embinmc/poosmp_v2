@@ -5,5 +5,5 @@
   "result": {
     "id": "poosmp:red_poo_leggings"
   },
-  "template": "minecraft:netherite_upgrade_smithing_template"
+  "template": "poosmp:red_poo_upgrade_smithing_template"
 }

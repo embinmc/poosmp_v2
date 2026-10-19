@@ -403,7 +403,7 @@ public class PooSMPRecipeProvider extends FabricRecipeProvider {
 
             public void convertSmithing(Ingredient input, Item output, TagKey<Item> material) {
                 SmithingTransformRecipeBuilder.smithing(
-                        Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
+                        Ingredient.of(PooItems.RED_POO_UPGRADE_TEMPLATE),
                         input,
                         this.tag(material),
                         RecipeCategory.TOOLS,

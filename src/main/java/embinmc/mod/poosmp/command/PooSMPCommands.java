@@ -217,7 +217,7 @@ public interface PooSMPCommands {
                         })
                 )
             )
-            .then(Commands.literal("money")
+            .then(Commands.literal("cash")
                 .then(withdrawMoneyItem("1", PooItems.ONE_DOLLAR_BILL))
                 .then(withdrawMoneyItem("2", PooItems.TWO_DOLLAR_BILL))
                 .then(withdrawMoneyItem("5", PooItems.FIVE_DOLLAR_BILL))

@@ -20,6 +20,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.commands.FillBiomeCommand;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -117,10 +119,12 @@ public record BiomeStickComponent(byte horizontalDiameter, byte verticalDiameter
             Either<Integer, CommandSyntaxException> result = FillBiomeCommand.fill(serverLevel, corner1, corner2, biome, holder -> true, text -> {
                 Component component = text.get();
                 serverPlayer.sendSystemMessage(component, true);
+                serverLevel.playSound(null, serverPlayer.blockPosition(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.PLAYERS);
             });
             if (result.right().isPresent()) {
                 serverPlayer.sendSystemMessage(Component.literal("An error occurred, likely gamerule " + GameRules.MAX_BLOCK_MODIFICATIONS.getIdentifier() + " being too low").withStyle(ChatFormatting.RED));
                 serverPlayer.sendSystemMessage(Component.literal("The error: " + result.right().orElseThrow().getMessage()).withStyle(ChatFormatting.RED));
+                serverLevel.playSound(null, serverPlayer.blockPosition(), SoundEvents.ANVIL_DESTROY, SoundSource.PLAYERS);
             }
         }
         player.getCooldowns().addCooldown(stackInHand, 2);

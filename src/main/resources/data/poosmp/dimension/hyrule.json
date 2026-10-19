@@ -31,7 +31,7 @@
           }
         },
         {
-          "biome": "poosmp:hyrule_castle",
+          "biome": "poosmp:hyrule_castle_sky",
           "parameters": {
             "temperature": [-1, 1],
             "humidity": [-1, 1],
@@ -47,7 +47,7 @@
           "parameters": {
             "temperature": [-1, 1],
             "humidity": [-1, 1],
-            "continentalness": [-1.05, -0.32],
+            "continentalness": [-1.05, -0.25],
             "depth": 0,
             "weirdness": [-1, 1],
             "offset": 0,
@@ -59,7 +59,7 @@
           "parameters": {
             "temperature": [-1, 1],
             "humidity": [-1, 1],
-            "continentalness": [-0.32, 1],
+            "continentalness": [-0.25, 1],
             "depth": 0,
             "weirdness": [-1, 1],
             "offset": 0,

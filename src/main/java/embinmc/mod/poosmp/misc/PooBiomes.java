@@ -49,7 +49,8 @@ public interface PooBiomes {
     DIMWORLD_DEEP_GLOOMY_OCEAN = create("deep_gloomy_ocean"),
     DIMWORLD_GRAVELY_FIELDS = create("gravely_fields"),
     DIMWORLD_WET_SKY = create("wet_sky"),
-    DIMWORLD_BARRENS = create("dim_barrens");
+    DIMWORLD_BARRENS = create("dim_barrens"),
+    HYRULE_CASTLE_SKY = create("hyrule_castle_sky");
 
     private static ResourceKey<Biome> create(String id) {
         return ResourceKey.create(Registries.BIOME, PooSMPMod.id(id));
@@ -108,7 +109,7 @@ public interface PooBiomes {
                         .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, AmbientParticle.of(ParticleTypes.COPPER_FIRE_FLAME, 0.0006f))
                         .generationSettings(this.genSettings(builder -> {
                             builder.addFeature(GenerationStep.Decoration.UNDERGROUND_STRUCTURES, CavePlacements.MONSTER_ROOM_DEEP);
-                            dimworldOres(builder);
+                            this.dimworldOres(builder);
                             builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AquaticPlacements.SEA_PICKLE);
                         }))
                 );
@@ -154,7 +155,7 @@ public interface PooBiomes {
                         .generationSettings(this.genSettings(builder -> {
                             builder.addFeature(GenerationStep.Decoration.UNDERGROUND_STRUCTURES, CavePlacements.MONSTER_ROOM);
                             builder.addFeature(GenerationStep.Decoration.UNDERGROUND_STRUCTURES, CavePlacements.MONSTER_ROOM_DEEP);
-                            dimworldOres(builder);
+                            this.dimworldOres(builder);
                             builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_FIREFLY_BUSH_NEAR_WATER);
                         }))
                 );
@@ -182,7 +183,7 @@ public interface PooBiomes {
                         .generationSettings(this.genSettings(builder -> {
                             builder.addFeature(GenerationStep.Decoration.UNDERGROUND_STRUCTURES, CavePlacements.MONSTER_ROOM);
                             builder.addFeature(GenerationStep.Decoration.UNDERGROUND_STRUCTURES, CavePlacements.MONSTER_ROOM_DEEP);
-                            dimworldOres(builder);
+                            this.dimworldOres(builder);
                             builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_FIREFLY_BUSH_NEAR_WATER);
                         }))
                 );
@@ -223,8 +224,8 @@ public interface PooBiomes {
                         .generationSettings(this.genSettings(builder -> {
                             builder.addFeature(GenerationStep.Decoration.UNDERGROUND_STRUCTURES, CavePlacements.MONSTER_ROOM);
                             builder.addFeature(GenerationStep.Decoration.UNDERGROUND_STRUCTURES, CavePlacements.MONSTER_ROOM_DEEP);
-                            dimworldOres(builder);
-                            builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_DEAD_BUSH_BADLANDS);
+                            this.dimworldOres(builder);
+                            builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_DEAD_BUSH_BADLANDS); // order matters greatly
                             builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_FIREFLY_BUSH_NEAR_WATER);
                         }))
                 );
@@ -250,7 +251,7 @@ public interface PooBiomes {
                         .generationSettings(this.genSettings(builder -> {
                             builder.addFeature(GenerationStep.Decoration.UNDERGROUND_STRUCTURES, CavePlacements.MONSTER_ROOM);
                             builder.addFeature(GenerationStep.Decoration.UNDERGROUND_STRUCTURES, CavePlacements.MONSTER_ROOM_DEEP);
-                            dimworldOres(builder);
+                            this.dimworldOres(builder);
                             builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_GRASS_BADLANDS);
                             builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_DRY_GRASS_BADLANDS);
                             builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_SUGAR_CANE_BADLANDS);
@@ -277,7 +278,7 @@ public interface PooBiomes {
                         .generationSettings(this.genSettings(builder -> {
                             builder.addFeature(GenerationStep.Decoration.UNDERGROUND_STRUCTURES, CavePlacements.MONSTER_ROOM);
                             builder.addFeature(GenerationStep.Decoration.UNDERGROUND_STRUCTURES, CavePlacements.MONSTER_ROOM_DEEP);
-                            dimworldOres(builder);
+                            this.dimworldOres(builder);
                             builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.FLOWER_DEFAULT);
                             builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_DEAD_BUSH_BADLANDS);
                             builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_FIREFLY_BUSH_NEAR_WATER);
@@ -315,7 +316,7 @@ public interface PooBiomes {
                         .generationSettings(this.genSettings(builder -> {
                             builder.addFeature(GenerationStep.Decoration.UNDERGROUND_STRUCTURES, CavePlacements.MONSTER_ROOM);
                             builder.addFeature(GenerationStep.Decoration.UNDERGROUND_STRUCTURES, CavePlacements.MONSTER_ROOM_DEEP);
-                            dimworldOres(builder);
+                            this.dimworldOres(builder);
                             builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_FIREFLY_BUSH_NEAR_WATER);
                         }))
                 );
@@ -469,6 +470,29 @@ public interface PooBiomes {
                         .setAttribute(EnvironmentAttributes.FOG_END_DISTANCE, 240f)
                         .generationSettings(BiomeGenerationSettings.EMPTY)
                 );
+                this.register(PooBiomes.HYRULE_CASTLE_SKY, new Biome.BiomeBuilder()
+                    .temperature(1.4f)
+                    .downfall(0.2f)
+                    .hasPrecipitation(false)
+                    .mobSpawnSettings(MobSpawnSettings.EMPTY)
+                    .specialEffects(new BiomeSpecialEffects(
+                        6062520, // water color
+                        Optional.of(5658198), // foliage color
+                        Optional.empty(), // dry foliage color
+                        Optional.of(7039851), // grass color override
+                        BiomeSpecialEffects.GrassColorModifier.NONE
+                    ))
+                    .setAttribute(EnvironmentAttributes.CLOUD_HEIGHT, 450f)
+                    .setAttribute(EnvironmentAttributes.SKY_COLOR, 0x9b3326)
+                    .setAttribute(EnvironmentAttributes.FOG_COLOR, 0x6b241b)
+                    .setAttribute(EnvironmentAttributes.SKY_LIGHT_FACTOR, 0.8f)
+                    .setAttribute(EnvironmentAttributes.SKY_LIGHT_COLOR, 0xffaaaa)
+                    .setAttribute(EnvironmentAttributes.EYEBLOSSOM_OPEN, TriState.TRUE)
+                    .setAttribute(EnvironmentAttributes.PIGLINS_ZOMBIFY, false)
+                    .setAttribute(EnvironmentAttributes.WATER_FOG_COLOR, 0xadadad)
+                    .setAttribute(EnvironmentAttributes.CLOUD_COLOR, 0xaa8d2525)
+                    .generationSettings(BiomeGenerationSettings.EMPTY)
+                );
             }
 
             private void register(ResourceKey<Biome> key, Biome.BiomeBuilder builder) {
@@ -487,7 +511,7 @@ public interface PooBiomes {
                 return builder.build();
             }
 
-            private static void dimworldOres(BiomeGenerationSettings.Builder builder) {
+            private void dimworldOres(BiomeGenerationSettings.Builder builder) {
                 builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_COAL_UPPER);
                 builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_COAL_LOWER);
                 builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_GOLD);

@@ -226,7 +226,7 @@ public class PooSMPRecipeProvider extends FabricRecipeProvider {
                         .define('3', PooItemTags.MAKES_NETHER_BRICKS_RED)
                         .unlockedBy(getHasName(Items.NETHER_BRICK), this.has(Items.NETHER_BRICK))
                         .save(this.output);
-                this.fenceBuilderPro(PooBlocks.RED_NETHER_BRICK_FENCE, Blocks.RED_NETHER_BRICKS, PooItems.RED_NETHER_BRICK, 3)
+                this.fenceBuilderPro(PooBlocks.RED_NETHER_BRICK_FENCE, Blocks.RED_NETHER_BRICKS, PooItems.RED_NETHER_BRICK, 6)
                         .unlockedBy(getHasName(Blocks.RED_NETHER_BRICKS), this.has(Blocks.RED_NETHER_BRICKS))
                         .save(this.output);
                 this.shapedSpecial(RecipeCategory.BUILDING_BLOCKS, Items.RED_NETHER_BRICKS)

@@ -175,7 +175,7 @@ public class UpgradeProvider extends PooCodecDataProvider<Upgrade> {
         protected Upgrade buildUpgrade() {
             ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder();
             for (Attrib attrib : this.attribs) {
-                Identifier modId = this.key.equals(Upgrades.BLOCK_REACH_INCREASE) ? PooSMPMod.id("upgade/block_reach_distance") : this.key.identifier().withPrefix("upgrade/");
+                Identifier modId = this.key.equals(Upgrades.BLOCK_REACH_INCREASE) ? PooSMPMod.id("upgrade/block_reach_distance") : this.key.identifier().withPrefix("upgrade/");
                 AttributeModifier modifier = new AttributeModifier(modId, attrib.val(), attrib.op());
                 builder.add(attrib.attribute(), modifier, EquipmentSlotGroup.ANY);
             }

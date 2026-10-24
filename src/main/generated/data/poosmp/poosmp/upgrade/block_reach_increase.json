@@ -4,7 +4,7 @@
     {
       "type": "minecraft:block_interaction_range",
       "amount": 1.0,
-      "id": "poosmp:upgade/block_reach_distance",
+      "id": "poosmp:upgrade/block_reach_distance",
       "operation": "add_value"
     }
   ],

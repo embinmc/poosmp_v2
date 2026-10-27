@@ -7,6 +7,8 @@
   "poosmp.biome_stick.crouch_tip": "Hold %s while using to configure!",
   "poosmp.mob_stick.entity": "Entity: %s",
   "poosmp.poo_tip": "POO TIP: %s",
+  "death.attack.poosmp.suicide": "%s killed themselves #LMAO",
+  "death.attack.poosmp.suicide.player": "%s killed themselves and changed the trajectory of %s's life forever",
   "trim_pattern.poosmp.fill": "Fill Armor Trim",
   "item.poosmp.poop_stick": "Poop Stick!",
   "item.poosmp.server_says_what_stick": "Server Says What?",

@@ -7,7 +7,7 @@
   },
   "price": {
     "addMultiplierPerAmountPurchased": 0.2,
-    "base": 120000.0
+    "base": 180000.0
   },
   "status_effect": {
     "ambient": true,

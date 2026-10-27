@@ -1,0 +1,12 @@
+{
+  "type": "poosmp:explode_entity_when_hit",
+  "icon": "minecraft:tnt",
+  "max_purchases": 1,
+  "name": {
+    "translate": "upgrade.poosmp.explosive_hands"
+  },
+  "price": {
+    "addMultiplierPerAmountPurchased": 0.2,
+    "base": 45000.0
+  }
+}

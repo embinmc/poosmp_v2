@@ -1,0 +1,19 @@
+{
+  "type": "poosmp:status_effect",
+  "icon": "minecraft:feather",
+  "max_purchases": 1,
+  "name": {
+    "translate": "upgrade.poosmp.slow_falling"
+  },
+  "price": {
+    "addMultiplierPerAmountPurchased": 0.2,
+    "base": 80000.0
+  },
+  "status_effect": {
+    "ambient": true,
+    "duration": -1,
+    "id": "minecraft:slow_falling",
+    "show_icon": true,
+    "show_particles": false
+  }
+}

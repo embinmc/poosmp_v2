@@ -9,7 +9,7 @@
     }
   ],
   "icon": "minecraft:iron_pickaxe",
-  "max_purchases": 20,
+  "max_purchases": 30,
   "name": {
     "translate": "upgrade.poosmp.mining_speed_increase"
   },

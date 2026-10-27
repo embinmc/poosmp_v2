@@ -15,6 +15,10 @@ public interface Upgrades {
     ResourceKey<Upgrade> TRIAL_OMEN = create("trial_omen");
     ResourceKey<Upgrade> WATER_BREATHING = create("water_breathing");
 
+    ResourceKey<Upgrade> DOLPHINS_GRACE = create("dolphins_grace");
+    ResourceKey<Upgrade> SLOW_FALLING = create("slow_falling");
+    ResourceKey<Upgrade> EXPLOSIVE_HANDS = create("explosive_hands");
+
     private static ResourceKey<Upgrade> create(String id) {
         return ResourceKey.create(PooRegistries.Keys.UPGRADE, PooSMPMod.id(id));
     }

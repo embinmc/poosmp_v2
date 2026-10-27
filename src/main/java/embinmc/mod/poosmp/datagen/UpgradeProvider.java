@@ -43,7 +43,7 @@ public class UpgradeProvider extends PooCodecDataProvider<Upgrade> {
         this.attributeUpgrade(Upgrades.HEALTH_INCREASE)
                 .addAttribute(Attributes.MAX_HEALTH, 2, AttributeModifier.Operation.ADD_VALUE)
                 .setIcon(Items.ENCHANTED_GOLDEN_APPLE)
-                .setPrice(4000D)
+                .setPrice(5000D)
                 .setPriceMult(0.25D)
                 .build();
         this.attributeUpgrade(Upgrades.ENTITY_REACH_INCREASE)
@@ -61,16 +61,16 @@ public class UpgradeProvider extends PooCodecDataProvider<Upgrade> {
         this.statusEffectUpgrade(Upgrades.FIRE_RESISTANCE)
                 .setEffect(MobEffects.FIRE_RESISTANCE, 0)
                 .setIcon(Items.MAGMA_BLOCK)
-                .setPrice(120_000D)
+                .setPrice(180_000D)
                 .build();
         this.statusEffectUpgrade(Upgrades.RESISTANCE_2)
                 .setEffect(MobEffects.RESISTANCE, 1)
                 .setIcon(Items.SHIELD)
-                .setPrice(180_000D)
+                .setPrice(150_000D)
                 .build();
         this.attributeUpgrade(Upgrades.MINING_SPEED_INCREASE)
                 .addAttribute(Attributes.MINING_EFFICIENCY, 2, AttributeModifier.Operation.ADD_VALUE)
-                .setMaxPurchases(20)
+                .setMaxPurchases(30)
                 .setIcon(Items.IRON_PICKAXE)
                 .setPrice(1000D)
                 .setPriceMult(0.15D)
@@ -78,7 +78,7 @@ public class UpgradeProvider extends PooCodecDataProvider<Upgrade> {
         this.statusEffectUpgrade(Upgrades.STRENGTH_2)
                 .setEffect(MobEffects.STRENGTH, 1)
                 .setIcon(Items.NETHERITE_SWORD)
-                .setPrice(180_000D)
+                .setPrice(150_000D)
                 .build();
         this.statusEffectUpgrade(Upgrades.TRIAL_OMEN)
                 .setEffect(MobEffects.TRIAL_OMEN, 0)
@@ -90,6 +90,21 @@ public class UpgradeProvider extends PooCodecDataProvider<Upgrade> {
                 .setIcon(Items.WATER_BUCKET)
                 .setPrice(120_000D)
                 .build();
+        this.statusEffectUpgrade(Upgrades.DOLPHINS_GRACE)
+            .setEffect(MobEffects.DOLPHINS_GRACE, 0)
+            .setIcon(Items.COD)
+            .setPrice(120_000D)
+            .build();
+        this.statusEffectUpgrade(Upgrades.SLOW_FALLING)
+            .setEffect(MobEffects.SLOW_FALLING, 0)
+            .setIcon(Items.FEATHER)
+            .setPrice(80_000D)
+            .build();
+        this.explodeEntityOnHitUpgrade(Upgrades.EXPLOSIVE_HANDS)
+            .setIcon(Items.TNT)
+            .setMaxPurchases(1)
+            .setPrice(45000)
+            .build();
     }
 
     protected AttributesUpgradeBuilder attributeUpgrade(ResourceKey<Upgrade> key) {

@@ -1,0 +1,19 @@
+{
+  "type": "poosmp:status_effect",
+  "icon": "minecraft:cod",
+  "max_purchases": 1,
+  "name": {
+    "translate": "upgrade.poosmp.dolphins_grace"
+  },
+  "price": {
+    "addMultiplierPerAmountPurchased": 0.2,
+    "base": 120000.0
+  },
+  "status_effect": {
+    "ambient": true,
+    "duration": -1,
+    "id": "minecraft:dolphins_grace",
+    "show_icon": true,
+    "show_particles": false
+  }
+}

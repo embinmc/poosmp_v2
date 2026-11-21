@@ -1,0 +1,42 @@
+name: Publish PooSMP Mod release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: PooSMP mod version
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build the mod
+    runs-on: ubuntu-24.04
+    steps:
+     - name: Checkout this repo
+       uses: actions/checkout@v6
+
+     - name: Setup Java
+       uses: actions/setup-java@v5
+       with:
+         distribution: 'microsoft'
+         java-version: 25
+
+     - name: Setup gradle
+       uses: gradle/actions/setup-gradle@v6
+
+     - name: Build
+       run: ./gradlew build --stacktrace
+
+     - name: Release
+       uses: softprops/action-gh-release@v3
+       with:
+         tag_name: ${{ inputs.version }}
+         name: ${{ inputs.version }}
+         target_commitish: main
+         generate_release_notes: true
+         make_latest: true
+         files: build/libs/*.jar

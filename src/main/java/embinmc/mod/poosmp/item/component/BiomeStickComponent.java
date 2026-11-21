@@ -96,7 +96,7 @@ public record BiomeStickComponent(byte horizontalDiameter, byte verticalDiameter
         BiomeStickComponent biomeStick = stackInHand.get(PooComponents.BIOME_TRANSFORMER);
         if (player.isCrouching()) {
             if (level.isClientSide()) {
-                ComponentC.openBiomeStickScreen();
+                ClientComponent.openBiomeStickScreen();
             }
             return InteractionResult.SUCCESS;
         }

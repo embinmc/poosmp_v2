@@ -160,7 +160,7 @@ public class ShopScreen extends Screen {
 
             public ShopCategoryEntry(Holder<ShopCategory> shopCategory) {
                 this.shopCategory = shopCategory;
-                this.setHeight(8);
+                this.setHeight(6);
             }
 
             @Override

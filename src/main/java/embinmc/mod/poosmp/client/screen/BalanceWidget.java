@@ -20,7 +20,7 @@ public class BalanceWidget extends AbstractWidget {
         PooSavedData savedData = PooSavedData.Client.INSTANCE;
         if (minecraft.player != null) {
             String balance = "$%,.2f".formatted(savedData.getBalance(minecraft.player));
-            context.drawCenteredString(minecraft.font, balance, this.getX(), this.getY(), CommonColors.WHITE);
+            context.drawCenteredString(minecraft.font, balance, this.getX(), this.getY() - 2, CommonColors.WHITE);
         }
     }
 

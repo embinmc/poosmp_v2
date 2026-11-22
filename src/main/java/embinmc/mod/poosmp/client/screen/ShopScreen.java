@@ -13,8 +13,10 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.ContainerObjectSelectionList;
 import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.components.StringWidget;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
+import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -46,17 +48,21 @@ public class ShopScreen extends Screen {
     @Override
     protected void init() {
         this.layout = new HeaderAndFooterLayout(this, 44, 30);
-        this.widget = new BalanceWidget(4, 16);
+        this.widget = new BalanceWidget(4, 10);
         this.layout.addToFooter(Button.builder(Component.literal("Exit"), button -> this.onClose()).width(160).build());
-        this.searchBar = new EditBox(this.font, 160, 16, Component.literal("Search shop"));
-        this.layout.addToHeader(this.searchBar);
+        this.searchBar = new EditBox(this.font, 160, 14, Component.literal("Search shop"));
+        LinearLayout linearLayout = this.layout.addToHeader(LinearLayout.vertical().spacing(4));
+        linearLayout.defaultCellSetting().alignHorizontallyCenter();
+        linearLayout.addChild(new StringWidget(this.title, this.font));
+        linearLayout.addChild(this.widget);
+        linearLayout.addChild(this.searchBar);
+        //this.layout.addToHeader(this.searchBar);
         if (this.minecraft.player != null) {
             RegistryAccess registries = this.minecraft.player.registryAccess();
             this.shopCategoryWidget = new ShopCategoryWidget(this.minecraft, registries);
             this.layout.addToContents(this.shopCategoryWidget);
         }
         this.layout.visitWidgets(this::addRenderableWidget);
-        this.layout.addToHeader(this.widget);
         this.searchBar.setResponder(this.shopCategoryWidget::updateWithSearch);
         this.layout.arrangeElements();
     }

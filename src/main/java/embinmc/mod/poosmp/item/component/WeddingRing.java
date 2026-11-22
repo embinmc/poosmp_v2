@@ -27,7 +27,6 @@ public record WeddingRing(ItemAttributeModifiers notMarriedAttributes, ItemAttri
             ItemAttributeModifiers.STREAM_CODEC, WeddingRing::marriedAttributes,
             WeddingRing::new
     );
-    public static final List<String> MARRIED_USERS = List.of("Embin", "ddededodediamant", "_thecubic_", "JeremyGamer13");
 
     public boolean isUserMarried(ItemStack itemStack, ServerPlayer player) {
         if (itemStack.has(PooComponents.FORCE_MARRIED))

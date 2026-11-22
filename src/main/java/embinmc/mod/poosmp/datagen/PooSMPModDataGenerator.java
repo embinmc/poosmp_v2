@@ -48,5 +48,6 @@ public class PooSMPModDataGenerator implements DataGeneratorEntrypoint {
 			TrimPatterns.register(bootstrapContext, ResourceKey.create(Registries.TRIM_PATTERN, PooSMPMod.id("fill")));
 		});
 		registryBuilder.add(PooRegistries.Keys.SHOP_CATEGORY, ShopCategories::bootstrap);
+		registryBuilder.add(PooRegistries.Keys.MARRIAGE, PooSMPRegistriesProvider::marriageBootstrap);
 	}
 }

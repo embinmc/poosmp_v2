@@ -1,6 +1,7 @@
 package embinmc.mod.poosmp.datagen;
 
 import embinmc.mod.poosmp.item.PooEnchantments;
+import embinmc.mod.poosmp.misc.Marriage;
 import embinmc.mod.poosmp.misc.PooDamageTypes;
 import embinmc.mod.poosmp.misc.PooRegistries;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -27,6 +28,7 @@ import net.minecraft.world.item.enchantment.effects.AddValue;
 import net.minecraft.world.level.storage.loot.predicates.DamageSourceCondition;
 import org.jspecify.annotations.NonNull;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class PooSMPRegistriesProvider extends FabricDynamicRegistryProvider {
@@ -39,6 +41,7 @@ public class PooSMPRegistriesProvider extends FabricDynamicRegistryProvider {
         entries.addAll(registries.lookupOrThrow(Registries.DAMAGE_TYPE));
         entries.addAll(registries.lookupOrThrow(Registries.ENCHANTMENT));
         entries.addAll(registries.lookupOrThrow(PooRegistries.Keys.SHOP_CATEGORY));
+        entries.addAll(registries.lookupOrThrow(PooRegistries.Keys.MARRIAGE));
     }
 
     public static void enchantmentBootstrap(BootstrapContext<Enchantment> context) {
@@ -79,6 +82,11 @@ public class PooSMPRegistriesProvider extends FabricDynamicRegistryProvider {
 
     public static void damageTypeBootstrap(BootstrapContext<DamageType> context) {
         context.register(PooDamageTypes.SUICIDE_COMMAND, new DamageType("poosmp.suicide", DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0f));
+    }
+
+    public static void marriageBootstrap(BootstrapContext<Marriage> context) {
+        context.register(Marriage.EMBIN_AND_DDE, new Marriage(List.of("Embin", "ddededodediamant")));
+        context.register(Marriage.CUBEY, new Marriage(List.of("_thecubic_", "JeremyGamer13", "meeoooowwwwwww")));
     }
 
     @Override

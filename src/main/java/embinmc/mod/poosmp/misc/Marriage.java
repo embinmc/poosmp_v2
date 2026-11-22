@@ -20,6 +20,10 @@ public record Marriage(List<String> marriedUsers) {
         return this.marriedUsers().contains(player1.getPlainTextName()) && this.marriedUsers().contains(player2.getPlainTextName());
     }
 
+    public boolean isMarried(ServerPlayer serverPlayer) {
+        return this.marriedUsers().contains(serverPlayer.getPlainTextName());
+    }
+
     private static ResourceKey<Marriage> createKey(String id) {
         return ResourceKey.create(PooRegistries.Keys.MARRIAGE, PooSMPMod.id(id));
     }

@@ -3,6 +3,8 @@ package embinmc.mod.poosmp.item.component;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import embinmc.mod.poosmp.PooSMPMod;
+import embinmc.mod.poosmp.misc.PooRegistries;
+import net.minecraft.core.Registry;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerPlayer;
@@ -13,6 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public record WeddingRing(ItemAttributeModifiers notMarriedAttributes, ItemAttributeModifiers marriedAttributes) {
     public static final Codec<WeddingRing> CODEC = RecordCodecBuilder.create(wr -> wr.group(
@@ -27,7 +30,11 @@ public record WeddingRing(ItemAttributeModifiers notMarriedAttributes, ItemAttri
     public static final List<String> MARRIED_USERS = List.of("Embin", "ddededodediamant", "_thecubic_", "JeremyGamer13");
 
     public boolean isUserMarried(ItemStack itemStack, ServerPlayer player) {
-        return itemStack.has(PooComponents.FORCE_MARRIED) || MARRIED_USERS.contains(player.getPlainTextName());
+        if (itemStack.has(PooComponents.FORCE_MARRIED))
+            return true;
+        return player.registryAccess().lookup(PooRegistries.Keys.MARRIAGE)
+            .map(Registry::stream).orElse(Stream.empty())
+            .anyMatch(marriage -> marriage.isMarried(player));
     }
 
     public static ItemAttributeModifiers defaultNotMarriedAttributes() {

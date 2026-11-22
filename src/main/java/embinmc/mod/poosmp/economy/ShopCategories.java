@@ -89,6 +89,7 @@ public interface ShopCategories {
                     .setVal(Items.LAPIS_BLOCK, 1.8)
                     .setVal(Items.NETHER_BRICK, 0.02)
                     .setVal(PooItems.RED_NETHER_BRICK, 0.04)
+                    .setVal(Items.SLIME_BALL, 0.10)
                     .build();
                 this.category(BANK_NOTES, "Bank Notes", PooItems.ONE_DOLLAR_BILL)
                     .banknote(PooItemKeys.ONE_DOLLAR_BILL, 1)
@@ -125,6 +126,7 @@ public interface ShopCategories {
                     .setVal(Items.NETHERRACK, 0.02)
                     .setVal(Items.BASALT, 0.06)
                     .setVal(Items.BLACKSTONE, 0.06)
+                    .setVal(Items.WHEAT, 0.06)
                     .build();
                 this.category(MISC, "Misc.", Items.TRIAL_KEY)
                     .setVal(PooItems.ANNOYANCE_SUS, 0.5)

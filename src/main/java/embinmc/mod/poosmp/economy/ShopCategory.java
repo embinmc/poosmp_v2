@@ -15,10 +15,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.jspecify.annotations.Nullable;
 
-import java.util.ConcurrentModificationException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ShopCategory {
     public static final MapCodec<ShopCategory> MAP_CODEC = RecordCodecBuilder.mapCodec(sc -> sc.group(
@@ -30,7 +28,7 @@ public class ShopCategory {
     protected final Component displayName;
     protected final Holder<Item> itemIcon;
     protected final Map<HolderSet<Item>, ItemValue> priceMap;
-    protected final Map<Holder<Item>, ItemValue> priceCache = HashMap.newHashMap(256);
+    protected final Map<Holder<Item>, ItemValue> priceCache = new ConcurrentHashMap<>(512);
 
     public ShopCategory(Component displayName, Holder<Item> itemIcon, Map<HolderSet<Item>, ItemValue> priceMap) {
         this.displayName = displayName;
@@ -44,17 +42,19 @@ public class ShopCategory {
 
     public @Nullable ItemValue getItemValue(Holder<Item> itemHolder) {
         try {
-            ItemValue value = this.priceCache.computeIfAbsent(itemHolder, item -> {
-                for (HolderSet<Item> items: this.priceMap.keySet()) {
-                    if (items.contains(itemHolder))
-                        return this.priceMap.get(items);
-                }
-                return null;
-            });
-            // it won't be put in automatically if it's null
-            if (!this.priceCache.containsKey(itemHolder) && value == null)
-                this.priceCache.put(itemHolder, null);
-            return value;
+            synchronized (this.priceCache) {
+                ItemValue value = this.priceCache.computeIfAbsent(itemHolder, item -> {
+                    for (HolderSet<Item> items: this.priceMap.keySet()) {
+                        if (items.contains(itemHolder))
+                            return this.priceMap.get(items);
+                    }
+                    return null;
+                });
+                // it won't be put in automatically if it's null
+                if (!this.priceCache.containsKey(itemHolder) && value == null)
+                    this.priceCache.put(itemHolder, null);
+                return value;
+            }
         } catch (ConcurrentModificationException e) {
             PooSMPMod.LOGGER.error("Concurrent modification exception occurred when trying to get item value of {}", itemHolder.getRegisteredName());
             return null;

@@ -12,6 +12,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.ContainerObjectSelectionList;
+import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
 import net.minecraft.client.gui.narration.NarratableEntry;
@@ -24,14 +25,19 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.CommonColors;
+import net.minecraft.util.Util;
 import net.minecraft.world.item.Item;
 import org.jspecify.annotations.NonNull;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ShopScreen extends Screen {
     protected HeaderAndFooterLayout layout;
     protected BalanceWidget widget;
+    protected EditBox searchBar;
+    private ShopCategoryWidget shopCategoryWidget;
 
     public ShopScreen() {
         super(Component.literal("Shop"));
@@ -39,16 +45,19 @@ public class ShopScreen extends Screen {
 
     @Override
     protected void init() {
-        this.layout = new HeaderAndFooterLayout(this);
+        this.layout = new HeaderAndFooterLayout(this, 44, 30);
         this.widget = new BalanceWidget(4, 16);
         this.layout.addToFooter(Button.builder(Component.literal("Exit"), button -> this.onClose()).width(160).build());
-        this.layout.addTitleHeader(this.title, this.font);
+        this.searchBar = new EditBox(this.font, 160, 16, Component.literal("Search shop"));
+        this.layout.addToHeader(this.searchBar);
         if (this.minecraft.player != null) {
             RegistryAccess registries = this.minecraft.player.registryAccess();
-            this.layout.addToContents(new ShopCategoryWidget(this.minecraft, registries));
+            this.shopCategoryWidget = new ShopCategoryWidget(this.minecraft, registries);
+            this.layout.addToContents(this.shopCategoryWidget);
         }
         this.layout.visitWidgets(this::addRenderableWidget);
-        this.addRenderableWidget(this.widget);
+        this.layout.addToHeader(this.widget);
+        this.searchBar.setResponder(this.shopCategoryWidget::updateWithSearch);
         this.layout.arrangeElements();
     }
 
@@ -58,14 +67,19 @@ public class ShopScreen extends Screen {
     }
 
     @Override
+    public boolean isInGameUi() {
+        return true;
+    }
+
+    @Override
     public void render(@NonNull GuiGraphics guiGraphics, int i, int j, float f) {
-        this.widget.setX(guiGraphics.guiWidth() / 2);
-        this.widget.setY(22);
         super.render(guiGraphics, i, j, f);
     }
 
     private class ShopCategoryWidget extends ContainerObjectSelectionList<ShopCategoryWidget.AbstractEntry> {
         private final RegistryAccess registries;
+        private final List<AbstractEntry> unfilteredEntries = new ArrayList<>(512);
+        public String searchTerm = "";
 
         public ShopCategoryWidget(Minecraft minecraftClient, RegistryAccess registries) {
             super(minecraftClient, ShopScreen.this.width, ShopScreen.this.layout.getContentHeight(), ShopScreen.this.layout.getHeaderHeight(), 24);
@@ -73,18 +87,38 @@ public class ShopScreen extends Screen {
             for (Holder<ShopCategory> shopCategoryHolder : this.registries.lookupOrThrow(PooRegistries.Keys.SHOP_CATEGORY).asHolderIdMap()) {
                 if (shopCategoryHolder.is(ShopCategories.BANK_NOTES))
                     continue;
-                this.addEntry(new ShopCategoryEntry(shopCategoryHolder));
+                this.unfilteredEntries.add(new ShopCategoryEntry(shopCategoryHolder));
                 for (HolderSet<Item> items : shopCategoryHolder.value().keys()) {
                     for (Holder<Item> item : items) {
-                        this.addEntry(new ShopEntry(shopCategoryHolder, item));
+                        this.unfilteredEntries.add(new ShopEntry(shopCategoryHolder, item));
                     }
                 }
             }
+            this.updateWithSearch(this.searchTerm);
         }
 
         @Override
         public int getRowWidth() {
             return 240;
+        }
+
+        public void updateWithSearch(final String search) {
+            this.clearEntries();
+            this.setScrollAmount(0);
+            this.searchTerm = search.toLowerCase();
+            if (this.searchTerm.isBlank()) {
+                this.unfilteredEntries.forEach(this::addEntry);
+                return;
+            }
+            List<AbstractEntry> filtered = Util.make(new ArrayList<>(this.unfilteredEntries.size()), list -> {
+                for (AbstractEntry abstractEntry : this.unfilteredEntries) {
+                    if (abstractEntry.searchTerm(this.searchTerm).isBlank())
+                        continue;
+                    if (abstractEntry.searchTerm(this.searchTerm).contains(this.searchTerm))
+                        list.add(abstractEntry);
+                }
+            });
+            filtered.forEach(this::addEntry);
         }
 
         @Override
@@ -112,6 +146,7 @@ public class ShopScreen extends Screen {
             protected final int fromCenter(GuiGraphics guiGraphics, int offset) {
                 return (guiGraphics.guiWidth() / 2) + offset;
             }
+            protected abstract String searchTerm(final String currentSearch);
         }
 
         private class ShopCategoryEntry extends AbstractEntry {
@@ -135,6 +170,11 @@ public class ShopScreen extends Screen {
             @Override
             public void renderContent(GuiGraphics guiGraphics, int mouseX, int mouseY, boolean hovered, float f) {
                 guiGraphics.drawCenteredString(this.font(), this.shopCategory.value().displayName(), guiGraphics.guiWidth() / 2, this.getY() + 10, CommonColors.WHITE);
+            }
+
+            @Override
+            protected String searchTerm(String currentSearch) {
+                return "";
             }
         }
 
@@ -187,6 +227,11 @@ public class ShopScreen extends Screen {
                 guiGraphics.drawCenteredString(this.font(), "$%,.2f".formatted(value == null ? -1 : value.price()), this.fromCenter(guiGraphics, -48), this.getY() + 8, CommonColors.WHITE);
                 this.buyOne.render(guiGraphics, mouseX, mouseY, f);
                 this.buyStack.render(guiGraphics, mouseX, mouseY, f);
+            }
+
+            @Override
+            protected String searchTerm(String currentSearch) {
+                return currentSearch.contains(":") ? this.item.getRegisteredName() : this.item.value().getName().getString().toLowerCase();
             }
         }
     }

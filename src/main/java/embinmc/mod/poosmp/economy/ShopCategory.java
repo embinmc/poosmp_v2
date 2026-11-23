@@ -28,7 +28,7 @@ public class ShopCategory {
     protected final Component displayName;
     protected final Holder<Item> itemIcon;
     protected final Map<HolderSet<Item>, ItemValue> priceMap;
-    protected final Map<Holder<Item>, ItemValue> priceCache = new ConcurrentHashMap<>(512);
+    protected final Map<Holder<Item>, ItemValue> priceCache = HashMap.newHashMap(512);
 
     public ShopCategory(Component displayName, Holder<Item> itemIcon, Map<HolderSet<Item>, ItemValue> priceMap) {
         this.displayName = displayName;

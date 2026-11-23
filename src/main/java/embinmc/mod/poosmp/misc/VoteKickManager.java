@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import java.time.Instant;
 import java.util.*;
 
+@WorkInProgress
 public class VoteKickManager {
     private static final Logger LOGGER = LogUtils.getLogger();
     private final Temporary<VoteKick> activeVoteKick = Temporary.empty();

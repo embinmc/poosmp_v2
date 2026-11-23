@@ -7,15 +7,10 @@ import embinmc.mod.poosmp.item.component.WeddingRing;
 import embinmc.mod.poosmp.misc.PooSavedData;
 import embinmc.mod.poosmp.misc.PooServer;
 import embinmc.mod.poosmp.upgrade.Upgrade;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientEntityEvents;
-import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.item.v1.ComponentTooltipAppenderRegistry;
-import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
-import net.fabricmc.fabric.api.networking.v1.EntityTrackingEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -27,7 +22,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 
 import java.util.Objects;
 

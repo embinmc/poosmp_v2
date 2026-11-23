@@ -311,6 +311,14 @@ public class PooSMPRecipeProvider extends FabricRecipeProvider {
                 this.discStonecutting(PooItems.DISC_STORY_OF_UNDERTALE);
                 // hurt sm64 not having a recipe is intentional
                 this.discStonecutting(PooItems.DISC_SKIBIDI_PENGUINMOD_SONG);
+                this.shapedSpecial(RecipeCategory.FOOD, Items.ENCHANTED_GOLDEN_APPLE)
+                    .pattern("###")
+                    .pattern("#3#")
+                    .pattern("###")
+                    .define('#', Items.GOLD_BLOCK)
+                    .define('3', Items.GOLDEN_APPLE)
+                    .unlockedBy(getHasName(Items.GOLD_BLOCK), this.has(Items.GOLD_BLOCK))
+                    .save(this.output, "poosmp:enchanted_golden_apple");
             }
 
             // hardcoded, don't care

@@ -21,6 +21,8 @@ public interface PooSoundEvents {
     SoundEvent SUS = registerSound("sus");
     Holder<SoundEvent> MUSIC_DISC_SOU = registerHolder("music_disc.story_of_undertale");
     SoundEvent OOBLEP = registerSound("annoyance.ooblep");
+    Holder<SoundEvent> MUSIC_DISC_THE_SKIBIDI_PENGUINMOD_SONG = registerHolder("music_disc.the_skibidi_penguinmod_song");
+    Holder<SoundEvent> MUSIC_DISC_HURT_SM64_SOUNDFONT = registerHolder("music_disc.hurt_sm64_soundfont");
 
     private static SoundEvent registerSound(String namespace) {
         Identifier id = PooSMPMod.id(namespace);

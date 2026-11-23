@@ -121,5 +121,23 @@
 				"volume":1.0
 			}
 		]
+	},
+	"music_disc.the_skibidi_penguinmod_song":{
+		"category":"record",
+		"sounds":[
+			{
+				"name":"poosmp:records/the_skibidi_penguinmod_song",
+				"stream":true
+			}
+		]
+	},
+	"music_disc.hurt_sm64_soundfont":{
+		"category":"record",
+		"sounds":[
+			{
+				"name":"poosmp:records/hurt_sm64_soundfont",
+				"stream":true
+			}
+		]
 	}
 }

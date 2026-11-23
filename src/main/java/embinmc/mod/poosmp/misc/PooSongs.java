@@ -21,4 +21,6 @@ public interface PooSongs {
     ResourceKey<JukeboxSong> ENDLESSLY = of("endlessly");
     ResourceKey<JukeboxSong> ENDLESSLY_STEREO = of("endlessly_stereo");
     ResourceKey<JukeboxSong> SOU = of("story_of_undertale");
+    ResourceKey<JukeboxSong> SKIBIDI_PENGUINMOD_SONG = of("the_skibidi_penguinmod_song");
+    ResourceKey<JukeboxSong> HURT_SM64_SOUNDFONT = of("hurt_sm64_soundfont");
 }

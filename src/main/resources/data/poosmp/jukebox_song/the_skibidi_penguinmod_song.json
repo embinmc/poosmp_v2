@@ -1,0 +1,8 @@
+{
+  "comparator_output": 12,
+  "description": {
+    "translate": "jukebox_song.poosmp.the_skibidi_penguinmod_song"
+  },
+  "length_in_seconds": 62.0,
+  "sound_event": "poosmp:music_disc.the_skibidi_penguinmod_song"
+}

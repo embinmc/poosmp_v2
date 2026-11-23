@@ -138,6 +138,8 @@ public class PooSMPModelProvider extends FabricModelProvider {
         gen.generateFlatItem(PooItems.NULL_SHARD, ModelTemplates.FLAT_ITEM);
         gen.generateFlatItem(PooItems.ITEM_FORCING_BACKPACK_UPGRADE, ModelTemplates.FLAT_ITEM);
         gen.generateFlatItem(PooItems.CHEQUE, ModelTemplates.FLAT_ITEM);
+        gen.generateFlatItem(PooItems.DISC_SKIBIDI_PENGUINMOD_SONG, ModelTemplates.FLAT_ITEM);
+        gen.generateFlatItem(PooItems.DISC_HURT_SM64_SOUNDFONT, ModelTemplates.FLAT_ITEM);
     }
 
     private void generateTrimmedTools(@NonNull ItemModelGenerators gen) {

@@ -309,6 +309,8 @@ public class PooSMPRecipeProvider extends FabricRecipeProvider {
                 this.discStonecutting(PooItems.DISC_ENDLESSLY);
                 this.discStonecutting(PooItems.DISC_ENDLESSLY_STEREO);
                 this.discStonecutting(PooItems.DISC_STORY_OF_UNDERTALE);
+                // hurt sm64 not having a recipe is intentional
+                this.discStonecutting(PooItems.DISC_SKIBIDI_PENGUINMOD_SONG);
             }
 
             // hardcoded, don't care

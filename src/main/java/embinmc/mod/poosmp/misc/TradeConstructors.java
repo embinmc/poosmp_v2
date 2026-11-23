@@ -64,6 +64,7 @@ public class TradeConstructors {
             factories.add(trade(Items.EYE_ARMOR_TRIM_SMITHING_TEMPLATE, 1, PooItems.HUNDRED_DOLLAR_BILL, 2));
             factories.add(enchantedBook(BANKER_HIGH, PooItems.HUNDRED_DOLLAR_BILL, 4));
             factories.add(trade(PooItems.DIMWORLD_STICK, 1, PooItems.FIVE_DOLLAR_BILL, 3));
+            factories.add(trade(PooItems.DISC_HURT_SM64_SOUNDFONT, 1, PooItems.HUNDRED_DOLLAR_BILL, 5));
         });
         TradeOfferHelper.registerVillagerOffers(PooSMPVillagers.BANKER_KEY, 5, factories -> {
             factories.add(trade(Items.ELYTRA, 1, PooItems.HUNDRED_DOLLAR_BILL, 48));

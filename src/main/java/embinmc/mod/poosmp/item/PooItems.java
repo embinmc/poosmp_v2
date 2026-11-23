@@ -208,6 +208,8 @@ public interface PooItems {
     // 7.0+ items
     Item DECODE_EXCEPTION_DUMMY = register(PooItemKeys.DECODE_EXCEPTION_DUMMY);
     Item CHEQUE = register(PooItemKeys.CHEQUE);
+    Item DISC_SKIBIDI_PENGUINMOD_SONG = requestedDisc(PooItemKeys.DISC_SKIBIDI_PENGUINMOD_SONG, PooSongs.SKIBIDI_PENGUINMOD_SONG, "Embin", false);
+    Item DISC_HURT_SM64_SOUNDFONT = requestedDisc(PooItemKeys.DISC_HURT_SM64_SOUNDFONT, PooSongs.HURT_SM64_SOUNDFONT, "Embin", false);
 
     private static Item warpStick(ResourceKey<Item> key, ResourceKey<Level> dimension) {
         MobEffectInstance effect = new MobEffectInstance(DimensionWarperComponent.DEFAULT_EFFECT);
@@ -242,7 +244,7 @@ public interface PooItems {
 
     private static Item requestedDisc(ResourceKey<Item> key, ResourceKey<JukeboxSong> song, String requester, boolean stereo) {
         return register(key, new Item.Properties()
-                .jukeboxPlayable(song).stacksTo(1).rarity(Rarity.RARE)
+                .jukeboxPlayable(song).stacksTo(1).rarity(song == PooSongs.HURT_SM64_SOUNDFONT ? Rarity.EPIC : Rarity.RARE)
                 .component(PooComponents.REQUESTED_DISC, new RequestedDiscComponent(requester, stereo))
         );
     }

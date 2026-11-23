@@ -6,7 +6,7 @@
     "BackpackWrapperMixin",
     "CachedUserNameResolverMixin",
     "EntityMixin",
-    "ExampleMixin",
+    "ServerMixin",
     "ItemMixin",
     "ItemStackMixin",
     "PlayerListMixin",

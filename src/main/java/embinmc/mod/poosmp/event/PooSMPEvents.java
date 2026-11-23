@@ -5,6 +5,7 @@ import embinmc.mod.poosmp.item.component.ItemUseComponents;
 import embinmc.mod.poosmp.item.component.PooComponents;
 import embinmc.mod.poosmp.item.component.WeddingRing;
 import embinmc.mod.poosmp.misc.PooSavedData;
+import embinmc.mod.poosmp.misc.PooServer;
 import embinmc.mod.poosmp.upgrade.Upgrade;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
@@ -154,6 +155,11 @@ public class PooSMPEvents {
                         player.level().playSound(null, player.blockPosition(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS);
                     });
                 }
+            }
+        });
+        ServerTickEvents.START_SERVER_TICK.register(server -> {
+            if (server instanceof PooServer pooServer) {
+                pooServer.poosmp$voteKickManager().tick(server);
             }
         });
     }

@@ -25,6 +25,7 @@
     "minecraft:shroomlight": 0.2,
     "minecraft:stone": 0.1,
     "minecraft:sugar_cane": 0.1,
+    "minecraft:wheat": 0.06,
     "poosmp:dim_moss_block": 0.3
   }
 }

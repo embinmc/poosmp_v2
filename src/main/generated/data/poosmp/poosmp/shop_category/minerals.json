@@ -39,6 +39,7 @@
     "minecraft:redstone": 1.0,
     "minecraft:redstone_block": 9.0,
     "minecraft:rotten_flesh": 0.02,
+    "minecraft:slime_ball": 0.1,
     "minecraft:spider_eye": 0.04,
     "minecraft:stick": 0.02,
     "minecraft:string": 0.06,

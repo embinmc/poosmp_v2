@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class ShopScreen extends Screen {
+    public static final Component SEARCH_BAR_HINT = Component.literal("Search shop");
     protected HeaderAndFooterLayout layout;
     protected BalanceWidget widget;
     protected EditBox searchBar;
@@ -50,7 +51,8 @@ public class ShopScreen extends Screen {
         this.layout = new HeaderAndFooterLayout(this, 44, 30);
         this.widget = new BalanceWidget(4, 10);
         this.layout.addToFooter(Button.builder(Component.literal("Exit"), button -> this.onClose()).width(160).build());
-        this.searchBar = new EditBox(this.font, 160, 14, Component.literal("Search shop"));
+        this.searchBar = new EditBox(this.font, 160, 14, SEARCH_BAR_HINT);
+        this.searchBar.setHint(SEARCH_BAR_HINT);
         LinearLayout linearLayout = this.layout.addToHeader(LinearLayout.vertical().spacing(4));
         linearLayout.defaultCellSetting().alignHorizontallyCenter();
         linearLayout.addChild(new StringWidget(this.title, this.font));
@@ -80,12 +82,16 @@ public class ShopScreen extends Screen {
     @Override
     public void render(@NonNull GuiGraphics guiGraphics, int i, int j, float f) {
         super.render(guiGraphics, i, j, f);
+        if (this.shopCategoryWidget.totalVisible == 0) {
+            guiGraphics.drawCenteredString(this.font, "Nothing found, bud...", guiGraphics.guiWidth() / 2, guiGraphics.guiHeight() / 2, 0x999999);
+        }
     }
 
     private class ShopCategoryWidget extends ContainerObjectSelectionList<ShopCategoryWidget.AbstractEntry> {
         private final RegistryAccess registries;
         private final List<AbstractEntry> unfilteredEntries = new ArrayList<>(512);
         public String searchTerm = "";
+        public int totalVisible = 0;
 
         public ShopCategoryWidget(Minecraft minecraftClient, RegistryAccess registries) {
             super(minecraftClient, ShopScreen.this.width, ShopScreen.this.layout.getContentHeight(), ShopScreen.this.layout.getHeaderHeight(), 24);
@@ -109,11 +115,14 @@ public class ShopScreen extends Screen {
         }
 
         public void updateWithSearch(final String search) {
+            if (!search.isBlank() && this.searchTerm.equals(search.toLowerCase()))
+                return;
             this.clearEntries();
             this.setScrollAmount(0);
             this.searchTerm = search.toLowerCase();
             if (this.searchTerm.isBlank()) {
                 this.unfilteredEntries.forEach(this::addEntry);
+                this.totalVisible = this.unfilteredEntries.size();
                 return;
             }
             List<AbstractEntry> filtered = Util.make(new ArrayList<>(this.unfilteredEntries.size()), list -> {
@@ -125,6 +134,7 @@ public class ShopScreen extends Screen {
                 }
             });
             filtered.forEach(this::addEntry);
+            this.totalVisible = filtered.size();
         }
 
         @Override

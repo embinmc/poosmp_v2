@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "#poosmp:convertible_discs",
+  "result": {
+    "count": 1,
+    "id": "poosmp:music_disc/bliss_instrumental"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_music_disc/stereo_madness": {
+      "conditions": {
+        "items": [
+          {
+            "items": "poosmp:music_disc/stereo_madness"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "poosmp:disc_stonecutting/stereo_madness"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_music_disc/stereo_madness"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "poosmp:disc_stonecutting/stereo_madness"
+    ]
+  }
+}

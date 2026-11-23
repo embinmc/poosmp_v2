@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_music_disc/story_of_undertale": {
+      "conditions": {
+        "items": [
+          {
+            "items": "poosmp:music_disc/story_of_undertale"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "poosmp:disc_stonecutting/story_of_undertale"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_music_disc/story_of_undertale"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "poosmp:disc_stonecutting/story_of_undertale"
+    ]
+  }
+}

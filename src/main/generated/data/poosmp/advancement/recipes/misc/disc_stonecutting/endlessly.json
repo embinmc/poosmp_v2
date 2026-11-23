@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_music_disc/endlessly": {
+      "conditions": {
+        "items": [
+          {
+            "items": "poosmp:music_disc/endlessly"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "poosmp:disc_stonecutting/endlessly"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_music_disc/endlessly"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "poosmp:disc_stonecutting/endlessly"
+    ]
+  }
+}

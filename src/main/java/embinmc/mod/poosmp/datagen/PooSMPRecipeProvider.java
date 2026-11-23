@@ -298,6 +298,17 @@ public class PooSMPRecipeProvider extends FabricRecipeProvider {
                         .save(this.output);
                 this.specialStick(PooItems.WIND_STICK, Items.BREEZE_ROD, PooItems.DIAMOND_SHARD);
                 this.specialStick(PooItems.ZOMBIE_STICK, Items.ROTTEN_FLESH, Items.DIAMOND);
+                this.discStonecutting(PooItems.DISC_TRIFECTA_CAP);
+                this.discStonecutting(PooItems.DISC_BUTTERFLIES_INSTRUMENTAL);
+                this.discStonecutting(PooItems.DISC_BUDDY_HOLLY);
+                this.discStonecutting(PooItems.DISC_STEREO_MADNESS);
+                this.discStonecutting(PooItems.DISC_NOT_LIKE_US);
+                this.discStonecutting(PooItems.DISC_RESISTANCE_INSTR);
+                this.discStonecutting(PooItems.DISC_BLISS_INSTRUMENTAL);
+                this.discStonecutting(PooItems.DISC_ENDLESSLY_INSTRUMENTAL);
+                this.discStonecutting(PooItems.DISC_ENDLESSLY);
+                this.discStonecutting(PooItems.DISC_ENDLESSLY_STEREO);
+                this.discStonecutting(PooItems.DISC_STORY_OF_UNDERTALE);
             }
 
             // hardcoded, don't care
@@ -411,6 +422,12 @@ public class PooSMPRecipeProvider extends FabricRecipeProvider {
                 )
                 .unlocks("has_smithing_ingredient", this.has(material))
                 .save(this.output, "poosmp:" + getItemName(output) + "_smithing");
+            }
+
+            public void discStonecutting(ItemLike resultingDisc) {
+                SingleItemRecipeBuilder.stonecutting(this.tag(PooItemTags.CONVERTIBLE_DISCS), RecipeCategory.MISC, resultingDisc, 1)
+                    .unlockedBy(getHasName(resultingDisc), this.has(resultingDisc))
+                    .save(this.output, "poosmp:disc_stonecutting/" + getItemName(resultingDisc).split("/")[1]);
             }
         };
     }

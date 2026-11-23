@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_music_disc/not_like_us": {
+      "conditions": {
+        "items": [
+          {
+            "items": "poosmp:music_disc/not_like_us"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "poosmp:disc_stonecutting/not_like_us"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_music_disc/not_like_us"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "poosmp:disc_stonecutting/not_like_us"
+    ]
+  }
+}

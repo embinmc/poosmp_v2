@@ -58,7 +58,6 @@ public class ShopScreen extends Screen {
         linearLayout.addChild(new StringWidget(this.title, this.font));
         linearLayout.addChild(this.widget);
         linearLayout.addChild(this.searchBar);
-        //this.layout.addToHeader(this.searchBar);
         if (this.minecraft.player != null) {
             RegistryAccess registries = this.minecraft.player.registryAccess();
             this.shopCategoryWidget = new ShopCategoryWidget(this.minecraft, registries);

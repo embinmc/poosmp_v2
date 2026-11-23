@@ -19,12 +19,14 @@
     "minecraft:leather": 0.1,
     "minecraft:moss_block": 0.3,
     "minecraft:netherrack": 0.02,
+    "minecraft:obsidian": 1.0,
     "minecraft:pale_moss_block": 0.3,
     "minecraft:red_sand": 0.2,
     "minecraft:sand": 0.1,
     "minecraft:shroomlight": 0.2,
     "minecraft:stone": 0.1,
     "minecraft:sugar_cane": 0.1,
+    "minecraft:tuff": 0.2,
     "minecraft:wheat": 0.06,
     "poosmp:dim_moss_block": 0.3
   }

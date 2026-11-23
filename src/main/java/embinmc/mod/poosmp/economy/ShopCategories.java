@@ -127,6 +127,8 @@ public interface ShopCategories {
                     .setVal(Items.BASALT, 0.06)
                     .setVal(Items.BLACKSTONE, 0.06)
                     .setVal(Items.WHEAT, 0.06)
+                    .setVal(Items.OBSIDIAN, 1)
+                    .setVal(Items.TUFF, stonePrice * 2)
                     .build();
                 this.category(MISC, "Misc.", Items.TRIAL_KEY)
                     .setVal(PooItems.ANNOYANCE_SUS, 0.5)

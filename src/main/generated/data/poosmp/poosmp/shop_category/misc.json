@@ -2,16 +2,21 @@
   "display_icon": "minecraft:trial_key",
   "display_name": "Misc.",
   "price_map": {
+    "minecraft:book": 0.4,
+    "minecraft:brick": 0.1,
     "minecraft:echo_shard": 64.0,
     "minecraft:ender_eye": 32.0,
+    "minecraft:nether_brick": 0.02,
     "minecraft:ominous_trial_key": {
       "price": 200.0,
       "sell_value": 180.0
     },
+    "minecraft:resin_brick": 0.1,
     "minecraft:trial_key": {
       "price": 50.0,
       "sell_value": 40.0
     },
-    "poosmp:im_gonna_kill_myself": 0.5
+    "poosmp:im_gonna_kill_myself": 0.5,
+    "poosmp:red_nether_brick": 0.04
   }
 }

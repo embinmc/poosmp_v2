@@ -27,7 +27,6 @@
     "minecraft:iron_nugget": 0.5,
     "minecraft:lapis_block": 1.8,
     "minecraft:lapis_lazuli": 0.2,
-    "minecraft:nether_brick": 0.02,
     "minecraft:nether_star": {
       "price": 1000.0,
       "sell_value": 1000.0
@@ -35,17 +34,17 @@
     "minecraft:netherite_block": 14652.0,
     "minecraft:netherite_ingot": 1628.0,
     "minecraft:netherite_scrap": 400.0,
-    "minecraft:oxidized_copper": 26.5,
+    "minecraft:oxidized_copper": 25.5,
     "minecraft:redstone": 1.0,
     "minecraft:redstone_block": 9.0,
+    "minecraft:resin_clump": 0.1,
     "minecraft:rotten_flesh": 0.02,
     "minecraft:slime_ball": 0.1,
     "minecraft:spider_eye": 0.04,
     "minecraft:stick": 0.02,
     "minecraft:string": 0.06,
     "minecraft:waxed_copper_block": 23.0,
-    "minecraft:waxed_oxidized_copper": 27.0,
-    "poosmp:diamond_shard": 2.0,
-    "poosmp:red_nether_brick": 0.04
+    "minecraft:waxed_oxidized_copper": 26.0,
+    "poosmp:diamond_shard": 2.0
   }
 }

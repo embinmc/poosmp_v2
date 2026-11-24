@@ -1,0 +1,11 @@
+{
+  "display_icon": "minecraft:bricks",
+  "display_name": "Building Blocks",
+  "price_map": {
+    "minecraft:bookshelf": 1.8,
+    "minecraft:bricks": 0.4,
+    "minecraft:deepslate_bricks": 0.2,
+    "minecraft:resin_bricks": 0.4,
+    "minecraft:tuff_bricks": 0.2
+  }
+}

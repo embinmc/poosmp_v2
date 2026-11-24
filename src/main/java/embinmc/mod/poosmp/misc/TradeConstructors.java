@@ -45,7 +45,6 @@ public class TradeConstructors {
             factories.add(trade(PooItems.WARP_STICK, 1, PooItems.TEN_DOLLAR_BILL, 5));
             factories.add(trade(Items.EXPERIENCE_BOTTLE, 1, PooItems.ONE_DOLLAR_BILL, 3));
             factories.add(trade(Items.PHANTOM_MEMBRANE, 1, PooItems.ONE_DOLLAR_BILL, 4));
-            factories.add(trade(PooItems.FIVE_DOLLAR_BILL, 1, PooItems.ONE_DOLLAR_BILL, 5));
 
             ItemStack omBottle = new ItemStack(Items.OMINOUS_BOTTLE);
             omBottle.set(DataComponents.OMINOUS_BOTTLE_AMPLIFIER, new OminousBottleAmplifier(4));
@@ -59,7 +58,6 @@ public class TradeConstructors {
             factories.add(trade(Items.FLOW_ARMOR_TRIM_SMITHING_TEMPLATE, 1, PooItems.TEN_DOLLAR_BILL, 6));
         });
         TradeOfferHelper.registerVillagerOffers(PooSMPVillagers.BANKER_KEY, 4, factories -> {
-            factories.add(trade(Items.NETHERITE_SCRAP, 1, PooItems.HUNDRED_DOLLAR_BILL, 4));
             factories.add(trade(Items.SILENCE_ARMOR_TRIM_SMITHING_TEMPLATE, 1, PooItems.HUNDRED_DOLLAR_BILL, 3));
             factories.add(trade(Items.EYE_ARMOR_TRIM_SMITHING_TEMPLATE, 1, PooItems.HUNDRED_DOLLAR_BILL, 2));
             factories.add(enchantedBook(BANKER_HIGH, PooItems.HUNDRED_DOLLAR_BILL, 4));

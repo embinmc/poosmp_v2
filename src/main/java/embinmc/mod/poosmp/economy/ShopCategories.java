@@ -188,6 +188,9 @@ public interface ShopCategories {
                         .setVal(Items.MAGENTA_CONCRETE_POWDER, 0.08)
                         .setVal(Items.PINK_CONCRETE_POWDER,    0.08)
                         .build();
+                this.category(BUILDING_BLOCKS, "Building Blocks", Items.BRICKS)
+                    .setVal(Items.BRICKS, 1)
+                    .build();
             }
 
             private Builder category(ResourceKey<ShopCategory> key, String name, Item icon) {

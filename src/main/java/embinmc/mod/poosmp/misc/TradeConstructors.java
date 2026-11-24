@@ -35,6 +35,7 @@ public class TradeConstructors {
         TradeOfferHelper.registerVillagerOffers(PooSMPVillagers.BANKER_KEY, 1, factories -> {
             factories.add(enchantedBook(BANKER_LOW, PooItems.TWENTY_FIVE_DOLLAR_BILL, 2));
             factories.add(trade(Items.ENDER_PEARL, 1, PooItems.ONE_DOLLAR_BILL, 8));
+            factories.add(trade(PooItems.WARP_STICK, 1, PooItems.TEN_DOLLAR_BILL, 5));
 
             ItemStack omBottle = new ItemStack(Items.OMINOUS_BOTTLE);
             omBottle.set(DataComponents.OMINOUS_BOTTLE_AMPLIFIER, new OminousBottleAmplifier(2));
@@ -42,16 +43,15 @@ public class TradeConstructors {
         });
         TradeOfferHelper.registerVillagerOffers(PooSMPVillagers.BANKER_KEY, 2, factories -> {
             factories.add(enchantedBook(BANKER_MID, PooItems.TWENTY_FIVE_DOLLAR_BILL, 2));
-            factories.add(trade(PooItems.WARP_STICK, 1, PooItems.TEN_DOLLAR_BILL, 5));
             factories.add(trade(Items.EXPERIENCE_BOTTLE, 1, PooItems.ONE_DOLLAR_BILL, 3));
             factories.add(trade(Items.PHANTOM_MEMBRANE, 1, PooItems.ONE_DOLLAR_BILL, 4));
+            factories.add(trade(PooBlocks.DRAGON_ANNOYANCE, 8, PooItems.FIVE_DOLLAR_BILL, 3));
 
             ItemStack omBottle = new ItemStack(Items.OMINOUS_BOTTLE);
             omBottle.set(DataComponents.OMINOUS_BOTTLE_AMPLIFIER, new OminousBottleAmplifier(4));
             factories.add(trade(omBottle, PooItems.ONE_DOLLAR_BILL, 12));
         });
         TradeOfferHelper.registerVillagerOffers(PooSMPVillagers.BANKER_KEY, 3, factories -> {
-            factories.add(trade(PooBlocks.DRAGON_ANNOYANCE, 8, PooItems.FIVE_DOLLAR_BILL, 3));
             factories.add(enchantedBook(BANKER_MID, PooItems.HUNDRED_DOLLAR_BILL, 1));
             factories.add(trade(Items.BLUE_ICE, 1, PooItems.ONE_DOLLAR_BILL, 18));
             factories.add(trade(Items.ECHO_SHARD, 1, PooItems.ONE_DOLLAR_BILL, 64));

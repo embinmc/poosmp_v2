@@ -38,6 +38,10 @@ public record PurchaseItemPacket(int category, int item, byte amount) implements
     }
 
     public static void receiver(PurchaseItemPacket packet, ServerPlayNetworking.Context context) {
+        if (packet.amount() <= 0) {
+            PooSMPMod.LOGGER.warn("Player {} tried to buy {} items from a shop", context.player().getPlainTextName(), packet.amount());
+            return;
+        }
         Registry<ShopCategory> shopCategories = context.server().registryAccess().lookupOrThrow(PooRegistries.Keys.SHOP_CATEGORY);
         Registry<Item> items = context.server().registryAccess().lookupOrThrow(Registries.ITEM);
         if (shopCategories.get(packet.category()).isEmpty() || items.get(packet.item()).isEmpty()) {
@@ -59,7 +63,7 @@ public record PurchaseItemPacket(int category, int item, byte amount) implements
         }
         savedData.addBalance(context.player(), -finalPrice);
         ServerPlayer player = context.player();
-        ItemEntity itemEntity = new ItemEntity(player.level(), player.getX(), player.getY(), player.getZ(), new ItemStack(itemHolder, Math.clamp(packet.amount(), 1, 99)));
+        ItemEntity itemEntity = new ItemEntity(player.level(), player.getX(), player.getY(), player.getZ(), new ItemStack(itemHolder, Math.clamp(packet.amount(), 1, itemHolder.value().getDefaultMaxStackSize())));
         player.level().addFreshEntity(itemEntity);
         PooSMPMod.LOGGER.info("Player {} purchased {} {}", context.player().getPlainTextName(), packet.amount(), itemHolder.getRegisteredName());
     }

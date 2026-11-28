@@ -32,7 +32,7 @@ public class ExplodeEntityWhenHitUpgrade extends AbstractUpgrade {
 
     @Override
     public void onHitEntity(int amountPurchased, ServerPlayer player, LivingEntity hitEntity, ServerLevel level) {
-        super.onHitEntity(amountPurchased, player, hitEntity);
+        super.onHitEntity(amountPurchased, player, hitEntity, level);
         level.explode(player, hitEntity.getX(), hitEntity.getY(), hitEntity.getZ(), 0.85f * amountPurchased, Level.ExplosionInteraction.MOB);
     }
 

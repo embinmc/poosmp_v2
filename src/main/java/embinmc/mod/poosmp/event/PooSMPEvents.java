@@ -19,6 +19,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
@@ -82,7 +83,7 @@ public class PooSMPEvents {
 
         /// [Upgrade#onHitEntity(int, ServerPlayer, LivingEntity)]
         ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> {
-            if (source.getDirectEntity() instanceof ServerPlayer player) {
+            if (source.getDirectEntity() instanceof ServerPlayer player && source.is(DamageTypeTags.IS_PLAYER_ATTACK)) {
                 Upgrade.withPurchasedUpgrades(player, (upgradeHolder, bought) -> {
                     Upgrade upgrade = upgradeHolder.value();
                     upgrade.onHitEntity(bought, player, entity);
